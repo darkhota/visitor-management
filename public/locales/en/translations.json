@@ -1,0 +1,76 @@
+{
+  "dashboard": {
+    "WELCOME": "Welcome to Angle!"
+  },
+  
+    "nav": {
+      "DASHBOARD": "Dashboard",
+      "WIDGETS": "Workwise",
+      "DOCUMENTATION": "Documentation",
+      "element": {
+        "ELEMENTS": "Feeds",
+        "BUTTON": "Button",
+        "COLOR": "Settings",
+        "NOTIFICATION": "Notification",
+        "CAROUSEL": "Carousel",
+        "SPINNER": "Spinner",
+        "ANIMATION": "Animation",
+        "DROPDOWN": "Dropdown",
+        "CARD": "Cards",
+        "PORTLET": "Portlet",
+        "GRID": "Grid",
+        "GRID_MASONRY": "Grid Masonry",
+        "TYPO": "Visitor Log",
+        "FONT_ICON": "Invites",
+        "WEATHER_ICON": "Devices"
+      },
+      "form": {
+        "FORM": "Visitors",
+        "STANDARD": "Standard",
+        "EXTENDED": "Extended",
+        "VALIDATION": "Validation"
+      },
+      "chart": {
+        "CHART": "User",
+        "FLOT": "Flot",
+        "RADIAL": "Radial"
+      },
+      "table": {
+        "TABLE": "Visitor",
+        "STANDARD": "Standard",
+        "EXTENDED": "Extended",
+        "DATATABLE": "Datatable"
+      },
+      "table2": {
+        "TABLE": "meeting room",
+        "STANDARD": "Standard",
+        "EXTENDED": "Extended",
+        "DATATABLE": "Datatable"
+      },
+      "map": {
+        "MAP": "Meeting Room",
+        "GOOGLE": "Google Map",
+        "VECTOR": "Vector Map"
+      },
+      "extra": {
+        "EXTRA": "Visitor Lookup",
+        "MAILBOX": "Mailbox",
+        "TIMELINE": "Timeline",
+        "CALENDAR": "Calendar",
+        "INVOICE": "Invoice",
+        "SEARCH": "Search",
+        "TODO": "Todo List",
+        "PROFILE": "Profile"
+      },
+      "pages": {
+        "PAGES": "Reports",
+        "LOGIN": "Login",
+        "REGISTER": "Register",
+        "RECOVER": "Recover password",
+        "PROFILE": "Profile",
+        "LOCK": "Lock",
+        "STARTER": "Starter Template"
+      }
+    }
+  }
+}
