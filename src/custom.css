@@ -401,3 +401,140 @@ small, .small {
 .whole-device{
     padding-right:80px;
 }
+.new-tablet-content{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding-top: 40px;
+    padding-left: 60px;
+}
+.list-numbering-tablet{
+    
+    border-radius: 100%;
+    color: #fff;
+    padding: 0px 6px;
+    font-size: 60%; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+    width:6%;
+    height: 28%;
+    margin-left:-40px;
+    background-color: #00914b;
+    margin-top:15px;
+}
+
+.list-style3 {
+    display: grid;
+    Grid-template-columns: repeat(2, 1fr);
+    color: #656565;
+    font-size: 18px;
+    text-align: left;
+}
+
+.list-style3 i {
+    margin-left:-40px;
+   
+}
+
+.list-style3 h4 {
+    margin-left:-315px;
+    font-size: 1.1rem;
+    font-weight: 1000px;
+    padding-bottom: 20px;
+  padding-top: 15px;
+}
+.list-style3 ul {
+    margin-left:-30px;
+    font-size: 1.1rem;
+    font-weight: 1000px;
+}
+.new-tablet-device {
+    padding-right: 10px;
+    text-align: right;
+    margin-right: 20px;
+}
+.new-tablet-device img{
+   max-height: 500px;
+}
+.new-tablet-form ul {
+    width: 140%;
+    
+}
+.card-top-tablet a{
+    color:#656565;
+}
+.card-top-tablet a:hover{
+    color:#00914a;
+}
+.new-tablet-form input {
+    background: right -10px center #fff;
+    background-size: 20px;
+    border: 1px solid #c9cacd;
+    border-radius: 4px;
+    outline: 0;
+    padding: 8px 6px 6px;
+    margin-bottom: 20px;
+    display: block;
+    transition: all .2s;
+    cursor: text;
+    position: relative;
+    box-sizing: border-box;
+    
+}
+.device-code{
+    font-size: 60px !important;
+    width: 60%;
+    height: auto !important;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 600;
+    font-variant-numeric: lining-nums;
+}
+
+@media(max-width: 960px) {
+    .cards-container{
+        display: grid;
+        grid-template-columns:  1fr;
+        grid-gap: 2rem;
+      }
+      .dashCards{
+        background-color: #ffffff;
+        box-shadow:0 0 12px rgba(160,159,159,.18);
+        width:100%;
+        height:192px;
+        padding-bottom: 20px;
+        border-radius: 5px;
+    }
+    .section-content{
+        
+        width:100%;
+        padding: 0px;
+        border-radius: 5px;
+        margin-bottom: 50px;
+        display:grid;
+        grid-template-columns:  1fr;
+        
+    }
+    .section-content img{
+        display: none;
+    }
+    .section-text-content{
+        margin-top: 50px;
+        width:90%;
+        margin-left: 20px;
+    }
+    .list-style2 h5 {
+        margin-left:-150px;
+    }
+     .brand-logo img 
+        {
+           width: 150px;
+        }
+    .sidebar-toggle em{
+        color:#000;
+    }
+    .layout-fixed .wrapper .topnavbar-wrapper{
+        position: fixed;
+    top: -20;
+    width: 100%;
+    z-index: 121;
+    }
+}

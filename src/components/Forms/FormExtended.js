@@ -19,7 +19,7 @@ import 'bootstrap-filestyle';
 import { EditorState, ContentState, convertFromHTML, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-
+import '../../custom.css'
 // used for react slider
 const marks = {
   '-10': '-10°C',
@@ -129,253 +129,62 @@ class FormExtended extends Component {
 
         return (
             <ContentWrapper>
-                <div className="content-heading">
-                    <div>Form Extended
-                        <small>New elements to extend the classic functions</small>
+                <div className="form-card">
+                <div className=" card-top-tablet">
+                            <h3>
+                            <a href="/chart-chartjs">
+                               <i className="far fa-arrow-alt-circle-left" ></i> 
+                           </a>
+                              &nbsp;  New Tablet
+                            </h3>
+                </div >
+                <div className="new-tablet-content">
+                    <div className="new-tablet-form">
+                    <ul>
+                                
+                                <li className="list-style3 ">
+                                    <a href="#" className="list-numbering-tablet">1</a>
+                                    <h4>Get the Workwise Visitors app</h4>
+                                    <ul>
+                                
+                                <li >
+                                    
+                                    <h5>On your tablet, open the app store</h5>
+                                </li>
+                                <li >
+                              
+                                    <h5>Search for and download Workwise Visitors Management</h5>
+                                </li>
+                            </ul>
+                                </li>
+                                <li className="list-style3 ">
+                                <a href="#" className="list-numbering-tablet">2</a>
+                                    <h4>Enter the device code</h4>
+                                    <ul>
+                                
+                                <li >
+                                    
+                                    <h5>Open the Workwise Visitors app.</h5>
+                                </li>
+                                <li >
+                              
+                                    <h5>Find the six digit device pairing code and type it below.</h5>
+                                </li>
+                            </ul>
+                                </li>
+                            </ul>
+                            <input type="text" className="device-code"></input>
+                            <a href="#">
+                                        <button class="btn btn-secondary btn-lg invite-btn" type="button">Pair Device</button>
+                                    </a>
+
+                    </div>
+                    <div className="new-tablet-device">
+                    <img src="img/ipad.png"></img>
                     </div>
                 </div>
-                { /*  START card */ }
-                <Card className="card-default">
-                    <CardHeader>Form elements</CardHeader>
-                    <CardBody>
-                        <form method="get" action="#" className="form-horizontal">
-                            <fieldset>
-                                <legend>New Components</legend>
-                                <div className="form-group row">
-                                   <label className="col-md-2 col-form-label">Slider</label>
-                                   <div className="col-md-4">
-                                        <p>Basic Slider</p>
-                                        <Slider onChange={this.sliderLog} />
-                                        <p className="mt-2">Basic Slider，`step=20`</p>
-                                        <Slider step={20} defaultValue={50} onBeforeChange={this.sliderLog} />
-                                        <p className="mt-2">Basic Slider，`step=20, dots`</p>
-                                        <Slider dots step={20} defaultValue={100} onAfterChange={this.sliderLog} />
-                                   </div>
-                                </div>
-                                <div className="form-group row">
-                                   <label className="col-md-2 col-form-label">Range</label>
-                                   <div className="col-md-4">
-                                        <p className="mt-2">Basic Range，`allowCross=false`</p>
-                                        <Range allowCross={false} defaultValue={[0, 20]} onChange={this.sliderLog} />
-                                        <p className="mt-2">Basic Range，`step=20` </p>
-                                        <Range step={20} defaultValue={[20, 40]} onBeforeChange={this.sliderLog} />
-                                        <p className="mt-2">Basic Range，`step=20, dots` </p>
-                                        <Range dots step={20} defaultValue={[20, 40]} onAfterChange={this.sliderLog} />
-                                   </div>
-                                </div>
-                                <div className="form-group row">
-                                   <label className="col-md-2 col-form-label">Slider Vertical</label>
-                                   <div className="col-md-4" style={{ overflow: 'hidden' }}>
-                                        <div className="row">
-                                            <div className="col-md-4">
-                                                <p className="mt-2">Slider with marks, `step=null`</p>
-                                                <div className="mb-3" style={{height: 400}}>
-                                                    <Slider vertical min={-10} marks={marks} step={null} onChange={this.sliderLog} defaultValue={20} />
-                                                </div>
-                                            </div>
-                                            <div className="col-md-4">
-                                                <p className="mt-2">Slider with marks and steps</p>
-                                                <div className="mb-3" style={{height: 400}}>
-                                                    <Slider vertical dots min={-10} marks={marks} step={10} onChange={this.sliderLog} defaultValue={20} />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
-                            <fieldset>
-                                <div className="form-group row align-items-center">
-                                    <label className="col-md-2 col-form-label">Switch Small</label>
-                                    <Col md={ 10 }>
-                                        <label className="switch switch-sm">
-                                            <input type="checkbox" defaultChecked />
-                                            <span></span>
-                                        </label>
-                                    </Col>
-                                </div>
-                                <div className="form-group row align-items-center">
-                                    <label className="col-md-2 col-form-label">Switch</label>
-                                    <Col md={ 10 }>
-                                        <label className="switch">
-                                            <input type="checkbox" defaultChecked />
-                                            <span></span>
-                                        </label>
-                                    </Col>
-                                </div>
-                                <div className="form-group row align-items-center">
-                                    <label className="col-md-2 col-form-label">Switch Large</label>
-                                    <Col md={ 10 }>
-                                        <label className="switch switch-lg">
-                                            <input type="checkbox" defaultChecked />
-                                            <span></span>
-                                        </label>
-                                    </Col>
-                                </div>
-                                <div className="form-group row align-items-center">
-                                    <label className="col-md-2 col-form-label">Switch Radio</label>
-                                    <Col md={ 10 }>
-                                        <div className="d-flex flex-row">
-                                            <label className="switch switch-lg mr-2">
-                                                <input type="radio" defaultChecked name="radioSwitch" />
-                                                <span></span>
-                                            </label>
-                                            <label className="switch switch-lg">
-                                                <input type="radio" name="radioSwitch" />
-                                                <span></span>
-                                            </label>
-                                        </div>
-                                    </Col>
-                                </div>
-                            </fieldset>
-                            <fieldset>
-                                <div className="form-group row mb">
-                                    <label className="col-md-2 col-form-label">Color picker</label>
-                                    <Col sm={ 8 }>
-                                        <Row>
-                                            <Col xs={ 12 }>
-                                                <p>Chrome colorpicker on button popup</p>
-                                                <button type="button" className="btn btn-secondary" onClick={ this.colorpickerHandleClick }>Pick Color</button>
-                                                { this.state.displayColorPicker ? <div style={ popover }>
-                                                  <div style={ cover } onClick={ this.colorpickerHandleClose }/>
-                                                  <ChromePicker />
-                                                </div> : null }
-                                            </Col>
-                                            <Col xs={ 12 }>
-                                                <p className="mt-3">Using an input</p>
-                                                <InputGroup className="colorpicker-component demo-colorpicker">
-                                                    <Input value={this.state.colorSelected} onChange={()=>{}} onFocus={ this.colorpickerInputHandleClick }/>
-                                                    <InputGroupAddon addonType="append">
-                                                        <InputGroupText><i className="icon-pin"></i></InputGroupText>
-                                                    </InputGroupAddon>
-                                                </InputGroup>
-                                                { this.state.displayColorPickerInput ? <div style={ popover }>
-                                                  <div style={ cover } onClick={ this.colorpickerInputHandleClose }/>
-                                                  <SketchPicker color={this.state.colorSelected} onChange={color => this.setState({colorSelected: color.hex})}/>
-                                                </div> : null }
-                                            </Col>
-                                            <Col xs={ 12 } className="mt-3">
-                                                <Row>
-                                                    <Col xs={ 6 }>
-                                                        <p>SketchPicker</p>
-                                                        <SketchPicker />
-                                                    </Col>
-                                                    <Col xs={ 6 }>
-                                                        <p>Block</p>
-                                                        <BlockPicker/>
-                                                        <p className="mt-2">Twitter</p>
-                                                        <TwitterPicker/>
-                                                    </Col>
-                                                </Row>
-                                            </Col>
-                                        </Row>
-                                    </Col>
-                                </div>
-                            </fieldset>
-                            <fieldset>
-                                <div className="form-group row mb">
-                                    <label className="col-md-2 col-form-label">React Select</label>
-                                    <Col md={ 10 }>
-                                        <p>Basic Select</p>
-                                        <Select
-                                            name="select-name"
-                                            value={value}
-                                            onChange={this.handleChangeSelect}
-                                            options={STATES}
-                                        />
-                                        <p className="mt-2">Multi Select</p>
-                                        <Select
-                                            name="multi-select-name"
-                                            multi
-                                            simpleValue
-                                            value={selectedOptionMulti}
-                                            onChange={this.handleChangeSelectMulti}
-                                            options={STATES}
-                                        />
-                                    </Col>
-                                </div>
-                            </fieldset>
-                            <fieldset>
-                                <div className="form-group row">
-                                    <label className="col-md-2 col-form-label">Masked input</label>
-                                    <Col md={ 10 }>
-                                        <p>Card Number:{' '}</p>
-                                        <MaskedInput className="form-control" mask="1111 1111 1111 1111" name="card" size="20" onChange={this.onChangeMasked}/>
-                                        <p className="mt-2">Expiry Date:{' '}</p>
-                                        <MaskedInput className="form-control" mask="11/1111" name="expiry" placeholder="mm/yyyy" onChange={this.onChangeMasked}/>
-                                        <p className="mt-2">CCV:{' '}</p>
-                                        <MaskedInput className="form-control" mask="111" name="ccv" onChange={this.onChangeMasked}/>
-                                        <p className="mt-2">Escaped:</p>
-                                        <MaskedInput className="form-control" mask="11 \* 11" name="escaped" id="escaped" onChange={this.onChangeMasked}/>
-                                        <div className="text-sm text-muted">Mask placeholder characters can be escaped with a leading <code>\</code> to use them as static contents</div>
-                                        <p className="mt-2">Leading:</p>
-                                        <MaskedInput className="form-control" mask="(0) 111 1111" name="leading" id="leading" onChange={this.onChangeMasked}/>
-                                        <div className="text-sm text-muted">Leading static characters</div>
-                                    </Col>
-                                </div>
-                            </fieldset>
-                            <fieldset>
-                                <div className="form-group row mb">
-                                    <label className="col-md-2 col-form-label mb">DateTimePicker</label>
-                                    <Col md={ 10 }>
-                                        <p>Basic</p>
-                                        <Datetime inputProps={{className: 'form-control'}}/>
-                                        <p className="mt-2">Date Format YYYY-MM</p>
-                                        <Datetime dateFormat="YYYY-MM" timeFormat={false} inputProps={{className: 'form-control'}}/>
-                                        <p className="mt-2">Time picker only</p>
-                                        <Datetime inputProps={{className: 'form-control'}} dateFormat={false} />
-                                    </Col>
-                                </div>
-                            </fieldset>
-                            <fieldset>
-                                <div className="form-group row">
-                                    <label className="col-md-2 col-form-label">File input</label>
-                                    <Col md={ 10 }>
-                                        <input type="file" data-buttonname="btn-secondary m-0" data-classinput="form-control" className="filestyle" />
-                                    </Col>
-                                </div>
-                            </fieldset>
-                            <fieldset>
-                                <div className="form-group row">
-                                    <label className="col-md-2 col-form-label">Block Note Editor</label>
-                                    <Col md={ 10 }>
-                                        <Card body>
-                                            <textarea rows="10" className="form-control note-editor"></textarea>
-                                        </Card>
-                                        <p>With margin</p>
-                                        <Card body>
-                                            <textarea rows="10" className="form-control note-editor note-editor-margin"></textarea>
-                                        </Card>
-                                    </Col>
-                                </div>
-                            </fieldset>
-                            <fieldset>
-                                <div className="form-group row">
-                                    <label className="col-md-2 col-form-label">Simple wysiwyg</label>
-                                    <Col md={ 10 }>
-                                        <Editor
-                                            editorState={editorState}
-                                            wrapperClassName="wysiwig-editor-wrapper"
-                                            editorClassName="form-control"
-                                            editorStyle={{height: 300}}
-                                            onEditorStateChange={this.onEditorStateChange}
-                                        />
-                                        <p className="mt-3">JSON OUTPUT</p>
-                                        <p dangerouslySetInnerHTML={{__html: JSON.stringify(convertToRaw(editorState.getCurrentContent()))}}></p>
-                                    </Col>
-                                </div>
-                            </fieldset>
-                            <fieldset>
-                                <div className="form-group row">
-                                    <div className="col-sm-4 col-sm-offset-2">
-                                        <button type="submit" className="btn btn-secondary">Cancel</button>
-                                        <button type="submit" className="btn btn-primary">Save changes</button>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </form>
-                    </CardBody>
-                </Card>
-                { /*  END card */ }
+                </div>
+               
             </ContentWrapper>
             );
     }

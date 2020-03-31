@@ -48,7 +48,7 @@ class ChartChartJS extends Component {
                               Tablets
                             </h2>
                             <div className="button-align">
-                            <a href="ChartFlot.js">
+                            <a href="/form-extended">
                                         <button class="btn btn-secondary btn-lg invite-btn" type="button">New Tablet</button>
                                     </a>
                                     </div>
