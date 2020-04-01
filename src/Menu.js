@@ -16,7 +16,7 @@ const Menu = [
         name: 'Feeds',
         icon: 'icon-speech',
         translate: 'sidebar.nav.form.FORM',
-        path: '/form-standard',
+        path: '/table-datagrid',
        
     },
     {
