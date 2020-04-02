@@ -1,162 +1,152 @@
 import React, { Component } from 'react';
 import ContentWrapper from '../Layout/ContentWrapper';
-import { Card, CardHeader, CardBody, Input } from 'reactstrap';
+import { Container, Card, CardHeader, CardBody, CardTitle } from 'reactstrap';
 import $ from 'jquery';
-// Wizard (jquery.steps)
-import 'jquery-validation/dist/jquery.validate.js';
-import 'jquery-steps/build/jquery.steps.min.js';
+import '../../custom.css'
+import Datatable from '../Tables/Datatable';
+import { Row, Col, Dropdown, DropdownMenu, DropdownToggle, DropdownItem } from 'reactstrap';
+import classNames from 'classnames';
+import "flatpickr/dist/themes/light.css";
+import Flatpickr from "react-flatpickr";
+import { Link } from 'react-router-dom';
 
+class DropdownBox extends Component  {
+    
+    state = { ddOpen: false }
+    toggle = () => this.setState({
+            ddOpen: !this.state.ddOpen
+    })
+    render() {
+        const ddClass = classNames('animated', this.props.title);
+        
+        return (
+            <div >
+                <Dropdown isOpen={this.state.ddOpen} toggle={this.toggle}>
+                    <DropdownToggle className="remove-border">
+                    <i className="fa fa-ellipsis-h"></i>
+                    </DropdownToggle>
+                    <DropdownMenu className={ddClass}>
+                        <DropdownItem>Action</DropdownItem>
+                        <DropdownItem>Another action</DropdownItem>
+                        <DropdownItem active>Active Item</DropdownItem>
+                        <DropdownItem divider />
+                        <DropdownItem>Separated link</DropdownItem>
+                    </DropdownMenu>
+                </Dropdown>
+            </div>
+        );
+    }
+}
 
 class FormWizard extends Component {
 
-    state = {
-        userName: '',
-        password: '',
-        confirm: '',
-        name: '',
-        surname: '',
-        email: '',
-        address: '',
-        terms: false
-    }
-
-    componentDidMount() {
-
-        // VALIDATION
-        // -----------------------------------
-
-        const form = $(this.refs.wizardform);
-
-        form.validate({
-            errorPlacement: (error, element) => element.is(':checkbox') ? element.parent().parent().after(error) : element.after(error),
-            rules: {
-                confirm: {
-                    equalTo: '#password'
-                }
-            }
-        });
-
-        form.children('div').steps({
-            headerTag: 'h4',
-            bodyTag: 'fieldset',
-            transitionEffect: 'slideLeft',
-            onStepChanging: (event, currentIndex, newIndex) => {
-                form.validate().settings.ignore = ':disabled,:hidden';
-                return form.valid();
-            },
-            onFinishing: (event, currentIndex) => {
-                form.validate().settings.ignore = ':disabled';
-                return form.valid();
-            },
-            onFinished: (event, currentIndex) => {
-                // Submit form
-                console.log('Submitted!');
-                console.log(JSON.stringify(this.state));
-                // form.submit();
-            }
-        });
-
-        // VERTICAL
-        // -----------------------------------
-        $(this.refs.examplevertical).steps({
-            headerTag: 'h4',
-            bodyTag: 'section',
-            transitionEffect: 'slideLeft',
-            stepsOrientation: 'vertical'
-        });
-
-    }
-
-    handleInputChange = event => {
-        const target = event.currentTarget;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-        this.setState({
-          [name]: value
-        });
+    constructor() {
+        super();
+     
+        this.state = {
+          date: new Date()
+        };
       }
 
+    state = {
+        dtOptions1: {
+            'paging': true, // Table pagination
+            'ordering': true, // Column ordering
+            'info': true, // Bottom left status text
+            responsive: true,
+            // Text translation options
+            // Note the required keywords between underscores (e.g _MENU_)
+            oLanguage: {
+                sSearch: '<em class="fa fa-search"></em>',
+                
+                info: 'Showing page _PAGE_ of _PAGES_',
+                zeroRecords: 'Nothing found - sorry',
+                infoEmpty: 'No records available',
+                infoFiltered: '(filtered from _MAX_ total records)',
+                oPaginate: {
+                    sNext: '<em class="fa fa-caret-right"></em>',
+                    sPrevious: '<em class="fa fa-caret-left"></em>'
+                }
+            }
+        },
+        
+       
+    }
+
+    // Access to internal datatable instance for customizations
+    dtInstance = dtInstance => {
+        const inputSearchClass = 'datatable_input_col_search';
+        const columnInputs = $('tfoot .' + inputSearchClass);
+        // On input keyup trigger filtering
+        columnInputs
+            .keyup(function() {
+                dtInstance.fnFilter(this.value, columnInputs.index(this));
+            });
+    }
+
     render() {
+        const { date } = this.state;
+        const ANIMATIONS = ['fadeIn',]
         return (
             <ContentWrapper>
-                <div className="content-heading">Form Wizard</div>
-                <Card className="card-default">
-                    <CardHeader>Basic Form (jquery.validate)</CardHeader>
-                    <CardBody>
-                        <form ref='wizardform' action='#'>
-                            <div>
-                                <h4>Account
-                                   <br/>
-                                   <small>Nam egestas, leo eu gravida tincidunt</small>
-                                </h4>
-                                <fieldset>
-                                    <label htmlFor='userName'>User name *</label>
-                                    <Input id='userName' onChange={this.handleInputChange} value={this.state.userName} name='userName' type='text' className='required' />
-                                    <label htmlFor='password'>Password *</label>
-                                    <Input id='password' onChange={this.handleInputChange} value={this.state.password} name='password' type='text' className='required' />
-                                    <label htmlFor='confirm'>Confirm Password *</label>
-                                    <Input id='confirm' onChange={this.handleInputChange} value={this.state.confirm} name='confirm' type='text' className='required' />
-                                    <p>(*) Mandatory</p>
-                                </fieldset>
-                                <h4>Profile
-                                   <br/>
-                                   <small>Nam egestas, leo eu gravida tincidunt</small>
-                                </h4>
-                                <fieldset>
-                                    <label htmlFor='name'>First name *</label>
-                                    <Input id='name' onChange={this.handleInputChange} value={this.state.name} name='name' type='text' className='required' />
-                                    <label htmlFor='surname'>Last name *</label>
-                                    <Input id='surname' onChange={this.handleInputChange} value={this.state.surname} name='surname' type='text' className='required' />
-                                    <label htmlFor='email'>Email *</label>
-                                    <Input id='email' onChange={this.handleInputChange} value={this.state.email} name='email' type='text' className='required email' />
-                                    <label htmlFor='address'>Address</label>
-                                    <Input id='address' onChange={this.handleInputChange} value={this.state.address} name='address' type='text' />
-                                    <p>(*) Mandatory</p>
-                                </fieldset>
-                                <h4>Hints
-                                   <br/>
-                                   <small>Nam egestas, leo eu gravida tincidunt</small>
-                                </h4>
-                                <fieldset>
-                                    <p className='lead text-center'>Almost there!</p>
-                                </fieldset>
-                                <h4>Finish
-                                   <br/>
-                                   <small>Nam egestas, leo eu gravida tincidunt</small>
-                                </h4>
-                                <fieldset>
-                                    <p className='lead'>One last check</p>
-                                    <div className="checkbox c-checkbox">
-                                        <label>
-                                            <input type="checkbox" required onChange={this.handleInputChange} checked={this.state.terms} name='terms'/>
-                                            <span className="fa fa-check"></span>
-                                            I agree with the Terms and Conditions.
-                                        </label>
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </form>
-                    </CardBody>
-                </Card>
-                <Card className="card-default">
-                    <CardHeader>Basic Vertical Example</CardHeader>
-                    <CardBody>
-                        <div ref='examplevertical'>
-                            <h4>Keyboard</h4>
-                            <section>
-                                <p>Try the keyboard navigation by clicking arrow left or right!</p>
-                            </section>
-                            <h4>Effects</h4>
-                            <section>
-                                <p>Wonderful transition effects.</p>
-                            </section>
-                            <h4>Pager</h4>
-                            <section>
-                                <p>The next and previous buttons help you to navigate through your content.</p>
-                            </section>
-                        </div>
-                    </CardBody>
-                </Card>
+                <Container fluid>
+                    {/* DATATABLE DEMO 1 */}
+                    <Card>
+                        <CardHeader className="table-card-header">
+                            
+                            <h1>1 Booking(s)</h1>
+                            <Flatpickr
+
+                                        options={{   altInput: true,
+                                            altFormat: "F j, Y",
+                                            dateFormat: "Y-m-d"}}
+       
+                                        value={date}
+                                        onChange={date => {
+                                        this.setState({ date });
+                                        }}
+                                    />
+                            <select className="selectVisitors">
+										<option value="1">All Bookings</option>
+										<option value="2">My Bookings</option>
+	                              	</select>
+                            <button href="#" className="table button"><Link to="/form-standard">Export</Link> </button>
+                        </CardHeader>
+                        <CardBody>
+                            <Datatable options={this.state.dtOptions1}>
+                                <table className="table table-striped my-4 w-100">
+                                    <thead>
+                                        <tr>
+                                        
+                                            <th>Title</th>
+                                            <th>Room </th>
+                                            <th className="sort-numeric">Date</th>
+                                            <th className="sort-alpha" data-priority="2">Duration</th>
+                                            
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr className="gradeX">
+                                        
+                                            <td>Test</td>
+                                            <td>Conference room</td>
+                                            
+                                            <td>28 Jan, 2020</td>
+                                            <td>08:00 AM - 08:30 AM</td>
+                                            <td>{ ANIMATIONS.map((title, i) => (
+                   
+                                             <DropdownBox title={title}/>                     
+                                              ))}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </Datatable>
+                        </CardBody>
+                    </Card>
+                   
+                    
+                </Container>
             </ContentWrapper>
             );
     }

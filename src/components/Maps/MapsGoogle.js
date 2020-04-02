@@ -1,146 +1,156 @@
 import React, { Component } from 'react';
 import ContentWrapper from '../Layout/ContentWrapper';
-import { Row, Col, Card, CardHeader, CardBody } from 'reactstrap';
-import { compose, withProps } from "recompose"
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+import { Container, Card, CardHeader, CardBody, CardTitle } from 'reactstrap';
+import $ from 'jquery';
+import '../../custom.css'
+import Datatable from '../Tables/Datatable';
+import { Row, Col, Dropdown, DropdownMenu, DropdownToggle, DropdownItem } from 'reactstrap';
+import classNames from 'classnames';
+import "flatpickr/dist/themes/light.css";
+import Flatpickr from "react-flatpickr";
+import { Link } from 'react-router-dom';
 
-// required props for HOCs (withScriptjs and withGoogleMap)
-const requiredProps = {
-    googleMapURL: '//maps.google.com/maps/api/js?key=AIzaSyBNs42Rt_CyxAqdbIBK0a5Ut83QiauESPA', // &libraries=geometry,drawing,places
-    loadingElement: <div className='gmap'>Loading...</div>,
-    containerElement: <div className='gmap'/>,
-    mapElement: <div style={{ height: `100%` }}/>
+class DropdownBox extends Component  {
+    
+    state = { ddOpen: false }
+    toggle = () => this.setState({
+            ddOpen: !this.state.ddOpen
+    })
+    render() {
+        const ddClass = classNames('animated', this.props.title);
+        
+        return (
+            <div >
+                <Dropdown isOpen={this.state.ddOpen} toggle={this.toggle}>
+                    <DropdownToggle className="remove-border">
+                    <i className="fa fa-ellipsis-h"></i>
+                    </DropdownToggle>
+                    <DropdownMenu className={ddClass}>
+                        <DropdownItem>Action</DropdownItem>
+                        <DropdownItem>Another action</DropdownItem>
+                        <DropdownItem active>Active Item</DropdownItem>
+                        <DropdownItem divider />
+                        <DropdownItem>Separated link</DropdownItem>
+                    </DropdownMenu>
+                </Dropdown>
+            </div>
+        );
+    }
 }
 
-// Demo classic
-const DemoMapClassic = compose(
-  withProps(requiredProps),
-  withScriptjs,
-  withGoogleMap
-)(props => (
-    <GoogleMap defaultZoom={14} defaultCenter={props.location}>
-        <Marker position={props.location} />
-    </GoogleMap>
-))
-// Demo with custom zoon
-const DemoMapCustomZoom = compose(
-  withProps(requiredProps),
-  withScriptjs,
-  withGoogleMap
-)(props => (
-    <GoogleMap defaultZoom={props.customZoom} defaultCenter={props.location}>
-        <Marker position={props.location} />
-    </GoogleMap>
-))
-// Demo with custom map type
-const DemoMapCustomType = compose(
-  withProps(requiredProps),
-  withScriptjs,
-  withGoogleMap
-)(props => (
-    <GoogleMap defaultZoom={14} defaultCenter={props.location} defaultMapTypeId={window.google.maps.MapTypeId[props.mapType]}>
-        <Marker position={props.location} />
-    </GoogleMap>
-))
+class ChartRadial extends Component {
 
-// Demo with multiple markers
-const DemoMapCustomMarkers = compose(
-  withProps(requiredProps),
-  withScriptjs,
-  withGoogleMap
-)(props => (
-    props.customMarkers.length ?
-        <GoogleMap defaultZoom={14} defaultCenter={props.customMarkers[0]}>
-            {props.customMarkers.map((loc, i) =>
-                <Marker key={i} position={loc} />
-            )}
-        </GoogleMap>
-    :
-        null
-))
-
-// Demo with custom style
-const DemoMapCustomStyle = compose(
-  withProps(requiredProps),
-  withScriptjs,
-  withGoogleMap
-)(props => (
-    <GoogleMap defaultZoom={14} defaultCenter={props.location} defaultOptions={{ styles: props.mapStyles }}>
-        <Marker position={props.location} />
-    </GoogleMap>
-))
-
-class MapsGoogle extends Component {
+    constructor() {
+        super();
+     
+        this.state = {
+          date: new Date()
+        };
+      }
 
     state = {
-        // default location used for all demos
-        location:  { lat: 33.7906731, lng: -117.8357194 },
-        location2: { lat: 33.7928273, lng: -117.8360953 },
+        dtOptions1: {
+            'paging': true, // Table pagination
+            'ordering': true, // Column ordering
+            'info': true, // Bottom left status text
+            responsive: true,
+            // Text translation options
+            // Note the required keywords between underscores (e.g _MENU_)
+            oLanguage: {
+                sSearch: '<em class="fa fa-search"></em>',
+                
+                info: 'Showing page _PAGE_ of _PAGES_',
+                zeroRecords: 'Nothing found - sorry',
+                infoEmpty: 'No records available',
+                infoFiltered: '(filtered from _MAX_ total records)',
+                oPaginate: {
+                    sNext: '<em class="fa fa-caret-right"></em>',
+                    sPrevious: '<em class="fa fa-caret-left"></em>'
+                }
+            }
+        },
+        
+       
+    }
 
-        // Get more styles from http://snazzymaps.com/style/29/light-monochrome
-        // - Just replace and assign to 'MapStyles' the new style array
-        customStyle: [{featureType:'water',stylers:[{visibility:'on'},{color:'#bdd1f9'}]},{featureType:'all',elementType:'labels.text.fill',stylers:[{color:'#334165'}]},{featureType:'landscape',stylers:[{color:'#e9ebf1'}]},{featureType:'road.highway',elementType:'geometry',stylers:[{color:'#c5c6c6'}]},{featureType:'road.arterial',elementType:'geometry',stylers:[{color:'#fff'}]},{featureType:'road.local',elementType:'geometry',stylers:[{color:'#fff'}]},{featureType:'transit',elementType:'geometry',stylers:[{color:'#d8dbe0'}]},{featureType:'poi',elementType:'geometry',stylers:[{color:'#cfd5e0'}]},{featureType:'administrative',stylers:[{visibility:'on'},{lightness:33}]},{featureType:'poi.park',elementType:'labels',stylers:[{visibility:'on'},{lightness:20}]},{featureType:'road',stylers:[{color:'#d8dbe0',lightness:20}]}]
+    // Access to internal datatable instance for customizations
+    dtInstance = dtInstance => {
+        const inputSearchClass = 'datatable_input_col_search';
+        const columnInputs = $('tfoot .' + inputSearchClass);
+        // On input keyup trigger filtering
+        columnInputs
+            .keyup(function() {
+                dtInstance.fnFilter(this.value, columnInputs.index(this));
+            });
     }
 
     render() {
+        const { date } = this.state;
+        const ANIMATIONS = ['fadeIn',]
         return (
             <ContentWrapper>
-                <div className="content-heading">
-                    <div>Google Maps
-                        <small>Easy usage directly from data attribute</small>
-                    </div>
-                </div>
-                <Row>
-                    <Col md={ 6 }>
-                        <Card className="card-default">
-                            <CardHeader>Classic Map</CardHeader>
-                            <CardBody>
-                                <DemoMapClassic location={this.state.location}/>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                    <Col md={ 6 }>
-                        <Card className="card-default">
-                            <CardHeader>Custom zoom</CardHeader>
-                            <CardBody>
-                                <DemoMapCustomZoom location={this.state.location} customZoom={19}/>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md={ 6 }>
-                        <Card className="card-default">
-                            <CardHeader>Different Map Type</CardHeader>
-                            <CardBody>
-                                <DemoMapCustomType location={this.state.location} mapType='SATELLITE'/>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                    <Col md={ 6 }>
-                        <Card className="card-default">
-                            <CardHeader>Multiple Addresses</CardHeader>
-                            <CardBody>
-                                <DemoMapCustomMarkers customMarkers={[this.state.location, this.state.location2]}/>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md={ 12 }>
-                        <Card className="card-default">
-                            <CardHeader>Styled Maps</CardHeader>
-                            <CardBody>
-                                <DemoMapCustomStyle location={this.state.location} mapStyles={this.state.customStyle}/>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
+                <Container fluid>
+                    {/* DATATABLE DEMO 1 */}
+                    <Card>
+                        <CardHeader className="table-card-header employee-header">
+                            
+                            <h1>1 Employee</h1>
+                           
+                            <select className="selectVisitors">
+										<option value="1">All Employees</option>
+										<option value="2">My Employees</option>
+	                              	</select>
+                                      
+                                      <button href="#" className="table button"><Link to="/form-standard">New</Link> </button>
+                                      
+                           <div className="align-left">
+                               <button href="#" className="table button "><Link to="/form-standard">Export</Link> </button></div>
+                            <div className="align-left2"><button href="#" className="table button"><Link to="/form-standard">Import employees</Link> </button></div>
+                            
+                        </CardHeader>
+                        <CardBody>
+                            <Datatable options={this.state.dtOptions1}>
+                                <table className="table table-striped my-4 w-100">
+                                    <thead>
+                                        <tr>
+                                            
+                                            <th></th>
+                                            <th> Name</th>
+                                            <th>Account type</th>
+                                            <th className="sort-numeric">Gender</th>
+                                            <th className="sort-alpha" data-priority="2">Company</th>
+                                            <th>Email</th>  
+                                            <th>Status</th>  
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr className="gradeX">
+                                           
+                                            <td className="image-holder"><img src="img/user/02.jpg"></img></td>
+                                            <td>Joseph Tioluwani</td>
+                                            <td><button href="#" className="btn btn-secondary btn-lg invite-btn table-round-btn">Visitor </button></td>
+                                            <td><button href="#" className="btn btn-secondary btn-lg invite-btn table-round-btn table-dark-btn ">Male </button></td>
+                                            <td>Techbarn</td>
+                                            <td>tioluwanijoseph@gmail.com</td>
+                                            <td><button href="#" className="btn btn-secondary btn-lg invite-btn table-round-btn">Active </button></td>
+                                            <td>{ ANIMATIONS.map((title, i) => (
+                   
+                                             <DropdownBox title={title}/>                     
+                                              ))}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </Datatable>
+                        </CardBody>
+                    </Card>
+                   
+                    
+                </Container>
             </ContentWrapper>
             );
     }
 
 }
 
-export default MapsGoogle;
-
+export default ChartRadial;

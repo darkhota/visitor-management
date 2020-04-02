@@ -66,6 +66,12 @@ const Menu = [
                
             },
             {
+                name: 'Bookings',
+                path: '/form-wizard',
+                translate: 'sidebar.nav.table.STANDARD',
+               
+            },
+            {
                 name: 'Analytics',
                 path: '/table-extended',
                 translate: 'sidebar.nav.table.EXTENDED'

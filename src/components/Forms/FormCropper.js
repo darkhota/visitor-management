@@ -1,111 +1,153 @@
 import React, { Component } from 'react';
 import ContentWrapper from '../Layout/ContentWrapper';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Card, CardHeader, CardBody, CardTitle } from 'reactstrap';
 import $ from 'jquery';
-// Image Cropper
-import 'cropper/dist/cropper.css';
-import 'cropper/dist/cropper.js';
+import '../../custom.css'
+import Datatable from '../Tables/Datatable';
+import { Row, Col, Dropdown, DropdownMenu, DropdownToggle, DropdownItem } from 'reactstrap';
+import classNames from 'classnames';
+import "flatpickr/dist/themes/light.css";
+import Flatpickr from "react-flatpickr";
+import { Link } from 'react-router-dom';
+
+class DropdownBox extends Component  {
+    
+    state = { ddOpen: false }
+    toggle = () => this.setState({
+            ddOpen: !this.state.ddOpen
+    })
+    render() {
+        const ddClass = classNames('animated', this.props.title);
+        
+        return (
+            <div >
+                <Dropdown isOpen={this.state.ddOpen} toggle={this.toggle}>
+                    <DropdownToggle className="remove-border">
+                    <i className="fa fa-ellipsis-h"></i>
+                    </DropdownToggle>
+                    <DropdownMenu className={ddClass}>
+                        <DropdownItem>Action</DropdownItem>
+                        <DropdownItem>Another action</DropdownItem>
+                        <DropdownItem active>Active Item</DropdownItem>
+                        <DropdownItem divider />
+                        <DropdownItem>Separated link</DropdownItem>
+                    </DropdownMenu>
+                </Dropdown>
+            </div>
+        );
+    }
+}
 
 class FormCropper extends Component {
 
-    componentDidMount() {
-        // var self = this;
-
-        this.inputImage = $(this.refs.inputImage); // upload button
-        this.cropperElement = $(this.refs.cropperImage); // image for cropper
-
-        this.options = {
-            aspectRatio: 16 / 9,
-            preview: '.img-preview',
-            crop: function(data) {
-                // console.log(self.cropperElement.cropper('getCroppedCanvas').toDataURL()); // base64
-                console.log('Data X: ' + (Math.round(data.x)));
-                console.log('Data Y: ' + (Math.round(data.y)));
-                console.log('Data Height: ' + (Math.round(data.height)));
-                console.log('Data Width: ' + (Math.round(data.width)));
-                console.log('Data Rotate: ' + (Math.round(data.rotate)));
-            }
+    constructor() {
+        super();
+     
+        this.state = {
+          date: new Date()
         };
+      }
 
-        // init plugin
-        this.cropperElement.cropper(this.options);
-
-        // prepare to handle image upload
-        this.handleNewImage();
-
+    state = {
+        dtOptions1: {
+            'paging': true, // Table pagination
+            'ordering': true, // Column ordering
+            'info': true, // Bottom left status text
+            responsive: true,
+            // Text translation options
+            // Note the required keywords between underscores (e.g _MENU_)
+            oLanguage: {
+                sSearch: '<em class="fa fa-search"></em>',
+                
+                info: 'Showing page _PAGE_ of _PAGES_',
+                zeroRecords: 'Nothing found - sorry',
+                infoEmpty: 'No records available',
+                infoFiltered: '(filtered from _MAX_ total records)',
+                oPaginate: {
+                    sNext: '<em class="fa fa-caret-right"></em>',
+                    sPrevious: '<em class="fa fa-caret-left"></em>'
+                }
+            }
+        },
+        
+       
     }
 
-    handleNewImage() {
-        var self = this;
-        var URL = window.URL || window.webkitURL,
-            blobURL;
-
-        if (URL) {
-            this.inputImage.change(function() {
-                var files = this.files,
-                    file;
-
-                if (!self.cropperElement.data('cropper')) {
-                    return;
-                }
-
-                if (files && files.length) {
-                    file = files[0];
-
-                    if (/^image\/\w+$/.test(file.type)) {
-                        blobURL = URL.createObjectURL(file);
-                        self.cropperElement.one('built.cropper', function() {
-                            URL.revokeObjectURL(blobURL); // Revoke when load complete
-                        }).cropper('reset').cropper('replace', blobURL);
-                        self.inputImage.val('');
-                    } else {
-                        alert('Please choose an image file.');
-                    }
-                }
+    // Access to internal datatable instance for customizations
+    dtInstance = dtInstance => {
+        const inputSearchClass = 'datatable_input_col_search';
+        const columnInputs = $('tfoot .' + inputSearchClass);
+        // On input keyup trigger filtering
+        columnInputs
+            .keyup(function() {
+                dtInstance.fnFilter(this.value, columnInputs.index(this));
             });
-        } else {
-            this.inputImage.parent().remove();
-        }
-    }
-
-    componentWillUnmount() {
-        this.cropperElement.cropper('destroy');
     }
 
     render() {
+        const { date } = this.state;
+        const ANIMATIONS = ['fadeIn',]
         return (
             <ContentWrapper>
-                <div className="content-heading">
-                    <div>Image Cropper
-                        <small>Simple image cropping plugin.</small>
-                    </div>
-                </div>
-                <Container>
-                    <Row>
-                        <Col lg={ 8 }>
-                            <div className="img-container mb-lg">
-                                <img ref="cropperImage" src="img/mb-sample.jpg" alt="Sample" />
-                            </div>
-                        </Col>
-                        <Col lg={ 4 }>
-                            <div className="docs-preview clearfix">
-                                <div className="img-preview preview-lg"></div>
-                                <div className="img-preview preview-md"></div>
-                                <div className="img-preview preview-sm"></div>
-                                <div className="img-preview preview-xs"></div>
-                            </div>
-                        </Col>
-                    </Row>
-                    <Row className="mt">
-                        <Col lg={ 4 }>
-                            <label htmlFor="inputImage" title="Upload image file" className="btn btn-info btn-upload">
-                                <input ref="inputImage" id="inputImage" name="file" type="file" accept="image/*" className="sr-only" />
-                                <span title="Import image with Blob URLs" className="docs-tooltip">
-                                Upload image
-                                </span>
-                            </label>
-                        </Col>
-                    </Row>
+                <Container fluid>
+                    {/* DATATABLE DEMO 1 */}
+                    <Card>
+                        <CardHeader className="table-card-header">
+                            
+                            <h1>1 Delivery(s)</h1>
+                            <Flatpickr
+
+                                        options={{   altInput: true,
+                                            altFormat: "F j, Y",
+                                            dateFormat: "Y-m-d"}}
+       
+                                        value={date}
+                                        onChange={date => {
+                                        this.setState({ date });
+                                        }}
+                                    />
+                            <select className="selectVisitors">
+										<option value="1">All Deliveries</option>
+										<option value="2">My Deliveries</option>
+	                              	</select>
+                            <button href="#" className="table button"><Link to="/form-standard">Export</Link> </button>
+                        </CardHeader>
+                        <CardBody>
+                            <Datatable options={this.state.dtOptions1}>
+                                <table className="table table-striped my-4 w-100">
+                                    <thead>
+                                        <tr>
+                                        <th data-priority="1"><input class="js-entry-checkbox" type="checkbox"/></th>
+                                            <th></th>
+                                            <th>Visitor</th>
+                                            <th>Purpose </th>
+                                            <th className="sort-numeric">Recipent</th>
+                                            <th className="sort-alpha" data-priority="2">Date</th>
+                                            <th>Signed in</th>  
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr className="gradeX">
+                                        <td><input class="js-entry-checkbox" type="checkbox"/></td>
+                                            <td className="image-holder"><img src="img/user/02.jpg"></img></td>
+                                            <td>Joseph Tioluwani</td>
+                                            <td>Deliveries</td>
+                                            <td>Niyi Adisa</td>
+                                            <td>Mar 6, 2020</td>
+                                            <td>2:06pm</td>
+                                            <td>{ ANIMATIONS.map((title, i) => (
+                   
+                                             <DropdownBox title={title}/>                     
+                                              ))}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </Datatable>
+                        </CardBody>
+                    </Card>
+                   
+                    
                 </Container>
             </ContentWrapper>
             );

@@ -62,9 +62,9 @@ class ChartMorris extends Component {
         },
         displayColorPicker: false,
             color: {
-                r: '241',
-                g: '112',
-                b: '19',
+                r: '0',
+                g: '145',
+                b: '74',
                 a: '1',
          },
     }
@@ -183,7 +183,7 @@ class ChartMorris extends Component {
                                         <h5>Choose a custom accent color for the details on your Tablet and pre-registration emails.</h5>
                                         <h4>Choose a color</h4>
                                                         <div style={ styles.swatch } onClick={ this.handleClick }>
-                        <div style={ styles.color } />
+                        <div style={ styles.color }></div> 
                         </div>
                         { this.state.displayColorPicker ? <div style={ styles.popover }>
                         <div style={ styles.cover } onClick={ this.handleClose }/>

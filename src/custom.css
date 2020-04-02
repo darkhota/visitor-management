@@ -185,7 +185,17 @@ border-radius: 9999px;
 .table-card-header{
     display:grid;
     grid-template-columns: repeat(4, 1fr);
+    padding-right:2rem;
 }
+.employee-header{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+.table-card-header-rooms{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
 .table-card-header input{
     width:70%;
     display:block;
@@ -198,10 +208,12 @@ border-radius: 9999px;
     line-height: 1.52857;
     color: #495057;
     padding: 0.375rem 1rem;
-    margin-left: -50%;
+    margin-left: -40%;
 }
 .table-card-header h1{
     font-size: 1.5rem;
+  
+    
 }
 .table-card-header select{
     background-color: transparent;
@@ -237,6 +249,28 @@ border-radius: 9999px;
     border-radius: 0.375rem;
     text-align: center;
 
+}
+.align-left{
+   
+    
+}
+.align-left button{
+    margin-left:0;
+    
+}
+.align-left2 button{
+    margin-left:-200px;
+    width: 50%;
+    
+}
+.table-card-header-rooms button{
+    width: 25%;
+    margin-left: 75%;
+    background-color: #00914a;
+    color:#fff;
+}
+ link{
+    color:#fff;
 }
 .image-holder img{
     border-radius:100%;
@@ -279,6 +313,9 @@ border-radius: 9999px;
     padding-top: 25px;
     padding-bottom: 70px;
 }
+.new-room-form{
+    padding-bottom: 2px;
+}
 
 .form-gird{
     display: grid;
@@ -300,8 +337,8 @@ border-radius: 9999px;
 .required{
     color:red;
 }
-.input-field{
-    padding-top:15px;
+.input-field select{
+    border-radius: 5px;
 }
 .input-field-large{
     padding-top:15px;
@@ -684,5 +721,17 @@ small, .small {
     background-color: #00914a;
     border: 1px solid #00914a;
   }
+
+  .table-round-btn{
+      border-radius:1.5rem;
+      padding: 5px 20px;
+      background-color: #27c24c;
+  }
+
+  .table-dark-btn{
+    background-color: #3a3f51;
+  }
+
+
 
   
