@@ -1,485 +1,198 @@
+'use strict'
 import React, { Component } from 'react';
 import ContentWrapper from '../Layout/ContentWrapper';
-import { Row, Col, Input, Card, CardHeader, CardBody, CardFooter, CustomInput } from 'reactstrap';
+import { Container, Row, Col, Card, CardHeader, CardBody, Input, Table } from 'reactstrap';
 
-import FormValidator from './FormValidator.js';
 
-/**
- * Validation flow using controlled components
- *
- * 1- User type on input
- * 2- onChange event trigger validation
- * 3- Validate methods are listed using "data-validate"
- *    attribute. Content must be an array in json format.
- * 4- The validation returns an object with format {[input name]: status}
- *    where status is an array of boolean per each method
- * 5- Methods that requires an argument, read the 'data-param' attribute
- * 6- Similarly, onSubmit event does a bulk validation on all form elements
- */
-
+import '../../custom.css'
+import { Link } from 'react-router-dom';
+import { SketchPicker } from 'react-color'
+import reactCSS from 'reactcss'
 class FormValidation extends Component {
 
     state = {
-        /* Group each form state in an object.
-           Property name MUST match the form name */
-        formRegister: {
-            email: '',
-            password: '',
-            password2: '',
-            terms: false
+        // Data for charts
+        chartdata: [
+            { y: "2006", a: 100, b: 90 },
+            { y: "2007", a: 75, b: 65 },
+            { y: "2008", a: 50, b: 40 },
+            { y: "2009", a: 75, b: 65 },
+            { y: "2010", a: 50, b: 40 },
+            { y: "2011", a: 75, b: 65 },
+            { y: "2012", a: 100, b: 90 }
+        ],
+        donutdata: [
+            {label: "Download Sales", value: 12},
+            {label: "In-Store Sales", value: 30},
+            {label: "Mail-Order Sales", value: 20}
+        ],
+        // Line Chart
+        lineOptions: {
+            element: 'morris-line',
+            xkey: 'y',
+            ykeys: ["a", "b"],
+            labels: ["Serie A", "Serie B"],
+            lineColors: ["#31C0BE", "#7a92a3"],
+            resize: true
         },
-        formLogin: {
-            email: '',
-            password: ''
+        // Donut Chart
+        donutOptions: {
+            element: 'morris-donut',
+            colors: ['#f05050', '#fad732', '#ff902b'],
+            resize: true
         },
-        formDemo: {
-            text: '',
-            email: '',
-            number: '',
-            integer: '',
-            alphanum: '',
-            url: '',
-            password: '',
-            password2: '',
-            minlength: '',
-            maxlength: '',
-            length: '',
-            minval: '',
-            maxval: '',
-            list: ''
-        }
+        // Bar Chart
+        barOptions: {
+            element: 'morris-bar',
+            xkey: 'y',
+            ykeys: ["a", "b"],
+            labels: ["Series A", "Series B"],
+            xLabelMargin: 2,
+            barColors: ['#23b7e5', '#f05050'],
+            resize: true
+        },
+        // Area Chart
+        areaOptions: {
+            element: 'morris-area',
+            xkey: 'y',
+            ykeys: ["a", "b"],
+            labels: ["Serie A", "Serie B"],
+            lineColors: ['#7266ba', '#23b7e5'],
+            resize: true
+        },
+        displayColorPicker: false,
+            color: {
+                r: '0',
+                g: '145',
+                b: '74',
+                a: '1',
+         },
     }
-
-     /**
-      * Validate input using onChange event
-      * @param  {String} formName The name of the form in the state object
-      * @return {Function} a function used for the event
-      */
-    validateOnChange = event => {
-        const input = event.target;
-        const form = input.form
-        const value = input.type === 'checkbox' ? input.checked : input.value;
-
-        const result = FormValidator.validate(input);
-
-        this.setState({
-            [form.name]: {
-                ...this.state[form.name],
-                [input.name]: value,
-                errors: {
-                    ...this.state[form.name].errors,
-                    [input.name]: result
-                }
-            }
-        });
-
-    }
-
-    onSubmit = e => {
-        const form = e.target;
-        const inputs = [...form.elements].filter(i => ['INPUT', 'SELECT'].includes(i.nodeName))
-
-        const { errors, hasError } = FormValidator.bulkValidate(inputs)
-
-        this.setState({
-            [form.name]: {
-                ...this.state[form.name],
-                errors
-            }
-        });
-
-        console.log(hasError ? 'Form has errors. Check!' : 'Form Submitted!')
-
-        e.preventDefault()
-    }
-
-    /* Simplify error check */
-    hasError = (formName, inputName, method) => {
-        return  this.state[formName] &&
-                this.state[formName].errors &&
-                this.state[formName].errors[inputName] &&
-                this.state[formName].errors[inputName][method]
-    }
+    handleClick = () => {
+        this.setState({ displayColorPicker: !this.state.displayColorPicker })
+      };
+    
+      handleClose = () => {
+        this.setState({ displayColorPicker: false })
+      };
+    
+      handleChange = (color) => {
+        this.setState({ color: color.rgb })
+      };
 
     render() {
+
+        const styles = reactCSS({
+            'default': {
+              color: {
+                width: '160px',
+                height: '40px',
+                borderRadius: '2px',
+                background: `rgba(${ this.state.color.r }, ${ this.state.color.g }, ${ this.state.color.b }, ${ this.state.color.a })`,
+              },
+              swatch: {
+                padding: '5px',
+                background: '#fff',
+                borderRadius: '1px',
+                boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
+                display: 'inline-block',
+                cursor: 'pointer',
+              },
+              popover: {
+                position: 'absolute',
+                zIndex: '2',
+              },
+              cover: {
+                position: 'fixed',
+                top: '0px',
+                right: '0px',
+                bottom: '0px',
+                left: '0px',
+              },
+            },
+          });
         return (
             <ContentWrapper>
-                <div className="content-heading">
-                    <div>Form Validation
-                        <small>Form validation based on Controlled Components.</small>
-                    </div>
+                <div className="form-card">
+                <div className=" card-top">
+                            <h3>
+                              Billing
+                            </h3>
+                            </div >
+                            
+                <div className=" card-top billing ">
+                            <h3>
+                            Products
+                            </h3>
+                            </div >
+
+                <div className="billing-content">
+                <div className="upload-logo billing-box">
+                                        <div className="content-text">
+                                            <h4>Visitor Basic</h4>
+                                        </div>
+                                        <div className="content-button">
+                                        <button class="btn btn-secondary btn-lg " type="button"><Link to="/#"></Link>  Manage subscription</button>
+                                        </div>
+                            </div>
+                            <div className="upload-logo billing-box">
+                                        <div className="content-text">
+                                            <h4>Deliveries</h4>
+                                            <h5>The simple solution of office deliveries.</h5> 
+                                        </div>
+                                        <div className="content-button learn-more">
+                                        <button class="btn btn-secondary btn-lg invite-btn" type="button"><Link to="/#"></Link>  Learn more</button>
+                                        </div>
+                            </div>
+
+                            <div className=" card-top billing billing-box2">
+                            <h3>
+                            Payment method
+                            </h3>
+                            </div >
+                            <div className="upload-logo billing-box">
+                                        <div className="content-text">
+                                            <h4>No card on file</h4>
+                                            <h5>Add a credit card to continue using Workwise.</h5> 
+                                        </div>
+                                        <div className="content-button learn-more">
+                                        <button class="btn btn-secondary btn-lg invite-btn" type="button"><Link to="/#"></Link>  Add</button>
+                                        </div>
+                            </div>
+
+                            <div className=" card-top billing billing-box2 ">
+                            <h3>
+                            Billing history
+                            </h3>
+                            </div >
+
+                            <div className="billing-box2">
+                            <Card >
+                            <Table responsive>
+                                    <thead>
+                                        <tr>
+                                            <th>DATE</th>
+                                            <th>AMOUNT</th>
+                                            <th>RECEIPT</th>
+                                            <th>STATUS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Mar 11, 2020</td>
+                                            <td>₦35,000</td>
+                                            <td>WW10321</td>
+                                            <td>Pending</td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </Table>
+                                </Card>
+                                </div>
+                                   </div>
                 </div>
-                { /* START row */ }
-                <Row>
-                    <Col lg={ 6 }>
-                        <form onSubmit={this.onSubmit} name="formRegister" action="">
-                            { /* START card */ }
-                            <Card className="card-default">
-                                <CardHeader>
-                                    <div className="card-title">Form Register</div>
-                                </CardHeader>
-                                <CardBody>
-                                    <div className="form-group">
-                                        <label className="col-form-label">Email Address *</label>
-                                        <Input type="email"
-                                            name="email"
-                                            invalid={this.hasError('formRegister','email','required')||this.hasError('formRegister','email','email')}
-                                            onChange={this.validateOnChange}
-                                            data-validate='["required", "email"]'
-                                            value={this.state.formRegister.email}/>
-                                        { this.hasError('formRegister','email','required') && <span className="invalid-feedback">Field is required</span> }
-                                        { this.hasError('formRegister','email','email') && <span className="invalid-feedback">Field must be valid email</span> }
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="col-form-label">Password *</label>
-                                        <Input type="text"
-                                            id="id-password"
-                                            name="password"
-                                            invalid={this.hasError('formRegister','password','required')}
-                                            onChange={this.validateOnChange}
-                                            data-validate='["required"]'
-                                            value={this.state.formRegister.password}
-                                        />
-                                        <span className="invalid-feedback">Field is required</span>
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="col-form-label">Confirm Password *</label>
-                                        <Input type="text" name="password2"
-                                            invalid={this.hasError('formRegister','password2','equalto')}
-                                            onChange={this.validateOnChange}
-                                            data-validate='["equalto"]'
-                                            value={this.state.formRegister.password2}
-                                            data-param="id-password"
-                                        />
-                                        <span className="invalid-feedback">Field must be equal to previous</span>
-                                    </div>
-                                    <div className="required">* Required fields</div>
-                                </CardBody>
-                                <CardFooter>
-                                    <div className="d-flex align-items-center">
-                                        <CustomInput type="checkbox" id="terms"
-                                            name="terms"
-                                            label="I agree with the terms"
-                                            invalid={this.hasError('formRegister','terms','required')}
-                                            onChange={this.validateOnChange}
-                                            data-validate='["required"]'
-                                            checked={this.state.formRegister.terms}>
-                                                <span className="invalid-feedback">Field is required</span>
-                                            </CustomInput>
-                                        <div className="ml-auto">
-                                            <button type="submit" className="btn btn-primary">Register</button>
-                                        </div>
-                                    </div>
-                                </CardFooter>
-                            </Card>
-                            { /* END card */ }
-                        </form>
-                    </Col>
-                    <Col lg={ 6 }>
-                        <form onSubmit={this.onSubmit} method="post" name="formLogin">
-                            { /* START card */ }
-                            <Card className="card-default">
-                                <CardHeader>
-                                    <div className="card-title">Form Login</div>
-                                </CardHeader>
-                                <CardBody>
-                                    <div className="form-group">
-                                        <label className="col-form-label">Email Address *</label>
-                                        <Input type="email"
-                                            name="email"
-                                            invalid={this.hasError('formLogin','email','required')||this.hasError('formLogin','email','email')}
-                                            onChange={this.validateOnChange}
-                                            data-validate='["required", "email"]'
-                                            value={this.state.formLogin.email}/>
-                                        { this.hasError('formLogin','email','required') && <span className="invalid-feedback">Field is required</span> }
-                                        { this.hasError('formLogin','email','email') && <span className="invalid-feedback">Field must be valid email</span> }
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="col-form-label">Password *</label>
-                                        <Input type="text"
-                                            id="id-password"
-                                            name="password"
-                                            invalid={this.hasError('formLogin','password','required')}
-                                            onChange={this.validateOnChange}
-                                            data-validate='["required"]'
-                                            value={this.state.formLogin.password}
-                                        />
-                                        <span className="invalid-feedback">Field is required</span>
-                                    </div>
-                                    <div className="required">* Required fields</div>
-                                </CardBody>
-                                <CardFooter>
-                                    <button type="submit" className="btn btn-primary">Login</button>
-                                </CardFooter>
-                            </Card>
-                            { /* END card */ }
-                        </form>
-                    </Col>
-                </Row>
-                { /* END row */ }
-                { /* START row */ }
-                <Row>
-                    <div className="col-md-12">
-                        <form onSubmit={this.onSubmit} action="" name="formDemo">
-                            { /* START card */ }
-                            <Card className="card-default">
-                                <CardHeader>
-                                    <div className="card-title">Fields validation</div>
-                                </CardHeader>
-                                <CardBody>
-                                    <legend className="mb-4">Type validation</legend>
-                                    <fieldset>
-                                        <div className="form-group row align-items-center">
-                                            <label className="col-md-2 col-form-label">Required Text</label>
-                                            <Col md={ 6 }>
-                                                <Input type="text"
-                                                    name="text"
-                                                    invalid={this.hasError('formDemo','text','required')}
-                                                    onChange={this.validateOnChange}
-                                                    data-validate='["required"]'
-                                                    value={this.state.formDemo.text}
-                                                />
-                                                <span className="invalid-feedback">Field is required</span>
-                                            </Col>
-                                            <Col md={ 4 }>
-                                            </Col>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <div className="form-group row align-items-center">
-                                            <label className="col-md-2 col-form-label">Email</label>
-                                            <Col md={ 6 }>
-                                                <Input type="email"
-                                                    name="email"
-                                                    invalid={this.hasError('formDemo','email','required')||this.hasError('formDemo','email','email')}
-                                                    onChange={this.validateOnChange}
-                                                    data-validate='["required", "email"]'
-                                                    value={this.state.formDemo.email}/>
-                                                { this.hasError('formDemo','email','required') && <span className="invalid-feedback">Field is required</span> }
-                                                { this.hasError('formDemo','email','email') && <span className="invalid-feedback">Field must be valid email</span> }
-                                            </Col>
-                                            <Col md={ 4 }></Col>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <div className="form-group row align-items-center">
-                                            <label className="col-md-2 col-form-label">Number</label>
-                                            <Col md={ 6 }>
-                                                <Input type="text"
-                                                    name="number"
-                                                    invalid={this.hasError('formDemo','number','number')}
-                                                    onChange={this.validateOnChange}
-                                                    data-validate='["number"]'
-                                                    value={this.state.formDemo.number}/>
-                                                <span className="invalid-feedback">Field must be valid number</span>
-                                            </Col>
-                                            <Col md={ 4 }>
-                                            </Col>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <div className="form-group row align-items-center">
-                                            <label className="col-md-2 col-form-label">Integer</label>
-                                            <Col md={ 6 }>
-                                                <Input type="text"
-                                                    name="integer"
-                                                    invalid={this.hasError('formDemo','integer','integer')}
-                                                    onChange={this.validateOnChange}
-                                                    data-validate='["integer"]'
-                                                    value={this.state.formDemo.integer}/>
-                                                <span className="invalid-feedback">Field must be an integer</span>
-                                            </Col>
-                                            <Col md={ 4 }>
-                                            </Col>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <div className="form-group row align-items-center">
-                                            <label className="col-md-2 col-form-label">Alphanum</label>
-                                            <Col md={ 6 }>
-                                                <Input type="text"
-                                                    name="alphanum"
-                                                    invalid={this.hasError('formDemo','alphanum','alphanum')}
-                                                    onChange={this.validateOnChange}
-                                                    data-validate='["alphanum"]'
-                                                    value={this.state.formDemo.alphanum}/>
-                                                <span className="invalid-feedback">Field must be alpha numeric</span>
-                                            </Col>
-                                            <Col md={ 4 }>
-                                            </Col>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <div className="form-group row align-items-center">
-                                            <label className="col-md-2 col-form-label">Url</label>
-                                            <Col md={ 6 }>
-                                                <Input type="text"
-                                                    name="url"
-                                                    invalid={this.hasError('formDemo','url','url')}
-                                                    onChange={this.validateOnChange}
-                                                    data-validate='["url"]'
-                                                    value={this.state.formDemo.url}/>
-                                                <span className="invalid-feedback">Field must be valid url</span>
-                                            </Col>
-                                            <Col md={ 4 }>
-                                            </Col>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <div className="form-group row align-items-center">
-                                            <label className="col-md-2 col-form-label">Equal to</label>
-                                            <div className="col-sm-3">
-                                                <Input type="text"
-                                                    id="id-source"
-                                                    name="password"
-                                                    invalid={this.hasError('formDemo','password','required')}
-                                                    onChange={this.validateOnChange}
-                                                    data-validate='["required"]'
-                                                    value={this.state.formDemo.password}
-                                                />
-                                                <span className="invalid-feedback">Field is required</span>
-                                            </div>
-                                            <div className="col-sm-3">
-                                                <Input type="text" name="password2"
-                                                    invalid={this.hasError('formDemo','password2','equalto')}
-                                                    onChange={this.validateOnChange}
-                                                    data-validate='["equalto"]'
-                                                    value={this.state.formDemo.password2}
-                                                    data-param="id-source"
-                                                />
-                                                <span className="invalid-feedback">Field must be equal to previous</span>
-                                            </div>
-                                            <Col md={ 4 }>
-                                            </Col>
-                                        </div>
-                                    </fieldset>
-                                    <legend className="mb-4">Range validation</legend>
-                                    <fieldset>
-                                        <div className="form-group row align-items-center">
-                                            <label className="col-md-2 col-form-label">Minlength</label>
-                                            <Col md={ 6 }>
-                                                <Input type="text"
-                                                    name="minlength"
-                                                    invalid={this.hasError('formDemo','minlength','minlen')}
-                                                    onChange={this.validateOnChange}
-                                                    data-validate='["minlen"]'
-                                                    value={this.state.formDemo.minlength}
-                                                    data-param="6"
-                                                />
-                                                <span className="invalid-feedback">Field must have a valid length</span>
-                                            </Col>
-                                            <Col md={ 4 }>
-                                                <code>Min length of 6</code>
-                                            </Col>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <div className="form-group row align-items-center">
-                                            <label className="col-md-2 col-form-label">Maxlength</label>
-                                            <Col md={ 6 }>
-                                                <Input type="text"
-                                                    name="maxlength"
-                                                    invalid={this.hasError('formDemo','maxlength','maxlen')}
-                                                    onChange={this.validateOnChange}
-                                                    data-validate='["maxlen"]'
-                                                    value={this.state.formDemo.maxlength}
-                                                    data-param="10"
-                                                />
-                                                <span className="invalid-feedback">Field must have a valid length</span>
-                                            </Col>
-                                            <Col md={ 4 }>
-                                                <code>Max length of 10</code>
-                                            </Col>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <div className="form-group row align-items-center">
-                                            <label className="col-md-2 col-form-label">Length</label>
-                                            <Col md={ 6 }>
-                                                <Input type="text"
-                                                    name="length"
-                                                    invalid={this.hasError('formDemo','length','len')}
-                                                    onChange={this.validateOnChange}
-                                                    data-validate='["len"]'
-                                                    value={this.state.formDemo.length}
-                                                    data-param="[6, 10]"
-                                                />
-                                                <span className="invalid-feedback">Field must have a valid length</span>
-                                            </Col>
-                                            <Col md={ 4 }>
-                                                <code>Length between 6 and 10</code>
-                                            </Col>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <div className="form-group row align-items-center">
-                                            <label className="col-md-2 col-form-label">Min</label>
-                                            <Col md={ 6 }>
-                                                <Input type="number"
-                                                    name="minval"
-                                                    invalid={this.hasError('formDemo','minval','min')}
-                                                    onChange={this.validateOnChange}
-                                                    data-validate='["min"]'
-                                                    value={this.state.formDemo.minval}
-                                                    data-param="6"
-                                                />
-                                                <span className="invalid-feedback">Field must have a minimun value</span>
-                                            </Col>
-                                            <Col md={ 4 }>
-                                                <code>Min value 6</code>
-                                            </Col>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <div className="form-group row align-items-center">
-                                            <label className="col-md-2 col-form-label">Max</label>
-                                            <Col md={ 6 }>
-                                                <Input type="number"
-                                                    name="maxval"
-                                                    invalid={this.hasError('formDemo','maxval','max')}
-                                                    onChange={this.validateOnChange}
-                                                    data-validate='["max"]'
-                                                    value={this.state.formDemo.maxval}
-                                                    data-param="6"
-                                                />
-                                                <span className="invalid-feedback">Field must have a maximun value</span>
-                                            </Col>
-                                            <Col md={ 4 }>
-                                                <code>Max value 6</code>
-                                            </Col>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <div className="form-group row align-items-center">
-                                            <label className="col-md-2 col-form-label">List</label>
-                                            <Col md={ 6 }>
-                                                <Input type="text"
-                                                    name="list"
-                                                    invalid={this.hasError('formDemo','list','list')}
-                                                    onChange={this.validateOnChange}
-                                                    data-validate='["list"]'
-                                                    value={this.state.formDemo.list}
-                                                    data-param='["red", "pink", "black"]'
-                                                />
-                                                <span className="invalid-feedback">Field content not allowed</span>
-                                            </Col>
-                                            <Col md={ 4 }>
-                                                <code>Only allowed ["red", "pink", "black"]</code>
-                                            </Col>
-                                        </div>
-                                    </fieldset>
-                                </CardBody>
-                                <CardFooter className="text-center">
-                                    <button type="submit" className="btn btn-info">Run validation</button>
-                                </CardFooter>
-                            </Card>
-                            { /* END card */ }
-                        </form>
-                    </div>
-                </Row>
-                { /* END row */ }
             </ContentWrapper>
-            );
+        );
     }
 
 }

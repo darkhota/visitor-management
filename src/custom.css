@@ -26,7 +26,14 @@
     font-weight: 500;
     display: inline;
     line-height: 1.25;
-    color: #282c36;
+   
+}
+.billing{
+    padding-bottom:5px;
+}
+.billing h3{
+    font-size: 1.25rem;
+    
 }
 .card-top a{
     color: white;
@@ -313,6 +320,9 @@ border-radius: 9999px;
     padding-top: 25px;
     padding-bottom: 70px;
 }
+.profile-form{
+    width: 50%;
+}
 .new-room-form{
     padding-bottom: 2px;
 }
@@ -336,6 +346,9 @@ border-radius: 9999px;
 
 .required{
     color:red;
+}
+.input-field{
+    padding-bottom: 1rem;
 }
 .input-field select{
     border-radius: 5px;
@@ -610,6 +623,16 @@ small, .small {
     margin-top:2rem;
     margin-bottom:2rem;
 }
+.billing-box {
+    margin-top: 0;
+    margin-left:1rem;
+    padding: 1rem;
+    padding-left: 1rem;
+}
+.billing-box2{
+    margin-left:1rem;
+}
+
 
 .upload-logo img{
     width: 32px;
@@ -707,6 +730,12 @@ small, .small {
       text-align: right;
       margin-top: 10px;
   }
+  .learn-more{
+      margin-top: 1rem;
+  }
+  .content-text{
+      margin-top:1rem;
+  }
 
   .btn-deactivate{
     color: #282c36;
@@ -731,7 +760,83 @@ small, .small {
   .table-dark-btn{
     background-color: #3a3f51;
   }
+.all-integrations{
+    margin-top: -20px;
+    
+}
+.all-integrations a{
+    text-decoration: none;
+    box-shadow: inset 0 -0.125rem #00914b;
+    padding-bottom:.5rem;
+}
+.integration-desc{
+    padding-top:2rem;
+}
 
+.integration-desc p{
+    font-size: .875rem;
+    color: #73767c;
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: 0.65625rem;
+}
+.integration-desc a{
+    color: #5d9cec
+}
+.integration-content-header{
+    margin-top: 5rem;
+}
+.integration-content-container{
+    border: 1px solid #e9e9ea;
+    min-height: 235px;
+    padding: 1rem;
+    width: 30%;
+    border-radius: 0.25rem !important;
+    text-align:center;
+    margin-left: 1rem;
+    margin-top:3rem;
 
+}
+.integration-content-container img{
+    max-height: 50px;
+    text-align:center;
+    margin-top:20px;
+}
+.h4 {
+    font-size: 1rem;
+    margin-bottom: 0.65625rem;
+    font-weight: 500;
+    line-height: 1.1;
+    margin-top: 10px;
+}
+.sync-btn{
+    padding: 10px 35px;
+    font-size: 1rem;
+}
 
-  
+.change-pwd{
+    display: none;
+}
+
+.c-checkbox span:before, .c-radio span:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    text-align: center !important;
+    font-size: 12px;
+    line-height: 18px;
+    vertical-align: middle;
+}
+.c-checkbox:hover span, .c-radio:hover span {
+    border-color: #00914b;
+}
+label:not(.label-reset) {
+    font-weight: 600;
+}
+
+.profile-btn{
+    padding-top:1rem;
+}

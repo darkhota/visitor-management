@@ -89,10 +89,12 @@ class FormStandard extends Component {
                 
                 
                <div className="form-card">
-               <div className=" card-top">
-                            <h2>
-                                Single invite
-                            </h2>
+               <div className=" card-top-tablet">
+                            <h3><a href="/chart-radial">
+                               <i className="far fa-arrow-alt-circle-left" ></i> 
+                           </a>
+                              &nbsp;Single invite
+                            </h3>
                             </div >
                             <div className="visitorForm" >
                                    

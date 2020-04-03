@@ -106,6 +106,12 @@ const Menu = [
             }
         ]
     },   
+    {
+        name: 'Integrations',
+        icon: 'icon-puzzle',
+        translate:'sidebar.nav.form.FORM',
+        path: '/form-upload',
+    }
 ];
 
 export default Menu;

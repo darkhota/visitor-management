@@ -9,7 +9,7 @@ const Menufooter = [
         name: 'Billing',
         icon: 'icon-wallet',
         translate: 'sidebar.nav.form.FORM',
-        path: '/form-validator',
+        path: '/form-validation',
        
     },
     {
@@ -28,7 +28,7 @@ const Menufooter = [
             name: 'Profile',
             icon: 'icon-settings',
             translate: 'sidebar.nav.table.STANDARD',
-            path: '/form-upload',
+            path: '/blog-post',
 
         },
         {

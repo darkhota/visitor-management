@@ -153,9 +153,9 @@ class FormStandard extends Component {
                                    
                                 </div>
                                 <hr></hr>
-                                    <div className="button-align">
+                                    
                                     <button class="invite-btn" type="button"><i class="icon-paper-plane"></i>&nbsp;&nbsp;Save</button>
-                                    </div>
+                                    
                </div>
                 
             </ContentWrapper>

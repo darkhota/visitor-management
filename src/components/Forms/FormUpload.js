@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import ContentWrapper from '../Layout/ContentWrapper';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col,Card, CardHeader, CardBody, } from 'reactstrap';
 import Dropzone from 'react-dropzone';
+import '../../custom.css'
+import { Link } from 'react-router-dom';
 
 class FormUpload extends Component {
 
@@ -18,22 +20,43 @@ class FormUpload extends Component {
     )
 
     render() {
-        let allFiles = this.state.files;
+       
         return (
             <ContentWrapper>
-                <Container className="container-md">
-                    <p className="text-center">Dropzone<br/><small>DropzoneJS is an open source library that provides drag&apos;n&apos;drop file uploads with image previews.</small><br/><small className="spr">It’s lightweight, doesn’t depend on any other library (like jQuery) and is</small><small><a href="http://www.dropzonejs.com/" rel="noopener noreferrer" target="_blank"> highly customizable</a></small></p>
-                    <Dropzone className="card p-3" ref="dropzone" onDrop={this.onDrop} >
-                        <div className="text-center box-placeholder m-0">Try dropping some files here, or click to select files to upload.</div>
-                        <div className="mt-3">
-                            {this.state.files.length > 0 ?
-                                <Row>{allFiles.map(this.createImageItem)}</Row>
-                                :
-                                <div><small>This demo does not upload files to any server.</small></div>
-                            }
+             <Container fluid>
+             <Card>
+             <CardHeader className="table-card-header employee-header">
+                            <h1>Integrations</h1>    
+                        </CardHeader>
+                        <CardBody>
+                        <div className="all-integrations">
+                            <a href="#">All Integrations</a>
                         </div>
-                    </Dropzone>
-                </Container>
+                        <div className="integration-desc">
+                            <p>
+                            Workwise robust integrations directory makes it easy to integrate with your current workflow.<br></br>
+									  Learn more about <a href="#" >integrations and GDPR</a>
+                            </p>
+                        </div>
+                        <div className="integration-content"> 
+                            <div className="integration-content-header">
+                            <h4>Directory</h4>
+                        </div>
+                        <div className="integration-content-container">
+                            <img src="/img/google.png"></img>
+                            <h4 className="h4"><strong>Google Apps</strong></h4>
+                            <p className="h5 em-tw-m-0">Automatically sync Google Apps with Workwise.</p>
+                            <a href="#">
+                                        <button className="btn btn-secondary btn-lg invite-btn sync-btn" type="button">Sync</button>
+                                    </a>
+                        </div>
+                        </div>
+                       
+                        </CardBody>
+             </Card>
+                        
+                        
+             </Container>
             </ContentWrapper>
             );
     }
