@@ -4,7 +4,7 @@ import { Container, Card, CardHeader, CardBody, CardTitle } from 'reactstrap';
 import $ from 'jquery';
 import '../../custom.css'
 import Datatable from './Datatable';
-import { Row, Col, Dropdown, DropdownMenu, DropdownToggle, DropdownItem } from 'reactstrap';
+import { Dropdown, DropdownMenu, DropdownToggle, DropdownItem } from 'reactstrap';
 import classNames from 'classnames';
 import "flatpickr/dist/themes/light.css";
 import Flatpickr from "react-flatpickr";
@@ -119,14 +119,14 @@ class DatatableView extends Component {
                                             <th data-priority="1"><input class="js-entry-checkbox" type="checkbox"/></th>
                                             <th></th>
                                             <th>Visitor</th>
-                                            <th>Purpose</th>
-                                            <th className="sort-numeric">Host</th>
-                                            <th className="sort-alpha" data-priority="2">Private Notes</th>
-                                            <th>Date</th>
-                                            <th>Signed in</th>
-                                            <th>Signed out</th>
-                                            <th>Checked Out By</th>
-                                            <th></th>
+                                            <th className="no-display">Purpose</th>
+                                            <th className="sort-numeric no-display">Host</th>
+                                            <th className="sort-alpha no-display" data-priority="2">Private Notes</th>
+                                            <th className="no-display">Date</th>
+                                            <th className="no-display">Signed in</th>
+                                            <th className="no-display">Signed out</th>
+                                            <th className="no-display">Checked Out By</th>
+                                            <th className="no-display"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -135,13 +135,13 @@ class DatatableView extends Component {
                                             <td className="image-holder"><img src="img/user/02.jpg"></img></td>
                                             <td>Joseph Tioluwani</td>
                                             <td>Visitor</td>
-                                            <td>Niyi Adisa</td>
-                                            <td>Come early</td>
-                                            <td>Mar 6, 2020</td>
-                                            <td>2:06 pm</td>
-                                            <td>2:35pm</td>
-                                            <td>Ilyas</td>
-                                            <td>{ ANIMATIONS.map((title, i) => (
+                                            <td className="no-display">Niyi Adisa</td>
+                                            <td className="no-display"> Come early</td>
+                                            <td className="no-display">Mar 6, 2020</td>
+                                            <td className="no-display">2:06 pm</td>
+                                            <td className="no-display">2:35pm</td>
+                                            <td className="no-display">Ilyas</td>
+                                            <td className="no-display">{ ANIMATIONS.map((title, i) => (
                    
                                              <DropdownBox title={title}/>                     
                                               ))}</td>
@@ -151,13 +151,13 @@ class DatatableView extends Component {
                                             <td className="image-holder"><img src="img/user/01.jpg"></img></td>
                                             <td>Kamsi Kodi</td>
                                             <td>Visitor</td>
-                                            <td>Niyi Adisa</td>
-                                            <td>Come early</td>
-                                            <td>Mar 6, 2020</td>
-                                            <td>2:06 pm</td>
-                                            <td>Sign out</td>
-                                            <td>Ilyas</td>
-                                            <td>{ ANIMATIONS.map((title, i) => (
+                                            <td className="no-display">Niyi Adisa</td>
+                                            <td className="no-display">Come early</td>
+                                            <td className="no-display">Mar 6, 2020</td>
+                                            <td className="no-display">2:06 pm</td>
+                                            <td className="no-display">Sign out</td>
+                                            <td className="no-display">Ilyas</td>
+                                            <td className="no-display">{ ANIMATIONS.map((title, i) => (
                    
                    <DropdownBox title={title}/>                     
                     ))}</td>
@@ -168,13 +168,13 @@ class DatatableView extends Component {
                                             <td >
                                                 Niyi Adisa</td>
                                             <td>Visitor</td>
-                                            <td>Niyi Adisa</td>
-                                            <td>Come early</td>
-                                            <td>Mar 6, 2020</td>
-                                            <td>2:06 pm</td>
-                                            <td>2:36pm</td>
-                                            <td>Ilyas</td>
-                                            <td>{ ANIMATIONS.map((title, i) => (
+                                            <td className="no-display">Niyi Adisa</td>
+                                            <td className="no-display">Come early</td>
+                                            <td className="no-display">Mar 6, 2020</td>
+                                            <td className="no-display">2:06 pm</td>
+                                            <td className="no-display">2:36pm</td>
+                                            <td className="no-display">Ilyas</td>
+                                            <td className="no-display">{ ANIMATIONS.map((title, i) => (
                    
                    <DropdownBox title={title}/>                     
                     ))}</td>

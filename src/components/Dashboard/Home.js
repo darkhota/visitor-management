@@ -1,110 +1,15 @@
 import React, { Component } from 'react';
-import { withNamespaces, Trans } from 'react-i18next';
 import ContentWrapper from '../Layout/ContentWrapper';
-import { Row, Col, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import '../../custom.css'
-import CardTool from '../Common/CardTool'
-import Sparkline from '../Common/Sparklines';
-import Scrollable from '../Common/Scrollable'
-import FlotChart from '../Charts/Flot';
-import Now from '../Common/Now';
 
-class DashboardV1 extends Component {
 
-    state = {
-        flotData: [{
-            "label": "Uniques",
-            "color": "#768294",
-            "data": [
-                ["Mar", 70],["Apr", 85],["May", 59],["Jun", 93],["Jul", 66],["Aug", 86],["Sep", 60]
-            ]
-        }, {
-            "label": "Recurrent",
-            "color": "#1f92fe",
-            "data": [
-                ["Mar", 21],["Apr", 12],["May", 27],["Jun", 24],["Jul", 16],["Aug", 39],["Sep", 15]
-            ]
-        }],
-
-        flotOptions: {
-            series: {
-                lines: {
-                    show: false
-                },
-                points: {
-                    show: true,
-                    radius: 4
-                },
-                splines: {
-                    show: true,
-                    tension: 0.4,
-                    lineWidth: 1,
-                    fill: 0.5
-                }
-            },
-            grid: {
-                borderColor: '#eee',
-                borderWidth: 1,
-                hoverable: true,
-                backgroundColor: '#fcfcfc'
-            },
-            tooltip: true,
-            tooltipOpts: {
-                content: (label, x, y) => x + ' : ' + y
-            },
-            xaxis: {
-                tickColor: '#fcfcfc',
-                mode: 'categories'
-            },
-            yaxis: {
-                min: 0,
-                max: 150, // optional: use it for a clear represetation
-                tickColor: '#eee',
-                //position: 'right' or 'left',
-                tickFormatter: v => v /* + ' visitors'*/
-            },
-            shadowSize: 0
-        },
-
-        dropdownOpen: false
-
-    }
-
-    componentDidMount() {
-        // Easy pie
-        let pieOptions1 = {
-            animate: {
-                duration: 800,
-                enabled: true
-            },
-            barColor: '#23b7e5',
-            trackColor: 'rgba(200,200,200,0.4)',
-            scaleColor: false,
-            lineWidth: 10,
-            lineCap: 'round',
-            size: 145
-        };
-    }
-
-    changeLanguage = lng => {
-        this.props.i18n.changeLanguage(lng);
-    }
-
-    toggle = () => {
-        this.setState({
-            dropdownOpen: !this.state.dropdownOpen
-        });
-    }
-
+class Home extends Component {
     render() {
-        // Usse t function instead of Trans component
-        // const { t } = this.props;
-
         return (
             <ContentWrapper>
                 <div className="content-heading">
                     <div>Workwise HQ
-                        
+                    <small>Welcome to Workwise!</small>
                     </div>
                   
                 </div>
@@ -171,6 +76,11 @@ class DashboardV1 extends Component {
                                 <li className="list-style">
                                     <a href="#" className="list-numbering">2</a>
                                     <h5>select the rooms in your office location</h5>
+                                    <br></br>
+                                    <div className="list-link">
+                                        <a href="#"> Start →
+                                                  </a></div>
+                                    
                                 </li>
                                 <li className="list-style">
                                 <a href="#" className="list-numbering">3</a>
@@ -202,11 +112,13 @@ class DashboardV1 extends Component {
                             <ul>
                                 <li className="list-style2">
                                     <i className="fa fa-check-circle"></i>
-                                    <h5>import your company's room calenders</h5>
+                                    <h5>Upload your logo.  
+                                        </h5>
                                 </li>
                                 <li className="list-style2">
                                     <a href="#" className="list-numbering2">2</a>
-                                    <h5>select the rooms in your office location</h5>
+                                    <h5 className="list-link list-link2">Set up your employee directory.<a href="#"> Start →
+                                                  </a></h5>
                                 </li>
                                
                             </ul>
@@ -221,4 +133,4 @@ class DashboardV1 extends Component {
 
 }
 
-export default withNamespaces('translations')(DashboardV1);
+export default Home;

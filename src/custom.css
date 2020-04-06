@@ -8,7 +8,7 @@
     background-color: #ffffff;
     box-shadow:0 0 12px rgba(160,159,159,.18);
     width:320px;
-    height:192px;
+    height:210px;
     padding: 20px 15px;
     border-radius: 5px;
 }
@@ -46,10 +46,10 @@
     padding: 3px 8px; /* Some padding */
     font-size: 80%; /* Set a font size */
     cursor: pointer; /* Mouse pointer on hover */
-border-radius: 9999px;
+    border-radius: 9999px;
   width:17%;
   height: 69%;
-  box-shadow: 0 2px 12px 0 rgba(239,57,52,0.30);
+  box-shadow: 0 2px 10px 0 rgba(0,0,0,0.70);
   transition: all .2s;
   overflow: unset;
     line-height: 1;
@@ -62,7 +62,7 @@ border-radius: 9999px;
 .card-content{
     display: grid;
     Grid-template-columns: repeat(4, 1fr);
-    text-align: center;
+    text-align: left;
    padding-top: .50rem;
 }
 .card-content2{
@@ -73,7 +73,8 @@ border-radius: 9999px;
 
 .card-content h1{
     font-size: 2.5rem;
-    font-weight: 700;
+    font-weight: 500;
+    
 }
 
 .card-content h2{
@@ -83,15 +84,17 @@ border-radius: 9999px;
     text-align: left;
     line-height: 1.5;
     margin-left: 20px;
+    font-weight: 500;
     
 }
 .card-content h3{
     font-size: .875rem;
-    width:18rem;
+    width:16rem;
     color:#73767c;
     text-align: left;
     line-height: 1.5;
-    margin-left: 20px;
+   
+    font-weight: 500;
     
 }
 
@@ -106,6 +109,19 @@ border-radius: 9999px;
 .list-style i {
     margin-left:-40px;
    
+}
+.list-link{
+    margin-left: -140px;
+    margin-top: -10px;
+}
+.list-link2{
+    margin-left: 0px;
+    margin-top: 0px;
+}
+.list-link a{
+    color: #004684;
+    font-size:14px;
+    margin-left: 0px;
 }
 
 .list-style h5 {
@@ -560,55 +576,7 @@ small, .small {
     font-variant-numeric: lining-nums;
 }
 
-@media(max-width: 960px) {
-    .cards-container{
-        display: grid;
-        grid-template-columns:  1fr;
-        grid-gap: 2rem;
-      }
-      .dashCards{
-        background-color: #ffffff;
-        box-shadow:0 0 12px rgba(160,159,159,.18);
-        width:100%;
-        height:192px;
-        padding-bottom: 20px;
-        border-radius: 5px;
-    }
-    .section-content{
-        
-        width:100%;
-        padding: 0px;
-        border-radius: 5px;
-        margin-bottom: 50px;
-        display:grid;
-        grid-template-columns:  1fr;
-        
-    }
-    .section-content img{
-        display: none;
-    }
-    .section-text-content{
-        margin-top: 50px;
-        width:90%;
-        margin-left: 20px;
-    }
-    .list-style2 h5 {
-        margin-left:-150px;
-    }
-     .brand-logo img 
-        {
-           width: 150px;
-        }
-    .sidebar-toggle em{
-        color:#000;
-    }
-    .layout-fixed .wrapper .topnavbar-wrapper{
-        position: fixed;
-    top: -20;
-    width: 100%;
-    z-index: 121;
-    }
-}
+
 
 .save-button{
     padding-bottom: 40px;
@@ -839,4 +807,86 @@ label:not(.label-reset) {
 
 .profile-btn{
     padding-top:1rem;
+}
+
+@media(max-width: 960px) {
+    .cards-container{
+        display: grid;
+        grid-template-columns:  1fr;
+        grid-gap: 2rem;
+      }
+      .dashCards{
+        background-color: #ffffff;
+        box-shadow:0 0 12px rgba(160,159,159,.18);
+        width:100%;
+        height:192px;
+        padding-bottom: 20px;
+        border-radius: 5px;
+    }
+    .section-content{
+        
+        width:100%;
+        padding: 0px;
+        border-radius: 5px;
+        margin-bottom: 50px;
+        display:grid;
+        grid-template-columns:  1fr;
+        
+    }
+    .section-content img{
+        display: none;
+    }
+    .section-text-content{
+        margin-top: 50px;
+        width:90%;
+        margin-left: 20px;
+    }
+    .list-style2 h5 {
+        margin-left:-150px;
+    }
+     .brand-logo img 
+        {
+           width: 150px;
+        }
+    .sidebar-toggle em{
+        color:#000;
+    }
+    .layout-fixed .wrapper .topnavbar-wrapper{
+        position: fixed;
+    top: -20;
+    width: 100%;
+    z-index: 121;
+    }
+    .list-numbering2 {
+       
+        width:13%;
+       
+    }
+    .no-display{
+        display: none;
+    }
+    .table-card-header{
+        display:grid;
+        grid-template-columns: 1fr;
+       
+    }
+    .table-card-header select{
+     
+        margin-left: 0%;
+       
+        margin-top:10px;
+        width: 100%;
+    }
+    .table-card-header button{
+       
+        margin-left: 0%;
+        margin-top:10px;
+    
+    }
+    .table-card-header input{
+    
+        margin-left: 0%;
+        margin-top:10px;
+        
+    }
 }

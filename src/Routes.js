@@ -11,8 +11,8 @@ import BasePage from './components/Layout/BasePage';
 
 /* Used to render a lazy component with react-router */
 const waitFor = Tag => props => <Tag {...props}/>;
-
-const DashboardV1 = lazy(() => import('./components/Dashboard/DashboardV1'));
+const Signin = lazy(() => import('./components/Signin') );
+const Home = lazy(() => import('./components/Dashboard/Home'));
 
 
 
@@ -86,6 +86,7 @@ const ForumHome = lazy(() => import('./components/Forum/ForumHome'));
 // listed here to Switch between layouts
 // depending on the current pathname
 const listofPages = [
+    '/signin',
     '/login',
     '/register',
     '/recover',
@@ -112,6 +113,7 @@ const Routes = ({ location }) => {
             <BasePage>
                 <Suspense fallback={<PageLoader/>}>
                     <Switch location={location}>
+                    <Route path="/signin" component={waitFor(Signin)}/>
                         <Route path="/login" component={waitFor(Login)}/>
                         <Route path="/register" component={waitFor(Register)}/>
                         <Route path="/recover" component={waitFor(Recover)}/>
@@ -134,9 +136,10 @@ const Routes = ({ location }) => {
                     <div>
                         <Suspense fallback={<PageLoader/>}>
                             <Switch location={location}>
-
+                                
+                           
                                 {/*Dashboard*/}
-                                <Route path="/dashboardv1" component={waitFor(DashboardV1)}/>
+                                <Route path="/home" component={waitFor(Home)}/>
                                 {/*Widgets*/}
                                 
 
@@ -203,7 +206,7 @@ const Routes = ({ location }) => {
 
                                 <Route path="/forum" component={waitFor(ForumHome)}/>
 
-                                <Redirect to="/dashboardv1"/>
+                                <Redirect to="/signin"/>
                             </Switch>
                         </Suspense>
                     </div>

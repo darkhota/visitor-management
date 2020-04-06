@@ -121,10 +121,10 @@ class ChartRadial extends Component {
                                             <th></th>
                                             <th>Visitor Name</th>
                                             <th>Purpose of visit</th>
-                                            <th className="sort-numeric">Invited By</th>
-                                            <th className="sort-alpha" data-priority="2">Private Notes</th>
-                                            <th>Due at</th>  
-                                            <th></th>
+                                            <th className="sort-numeric no-display">Invited By</th>
+                                            <th className="sort-alpha no-display" data-priority="2">Private Notes</th>
+                                            <th className="no-display">Due at</th>  
+                                            <th className="no-display"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -133,10 +133,10 @@ class ChartRadial extends Component {
                                             <td className="image-holder"><img src="img/user/02.jpg"></img></td>
                                             <td>Joseph Tioluwani</td>
                                             <td>Visitor</td>
-                                            <td>Niyi Adisa</td>
-                                            <td>Come early</td>
-                                            <td>Mar 6, 2020</td>
-                                            <td>{ ANIMATIONS.map((title, i) => (
+                                            <td className="no-display">Niyi Adisa</td>
+                                            <td className="no-display">Come early</td>
+                                            <td className="no-display">Mar 6, 2020</td>
+                                            <td className="no-display">{ ANIMATIONS.map((title, i) => (
                    
                                              <DropdownBox title={title}/>                     
                                               ))}</td>

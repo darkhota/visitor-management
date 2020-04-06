@@ -45,9 +45,9 @@ $ui-bg-color: #ddd;
         position: relative;
         display: inline-block;
         vertical-align: top; // margin-left: -20px;
-        width: 20px;
-        height: 20px;
-        border-radius: 2px;
+        width: 15px;
+        height: 15px;
+        border-radius: 4px;
         border: 1px solid #ccc;
         margin-right: 5px;
         text-align: center;
@@ -57,7 +57,7 @@ $ui-bg-color: #ddd;
     }
 
     &:hover span {
-        border-color: $ui-fg-color;
+        border-color: #004684;
     }
 
     .form-inline & span {
@@ -89,8 +89,8 @@ $ui-bg-color: #ddd;
         bottom: 0;
         opacity: 0;
         text-align: center !important;
-        font-size: 12px;
-        line-height: 18px;
+        font-size: 8px;
+        line-height: 14px;
         vertical-align: middle;
     }
 }
@@ -109,7 +109,7 @@ $ui-bg-color: #ddd;
     input[type=checkbox]:checked+span,
     input[type=radio]:checked+span {
         border-color: $ui-fg-color;
-        background-color: $ui-fg-color;
+        background-color: #004684;
     }
 
     /* override for radio */
