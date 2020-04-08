@@ -9,7 +9,7 @@ const Menufooter = [
         name: 'Billing',
         icon: 'icon-wallet',
         translate: 'sidebar.nav.form.FORM',
-        path: '/form-validation',
+        path: '/billing',
        
     },
     {
@@ -28,14 +28,14 @@ const Menufooter = [
             name: 'Profile',
             icon: 'icon-settings',
             translate: 'sidebar.nav.table.STANDARD',
-            path: '/blog-post',
+            path: '/profile',
 
         },
         {
             name: 'Logout',
             icon: 'icon-logout',
             translate: 'sidebar.nav.table.EXTENDED',
-            path: '/form-wizard',
+            path: '/signin',
 
         },
     ]

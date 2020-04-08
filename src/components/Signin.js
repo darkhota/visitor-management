@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-import '../Login.css';
-
-
+import '../styles/MyStyles/Login.css';
 import workwise from '../fonts/workwise.ttf';
-import { Link } from 'react-router-dom';
-
-
 
 const Workwise = {
   fontFamily: 'workwise',

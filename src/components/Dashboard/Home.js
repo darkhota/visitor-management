@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ContentWrapper from '../Layout/ContentWrapper';
-import '../../custom.css'
+import '../../styles/MyStyles/custom.css'
 
 
 class Home extends Component {

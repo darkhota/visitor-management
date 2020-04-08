@@ -15,80 +15,38 @@ const Signin = lazy(() => import('./components/Signin') );
 const Home = lazy(() => import('./components/Dashboard/Home'));
 
 
+const Invites = lazy(() => import('./components/Visitors/Invites'));
+const Devices = lazy(() => import('./components/Visitors/Devices'));
+const Settings = lazy(() => import('./components/Visitors/Settings'));
 
+const AllEmployees = lazy(() => import('./components/Employee_directory/AllEmployees'));
 
-const ChartFlot = lazy(() => import('./components/Charts/ChartFlot'));
-const ChartRadial = lazy(() => import('./components/Charts/ChartRadial'));
-const ChartChartJS = lazy(() => import('./components/Charts/ChartChartJS'));
-const ChartMorris = lazy(() => import('./components/Charts/ChartMorris'));
-const ChartChartist = lazy(() => import('./components/Charts/ChartChartist'));
+const MyRooms = lazy(() => import('./components/Rooms/MyRooms'));
+const VisitorsLog = lazy(() => import('./components/Visitors/VisitorsLog'));
 
-const MapsGoogle = lazy(() => import('./components/Maps/MapsGoogle'));
-const MapsVector = lazy(() => import('./components/Maps/MapsVector'));
+const NewInvites = lazy(() => import('./components/Visitors/NewInvites'));
+const NewTablet = lazy(() => import('./components/Visitors/NewTablet'));
+const Billing = lazy(() => import('./components/Forms/Billing'));
+const Bookings = lazy(() => import('./components/Rooms/Bookings'));
+const Integrations = lazy(() => import('./components/Forms/Integrations'));
+const Deliveries = lazy(() => import('./components/Forms/Deliveries'));
 
-const TableStandard = lazy(() => import('./components/Tables/TableStandard'));
-const TableExtended = lazy(() => import('./components/Tables/TableExtended'));
-const Datatable = lazy(() => import('./components/Tables/DatatableView'));
-const DataGrid = lazy(() => import('./components/Tables/DataGrid'));
-
-const FormStandard = lazy(() => import('./components/Forms/FormStandard'));
-const FormExtended = lazy(() => import('./components/Forms/FormExtended'));
-const FormValidation = lazy(() => import('./components/Forms/FormValidation'));
-const FormWizard = lazy(() => import('./components/Forms/FormWizard'));
-const FormUpload = lazy(() => import('./components/Forms/FormUpload'));
-const FormCropper = lazy(() => import('./components/Forms/FormCropper'));
-
-const Login = lazy(() => import('./components/Pages/Login'));
-const Register = lazy(() => import('./components/Pages/Register'));
 const Recover = lazy(() => import('./components/Pages/Recover'));
 const Lock = lazy(() => import('./components/Pages/Lock'));
 const NotFound = lazy(() => import('./components/Pages/NotFound'));
 const Error500 = lazy(() => import('./components/Pages/Error500'));
 const Maintenance = lazy(() => import('./components/Pages/Maintenance'));
 
-const Mailbox = lazy(() => import('./components/Extras/Mailbox'));
-const Timeline = lazy(() => import('./components/Extras/Timeline'));
-const Calendar = lazy(() => import('./components/Extras/Calendar'));
-const Invoice = lazy(() => import('./components/Extras/Invoice'));
-const Search = lazy(() => import('./components/Extras/Search'));
-const Todo = lazy(() => import('./components/Extras/Todo'));
-const Profile = lazy(() => import('./components/Extras/Profile'));
-const BugTracker = lazy(() => import('./components/Extras/BugTracker'));
-const ContactDetails = lazy(() => import('./components/Extras/ContactDetails'));
-const Contacts = lazy(() => import('./components/Extras/Contacts'));
-const Faq = lazy(() => import('./components/Extras/Faq'));
-const FileManager = lazy(() => import('./components/Extras/FileManager'));
-const Followers = lazy(() => import('./components/Extras/Followers'));
-const HelpCenter = lazy(() => import('./components/Extras/HelpCenter'));
-const Plans = lazy(() => import('./components/Extras/Plans'));
-const ProjectDetails = lazy(() => import('./components/Extras/ProjectDetails'));
-const Projects = lazy(() => import('./components/Extras/Projects'));
-const Settings = lazy(() => import('./components/Extras/Settings'));
-const SocialBoard = lazy(() => import('./components/Extras/SocialBoard'));
-const TeamViewer = lazy(() => import('./components/Extras/TeamViewer'));
-const VoteLinks = lazy(() => import('./components/Extras/VoteLinks'));
 
-const EcommerceOrder = lazy(() => import('./components/Ecommerce/EcommerceOrders'));
-const EcommerceOrderView = lazy(() => import('./components/Ecommerce/EcommerceOrderView'));
-const EcommerceProduct = lazy(() => import('./components/Ecommerce/EcommerceProducts'));
-const EcommerceProductView = lazy(() => import('./components/Ecommerce/EcommerceProductView'));
-const EcommerceCheckout = lazy(() => import('./components/Ecommerce/EcommerceCheckout'));
-
-const BlogList = lazy(() => import('./components/Blog/BlogList'));
-const BlogPost = lazy(() => import('./components/Blog/BlogPost'));
-const BlogArticle = lazy(() => import('./components/Blog/BlogArticles'));
-const BlogArticleView = lazy(() => import('./components/Blog/BlogArticleView'));
-
-const ForumHome = lazy(() => import('./components/Forum/ForumHome'));
+const NewRoom = lazy(() => import('./components/Rooms/NewRoom'));
 
 
+const Profile = lazy(() => import('./components/Profile/Profile'));
 // List of routes that uses the page layout
 // listed here to Switch between layouts
 // depending on the current pathname
 const listofPages = [
     '/signin',
-    '/login',
-    '/register',
     '/recover',
     '/lock',
     '/notfound',
@@ -114,8 +72,6 @@ const Routes = ({ location }) => {
                 <Suspense fallback={<PageLoader/>}>
                     <Switch location={location}>
                     <Route path="/signin" component={waitFor(Signin)}/>
-                        <Route path="/login" component={waitFor(Login)}/>
-                        <Route path="/register" component={waitFor(Register)}/>
                         <Route path="/recover" component={waitFor(Recover)}/>
                         <Route path="/lock" component={waitFor(Lock)}/>
                         <Route path="/notfound" component={waitFor(NotFound)}/>
@@ -148,65 +104,31 @@ const Routes = ({ location }) => {
                                 
 
                                 {/*Forms*/}
-                                <Route path="/form-standard" component={waitFor(FormStandard)}/>
-                                <Route path="/form-extended" component={waitFor(FormExtended)}/>
-                                <Route path="/form-validation" component={waitFor(FormValidation)}/>
-                                <Route path="/form-wizard" component={waitFor(FormWizard)}/>
-                                <Route path="/form-upload" component={waitFor(FormUpload)}/>
-                                <Route path="/form-cropper" component={waitFor(FormCropper)}/>
+                                <Route path="/new-invites" component={waitFor(NewInvites)}/>
+                                <Route path="/new-tablet" component={waitFor(NewTablet)}/>
+                                <Route path="/billing" component={waitFor(Billing)}/>
+                                <Route path="/bookings" component={waitFor(Bookings)}/>
+                                <Route path="/integrations" component={waitFor(Integrations)}/>
+                                <Route path="/deliveries" component={waitFor(Deliveries)}/>
 
-                                {/*Charts*/}
-                                <Route path="/chart-flot" component={waitFor(ChartFlot)}/>
-                                <Route path="/chart-radial" component={waitFor(ChartRadial)}/>
-                                <Route path="/chart-chartjs" component={waitFor(ChartChartJS)}/>
-                                <Route path="/chart-morris" component={waitFor(ChartMorris)}/>
-                                <Route path="/chart-chartist" component={waitFor(ChartChartist)}/>
+                                {/*Visitors*/}
+                                
+                                <Route path="/invites" component={waitFor(Invites)}/>
+                                <Route path="/devices" component={waitFor(Devices)}/>
+                                <Route path="/settings" component={waitFor(Settings)}/>
 
                                 {/*Table*/}
-                                <Route path="/table-standard" component={waitFor(TableStandard)}/>
-                                <Route path="/table-extended" component={waitFor(TableExtended)}/>
-                                <Route path="/table-datatable" component={waitFor(Datatable)}/>
-                                <Route path="/table-datagrid" component={waitFor(DataGrid)}/>
+                                <Route path="/my-rooms" component={waitFor(MyRooms)}/>
+                               
+                                <Route path="/visitors-log" component={waitFor(VisitorsLog)}/>
+                               
 
                                 {/*Maps*/}
-                                <Route path="/map-google" component={waitFor(MapsGoogle)}/>
-                                <Route path="/map-vector" component={waitFor(MapsVector)}/>
-
+                                <Route path="/all-employees" component={waitFor(AllEmployees)}/>
                                 {/*Extras*/}
-                                <Route path="/mailbox" component={waitFor(Mailbox)}/>
-                                <Route path="/timeline" component={waitFor(Timeline)}/>
-                                <Route path="/calendar" component={waitFor(Calendar)}/>
-                                <Route path="/invoice" component={waitFor(Invoice)}/>
-                                <Route path="/search" component={waitFor(Search)}/>
-                                <Route path="/todo" component={waitFor(Todo)}/>
+                                <Route path="/new-room" component={waitFor(NewRoom)}/>                
                                 <Route path="/profile" component={waitFor(Profile)}/>
-                                <Route path="/ecommerce-orders" component={waitFor(EcommerceOrder)}/>
-                                <Route path="/ecommerce-order-view" component={waitFor(EcommerceOrderView)}/>
-                                <Route path="/ecommerce-products" component={waitFor(EcommerceProduct)}/>
-                                <Route path="/ecommerce-product-view" component={waitFor(EcommerceProductView)}/>
-                                <Route path="/ecommerce-checkout" component={waitFor(EcommerceCheckout)}/>
-                                <Route path="/blog-list" component={waitFor(BlogList)}/>
-                                <Route path="/blog-post" component={waitFor(BlogPost)}/>
-                                <Route path="/blog-articles" component={waitFor(BlogArticle)}/>
-                                <Route path="/blog-article-view" component={waitFor(BlogArticleView)}/>
-                                <Route path="/bug-tracker" component={waitFor(BugTracker)}/>
-                                <Route path="/contact-details" component={waitFor(ContactDetails)}/>
-                                <Route path="/contacts" component={waitFor(Contacts)}/>
-                                <Route path="/faq" component={waitFor(Faq)}/>
-                                <Route path="/file-manager" component={waitFor(FileManager)}/>
-                                <Route path="/followers" component={waitFor(Followers)}/>
-                                <Route path="/help-center" component={waitFor(HelpCenter)}/>
-                                <Route path="/plans" component={waitFor(Plans)}/>
-                                <Route path="/project-details" component={waitFor(ProjectDetails)}/>
-                                <Route path="/projects" component={waitFor(Projects)}/>
-                                <Route path="/settings" component={waitFor(Settings)}/>
-                                <Route path="/social-board" component={waitFor(SocialBoard)}/>
-                                <Route path="/team-viewer" component={waitFor(TeamViewer)}/>
-                                <Route path="/vote-links" component={waitFor(VoteLinks)}/>
-
-                                <Route path="/forum" component={waitFor(ForumHome)}/>
-
-                                <Redirect to="/signin"/>
+                                <Redirect to="#"/>
                             </Switch>
                         </Suspense>
                     </div>

@@ -10,7 +10,7 @@ const Menu = [
         name: 'Home',
         icon: 'icon-home',
         translate: 'sidebar.nav.DASHBOARD',
-        path: '/dashboardv1',      
+        path: '/home',      
     }, 
     {
         name: 'Feeds',
@@ -23,23 +23,24 @@ const Menu = [
         name: 'Visitors',
         icon: 'icon-people',
         translate: 'sidebar.nav.chart.CHART',
-        submenu: [{
+        submenu: [
+            {
                 name: 'Visitor Log',
-                path: '/table-datatable',
+                path: '/visitors-log',
                 translate: 'sidebar.nav.table.EXTENDED'
             },
             {
                 name: 'Invites',
-                path: '/chart-radial',
+                path: '/invites',
                 translate: 'sidebar.nav.chart.RADIAL'
             },
             {
                 name: 'Devices',
-                path: '/chart-chartjs',
+                path: '/devices',
             },
             {
                 name: 'Settings',
-                path: '/chart-morris',
+                path: '/settings',
                 translate: 'sidebar.nav.chart.CHART',
               
                 
@@ -51,7 +52,7 @@ const Menu = [
         name: 'Deliveries',
         icon: 'icon-bag',
         translate: 'sidebar.nav.form.FORM',
-        path: '/form-cropper',
+        path: '/deliveries',
         
        
     },
@@ -61,13 +62,13 @@ const Menu = [
         translate: 'sidebar.nav.table.TABLE',
         submenu: [{
                 name: 'My rooms',
-                path: '/table-standard',
+                path: '/my-rooms',
                 translate: 'sidebar.nav.table.STANDARD',
                
             },
             {
                 name: 'Bookings',
-                path: '/form-wizard',
+                path: '/bookings',
                 translate: 'sidebar.nav.table.STANDARD',
                
             },
@@ -96,7 +97,7 @@ const Menu = [
         translate: 'idebar.nav.map.MAP',
         submenu: [{
                 name: 'All employees',
-                path: '/map-google',
+                path: '/all-employees',
                 translate: 'sidebar.nav.map.GOOGLE'
             },
             {
@@ -110,7 +111,7 @@ const Menu = [
         name: 'Integrations',
         icon: 'icon-puzzle',
         translate:'sidebar.nav.form.FORM',
-        path: '/form-upload',
+        path: '/integrations',
     }
 ];
 
