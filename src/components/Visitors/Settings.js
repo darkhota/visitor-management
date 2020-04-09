@@ -119,21 +119,21 @@ class ChartMorris extends Component {
                             </div >
                             <div className="visitorForm" >
                 <div className="input-field">
-                                    <p>COMPANY NAME <span className="required">*</span></p>
+                                    <p><small><b>COMPANY NAME </b></small><span className="required">*</span></p>
                                         <Input id="input-id-1" type="text" placeholder="Enter Company name"/>
                                     </div>
                                     <div className="input-field">
-                                    <p>LOCATION NAME <span className="required">*</span></p>
+                                    <p><small><b>LOCATION NAME</b></small> <span className="required">*</span></p>
                                         <Input id="input-id-1" type="text" placeholder="Enter Location name"/>
                                     </div>
 
                                 <div className="form-gird2">
                                     <div className="input-field-large">
-                                    <p>ADDRESS <span className="required">*</span></p>
+                                    <p><small><b>ADDRESS</b></small> <span className="required">*</span></p>
                                         <Input id="input-id-1" type="text" placeholder="Enter a location"/>
                                     </div>
                                     <div className="input-field-small">
-                                    <p>ADDRESS LINE 2 </p>
+                                    <p><small><b>ADDRESS LINE 2</b></small> </p>
                                         <Input id="input-id-1" type="text" />
                                     </div>
                                 </div>

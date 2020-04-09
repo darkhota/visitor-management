@@ -45,13 +45,15 @@ class Signin extends Component {
              <div className="login-grid">
            
              <div className="checkbox c-checkbox float-left mt-0">
-                                    <label>
-                                        <input type="checkbox" value="" name="remember"/>
-                                        <span className="fa fa-check"></span>Remember Me</label>
+                                    <label className="remember-check">
+                                        <input type="checkbox" className="" value="" name="remember"/>
+                                        <span className="fa fa-check checkmark"></span>Remember Me</label>
                                 </div>
-              
+                  <div className="forgot-pwd">
                   <a
                   className="forgot-link" href="#">Forgot password?</a>
+                  </div>
+                  
               </div>
               <a href="/home">
               <button type= "button" className="form-submit" >

@@ -26,7 +26,7 @@ import {
 
     const STATES = [
         { value: 'australian-capital-territory', label: 'Australian Capital Territory', className: 'State-ACT' },
-        { value: 'new-south-wales', label: 'New South Wales', className: 'State-NSW' },
+        { value: 'new-south-wales', label: 'hello', className: 'State-NSW' },
         { value: 'victoria', label: 'Victoria', className: 'State-Vic' },
         { value: 'queensland', label: 'Queensland', className: 'State-Qld' },
         { value: 'western-australia', label: 'Western Australia', className: 'State-WA' },
@@ -41,7 +41,7 @@ import {
         option: (provided, state) => ({
           ...provided,
           
-          color: state.isSelected ? '#00914b' : '',
+          color: state.isSelected ? '#fff' : '',
           padding: 20,
         }),
        
@@ -99,11 +99,11 @@ class FormStandard extends Component {
                             <div className="visitorForm" >
                                    
                                     <div className="input-field">
-                                        <p>Visitor Type</p>
+                                        <p><small><b>Visitor Type</b></small></p>
                                         <Select
                                         theme={theme => ({
                                             ...theme,
-                                            borderRadius: 0,
+                                            borderRadius: 5,
                                             colors: {
                                               ...theme.colors,
                                              
@@ -139,36 +139,30 @@ class FormStandard extends Component {
                                                    
                                                     <div className="flat-width">
                                                     <p>Arrival time <span className="required">*</span></p>
-                                                      <Flatpickr
-
-                                                            options={{   altInput: true,
-                                                                altFormat: "F j, Y",
-                                                                dateFormat: "Y-m-d"}}
-
-                                                            value={date}
-                                                            onChange={date => {
-                                                            this.setState({ date });
-                                                            }}
-                                                            />
+                                                    <select defaultValue="" className="custom-select" multiple="">
+                                                    <option defaultValue="1">12:45 pm</option>
+                                                    <option defaultValue="2">1:00 pm</option>
+                                                    <option defaultValue="3">1:15 pm</option>
+                                                </select>
                                                            </div>
                                         
                                         </div>
                                        
                                         
                                     <div className="input-field">
-                                    <p>Full Name <span className="required">*</span></p>
+                                    <p><small><b>Full Name</b></small> <span className="required">*</span></p>
                                         <Input id="input-id-1" type="text" placeholder="Enter full name"/>
                                     </div>
                                     <div className="input-field">
-                                    <p>Visitor Email Address <span className="required">*</span></p>
+                                    <p><small><b>Visitor Email Address </b></small><span className="required">*</span></p>
                                         <Input id="input-id-1" type="text" placeholder="Enter email"/>
                                     </div>
                                     <div className="input-field">
-                                    <p>Phone  number <span className="required">*</span></p>
+                                    <p><small><b>Phone  number</b></small>Phone  number <span className="required">*</span></p>
                                         <Input id="input-id-1" type="text"placeholder="Enter phone number"/>
                                     </div>
                                     <div className="input-field">
-                                    <p>Private note</p>
+                                    <p><small><b>Private note</b></small></p>
                                         <Card body>
                                             <textarea rows="5" className="form-control note-editor note-editor-margin"></textarea>
                                         </Card>

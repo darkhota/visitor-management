@@ -97,6 +97,13 @@ form{
   background: transparent;
   transition: border-color 0.2s;
 }
+.form-field:focus{
+  padding-bottom: 5px;
+border-width: 2px;
+border-image: linear-gradient(to left, #004684, #00914b);
+    border-image-slice: 100%;
+border-image-slice: 1;
+}
 
 .form-field:placeholder-shown ~ .form-label{
   cursor:text;
@@ -147,7 +154,7 @@ form{
 }
 
 .container input:checked ~ .checkmark {
-  background-color: #004684;
+  background-color: #fff;
 }
 
 .checkmark:after {
@@ -159,6 +166,7 @@ form{
 .container input:checked ~ .checkmark:after {
   display: block;
 }
+
 
 .container .checkmark:after {
   left: 4px;
@@ -230,7 +238,7 @@ input{
     font-size: 1200px;
     color: #847b00;
 }
-input:checked ~ .checkmark{
+.remember-check input:checked ~ .checkmark{
     background-color: #00914b;
 }
 .login-checkbox{

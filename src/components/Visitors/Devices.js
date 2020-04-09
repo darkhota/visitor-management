@@ -20,11 +20,8 @@ class DropdownBox extends Component  {
                     <i className="fa fa-ellipsis-h"></i>
                     </DropdownToggle>
                     <DropdownMenu className={ddClass}>
-                        <DropdownItem>Action</DropdownItem>
-                        <DropdownItem>Another action</DropdownItem>
-                        <DropdownItem active>Active Item</DropdownItem>
-                        <DropdownItem divider />
-                        <DropdownItem>Separated link</DropdownItem>
+                        <DropdownItem><i class="icon-trash"></i>&nbsp;Remove tablet</DropdownItem>
+                        
                     </DropdownMenu>
                 </Dropdown>
             </div>
@@ -49,8 +46,7 @@ class Devices extends Component {
                                     </a>
                                     </div>
                             </div >
-
-                            <div className="device-cards">
+                            <div className="device-grid"> <div className="device-cards">
                               <div className="device-card-top">
                               { ANIMATIONS.map((title, i) => (
                    
@@ -59,7 +55,10 @@ class Devices extends Component {
                                   </div> 
                                   <div className="whole-device">
                                 <div className="device-content">
+                                    <div className ="box">
                                     <img src="img/ipad-air.png" alt="ipad" className="grid-height"></img>
+                                    </div>
+                                    
                                     <ul>
                                         <li>
                                         <h3 className="device-Name">Ipad</h3>
@@ -81,14 +80,65 @@ class Devices extends Component {
                                             iPad (9.7-inch)</h5>
                                             <h5>Device type:</h5>
                                         <h5>
-                                            iPad (9.7-inch)</h5>
+                                           
+                                                iOS - 13.3.1</h5>
                                             <h5>Device type:</h5>
                                         <h5>
-                                            iPad (9.7-inch)</h5>
+                                            
+                                            192.168.1.17</h5>
                                         </div> 
                                         
                             </div>
                             </div>
+
+                            <div className="device-cards">
+                              <div className="device-card-top">
+                              { ANIMATIONS.map((title, i) => (
+                   
+                   <DropdownBox title={title}/>                     
+                    ))}
+                                  </div> 
+                                  <div className="whole-device">
+                                <div className="device-content">
+                                    <div className="dancing">
+                                    <div className= "box">
+                                    <img src="img/ipad-air.png" alt="ipad" className="grid-height"></img>
+                                    </div>
+                                    
+                                    
+                                    </div>
+                                    
+                                    <ul>
+                                        <li>
+                                        <h3 className="device-Name">Samsung</h3>
+                                        </li>
+                                        <li>
+                                        <div className="device-status disabled">
+                                    <span data-test-status-icon="" class="deviceStatus small good"></span> Disabled
+                                    </div>
+                                        </li>
+                                    </ul>
+                                    
+                                   
+                                    </div>
+                                    
+
+                                    <div className="device-desc">
+                                        <h5>Device type:</h5>
+                                        <h5>
+                                            
+                                                Samsung (11-inch)</h5>
+                                            <h5>Device type:</h5>
+                                        <h5>
+                                        android - 8.3.1</h5>
+                                            <h5>Device type:</h5>
+                                        <h5>
+                                        192.168.8.1</h5>
+                                        </div> 
+                                        
+                            </div>
+                            </div></div>
+                           
                 </div>
             </ContentWrapper>
             );

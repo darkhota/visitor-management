@@ -102,26 +102,26 @@ class ChartRadial extends Component {
 										<option value="1">All Invites</option>
 										<option value="2">My Invites</option>
 	                              	</select>
-                            <button href="#" className="btn btn-secondary btn-lg invite-btn"><Link to="/new-invites">New</Link> </button>
+                            <button href="#" className="btn btn-secondary btn-lg invite-btn"><Link to="/new-invites">New invite</Link> </button>
                         </CardHeader>
                         <CardBody>
                             <Datatable options={this.state.dtOptions1}>
                                 <table className="table table-striped my-4 w-100">
                                     <thead>
                                         <tr>
-                                            
                                             <th></th>
-                                            <th>Visitor Name</th>
+                                            <th></th>
+                                            <th data-priority="2">Visitor Name</th>
                                             <th>Purpose of visit</th>
                                             <th className="sort-numeric no-display">Invited By</th>
-                                            <th className="sort-alpha no-display" data-priority="2">Private Notes</th>
+                                            <th className="sort-alpha no-display" >Private Notes</th>
                                             <th className="no-display">Due at</th>  
                                             <th className="no-display"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr className="gradeX">
-                                           
+                                            <td></td>
                                             <td className="image-holder"><img src="img/user/02.jpg"></img></td>
                                             <td>Joseph Tioluwani</td>
                                             <td>Visitor</td>

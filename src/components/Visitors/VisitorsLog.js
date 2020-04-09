@@ -136,7 +136,7 @@ class DatatableView extends Component {
                                             <td>Joseph Tioluwani</td>
                                             <td>Visitor</td>
                                             <td className="no-display">Niyi Adisa</td>
-                                            <td className="no-display"> Come early</td>
+                                            <td className="no-display"> <i>Come early</i></td>
                                             <td className="no-display">Mar 6, 2020</td>
                                             <td className="no-display">2:06 pm</td>
                                             <td className="no-display">2:35pm</td>
@@ -153,10 +153,12 @@ class DatatableView extends Component {
                                             <td>Kamsi Kodi</td>
                                             <td>Visitor</td>
                                             <td className="no-display">Niyi Adisa</td>
-                                            <td className="no-display">Come early</td>
+                                            <td className="no-display"><i>Come early</i></td>
                                             <td className="no-display">Mar 6, 2020</td>
                                             <td className="no-display">2:06 pm</td>
-                                            <td className="no-display">Sign out</td>
+                                            <td className="no-display sign-out"><button data-test-entry-feed-sign-out="" className="log-btn log-btn--smaller log-btn--brandHoverFill print-display-none" type="button">
+										      Sign out
+										    </button></td>
                                             <td className="no-display">Ilyas</td>
                                             <td className="no-display">{ ANIMATIONS.map((title, i) => (
                    
@@ -171,7 +173,7 @@ class DatatableView extends Component {
                                                 Niyi Adisa</td>
                                             <td>Visitor</td>
                                             <td className="no-display">Niyi Adisa</td>
-                                            <td className="no-display">Come early</td>
+                                            <td className="no-display"><i>Come early</i></td>
                                             <td className="no-display">Mar 6, 2020</td>
                                             <td className="no-display">2:06 pm</td>
                                             <td className="no-display">2:36pm</td>

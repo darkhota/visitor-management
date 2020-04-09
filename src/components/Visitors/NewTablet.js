@@ -142,10 +142,10 @@ class FormExtended extends Component {
                     <div className="new-tablet-form">
                     <ol>
                                 
-                                <li >
+                                <li className ="list-padding">
                                     
                                     <h4>Get the Workwise Visitors app</h4>
-                                    <ul >
+                                    <ul  className ="sublist-mgin">
                                 
                                 <li >
                                     
@@ -157,10 +157,10 @@ class FormExtended extends Component {
                                 </li>
                             </ul>
                                 </li>
-                                <li >
+                                <li  className ="list-padding">
                                 
                                     <h4>Enter the device code</h4>
-                                    <ul>
+                                    <ul className ="sublist-mgin">
                                 
                                 <li >
                                     
@@ -173,7 +173,7 @@ class FormExtended extends Component {
                             </ul>
                                 </li>
                             </ol>
-                            <input type="text" className="device-code"></input>
+                            <input type="text" className="device-code" maxLength='6' size='8'></input>
                             <a href="#">
                                         <button class="btn btn-secondary btn-lg invite-btn" type="button">Pair Device</button>
                                     </a>
