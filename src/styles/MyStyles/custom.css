@@ -407,7 +407,7 @@ ol >:nth-child(2):before{
   Grid-template-columns: repeat(2, 1fr);
   width: 100%;
   Grid-column-gap: 30px;
-  padding-top:15px
+  margin-top:-1rem;
   
 }
 
