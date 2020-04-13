@@ -174,9 +174,9 @@ class FormExtended extends Component {
                                 </li>
                             </ol>
                             <input type="text" className="device-code" maxLength='6' size='8'></input>
-                            <a href="#">
-                                        <button class="btn btn-secondary btn-lg invite-btn" type="button">Pair Device</button>
-                                    </a>
+
+                            <button class="btn btn-secondary btn-lg invite-btn" type="button">Pair Device</button>
+                                   
 
                     </div>
                     <div className="new-tablet-device">

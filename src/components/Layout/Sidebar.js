@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withNamespaces, Trans } from 'react-i18next';
 import { Link, withRouter } from 'react-router-dom';
 import { Collapse, Badge } from 'reactstrap';
-
+import '../../styles/MyStyles/custom.css'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../store/actions/actions';
@@ -16,8 +16,8 @@ import Menufooter from '../../Menufooter.js';
 
 /** Component to display headings on sidebar */
 const SidebarItemHeader = ({item}) => (
-    <li className="nav-heading">
-        <span><Trans i18nKey={item.translate}>{item.heading}</Trans></span>
+    <li className="nav-heading ">
+        <span className="sidebar-heading"><Trans i18nKey={item.translate}>{item.heading}</Trans></span>
     </li>
 )
 
@@ -143,7 +143,7 @@ class Sidebar extends Component {
                                     // heading
                                     if(this.itemType(item) === 'heading')
                                         return (
-                                            <SidebarItemHeader item={item} key={i} />
+                                            <SidebarItemHeader item={item} key={i}  />
                                         )
                                     else {
                                         if(this.itemType(item) === 'menu')

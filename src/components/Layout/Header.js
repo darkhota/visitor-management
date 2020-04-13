@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, ListGroup, ListGroupItem } from 'reactstrap';
-
+import '../../styles/MyStyles/custom.css'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../store/actions/actions';
@@ -83,7 +83,7 @@ class Header extends Component {
                     </ul>
                     { /* END Left navbar */ }
                     { /* START Right Navbar */ }
-                    <ul className="navbar-nav flex-row">
+                    <ul className="navbar-nav flex-row navbar-right">
                         { /* Search icon */ }
                         <li className="nav-item">
                             <a className="nav-link" href="" data-search-open="">

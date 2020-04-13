@@ -9,6 +9,7 @@ import classNames from 'classnames';
 import "flatpickr/dist/themes/light.css";
 import Flatpickr from "react-flatpickr";
 import { Link } from 'react-router-dom';
+import Avatar, { ConfigProvider } from 'react-avatar';
 
 class DropdownBox extends Component  {
     
@@ -21,19 +22,18 @@ class DropdownBox extends Component  {
         
         return (
             <div >
-                <Dropdown isOpen={this.state.ddOpen} toggle={this.toggle}>
-                    <DropdownToggle className="remove-border">
-                    <i className="fa fa-ellipsis-h"></i>
-                    </DropdownToggle>
-                    <DropdownMenu className={ddClass}>
-                        <DropdownItem>Action</DropdownItem>
-                        <DropdownItem>Another action</DropdownItem>
-                        <DropdownItem active>Active Item</DropdownItem>
-                        <DropdownItem divider />
-                        <DropdownItem>Separated link</DropdownItem>
-                    </DropdownMenu>
-                </Dropdown>
-            </div>
+            <Dropdown isOpen={this.state.ddOpen} toggle={this.toggle} >
+                <DropdownToggle className="remove-border" tag="span"
+    data-toggle="dropdown"
+    >
+                <i className="fa fa-ellipsis-h"></i>
+                </DropdownToggle>
+                <DropdownMenu className="dropdown-menu">
+                    <a class="dropdown-item" href="#"><i class="icon-action-redo"></i>&nbsp;&nbsp;Invite again</a>
+                    <a class="dropdown-item" href="#"><i class="icon-trash"></i>&nbsp;&nbsp;Delete invite</a>
+                </DropdownMenu>
+            </Dropdown>
+        </div>
         );
     }
 }
@@ -80,6 +80,7 @@ class ChartRadial extends Component {
         const { date } = this.state;
         const ANIMATIONS = ['fadeIn',]
         return (
+            <ConfigProvider colors={['hsl(172, 33%, 45%', 'blue', 'blue']}>
             <ContentWrapper>
                 <Container fluid>
                     {/* DATATABLE DEMO 1 */}
@@ -106,7 +107,7 @@ class ChartRadial extends Component {
                         </CardHeader>
                         <CardBody>
                             <Datatable options={this.state.dtOptions1}>
-                                <table className="table table-striped my-4 w-100">
+                                <table className="table table-striped my-4 w-100 smaller">
                                     <thead>
                                         <tr>
                                             <th></th>
@@ -122,7 +123,7 @@ class ChartRadial extends Component {
                                     <tbody>
                                         <tr className="gradeX">
                                             <td></td>
-                                            <td className="image-holder"><img src="img/user/02.jpg"></img></td>
+                                            <td><Avatar name="Tioluwani Joseph" round="50px" size="50"/></td>
                                             <td>Joseph Tioluwani</td>
                                             <td>Visitor</td>
                                             <td className="no-display">Niyi Adisa</td>
@@ -138,10 +139,9 @@ class ChartRadial extends Component {
                             </Datatable>
                         </CardBody>
                     </Card>
-                   
-                    
                 </Container>
             </ContentWrapper>
+            </ConfigProvider>
             );
     }
 

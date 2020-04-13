@@ -10,7 +10,7 @@ const Menu = [
         name: 'Home',
         icon: 'icon-home',
         translate: 'sidebar.nav.DASHBOARD',
-        path: '/home',      
+        path: '/',      
     }, 
     {
         name: 'Feeds',

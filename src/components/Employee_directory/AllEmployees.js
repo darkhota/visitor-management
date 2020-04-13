@@ -4,12 +4,10 @@ import { Container, Card, CardHeader, CardBody, CardTitle } from 'reactstrap';
 import $ from 'jquery';
 import '../../styles/MyStyles/custom.css'
 import Datatable from '../Tables/Datatable';
-import { Row, Col, Dropdown, DropdownMenu, DropdownToggle, DropdownItem } from 'reactstrap';
+import { Dropdown, DropdownMenu, DropdownToggle, DropdownItem } from 'reactstrap';
 import classNames from 'classnames';
-import "flatpickr/dist/themes/light.css";
-import Flatpickr from "react-flatpickr";
 import { Link } from 'react-router-dom';
-
+import Avatar, { ConfigProvider } from 'react-avatar';
 class DropdownBox extends Component  {
     
     state = { ddOpen: false }
@@ -21,16 +19,18 @@ class DropdownBox extends Component  {
         
         return (
             <div >
-                <Dropdown isOpen={this.state.ddOpen} toggle={this.toggle}>
-                    <DropdownToggle className="remove-border">
+                <Dropdown isOpen={this.state.ddOpen} toggle={this.toggle} >
+                    <DropdownToggle className="remove-border" tag="span"
+        data-toggle="dropdown"
+        >
                     <i className="fa fa-ellipsis-h"></i>
                     </DropdownToggle>
-                    <DropdownMenu className={ddClass}>
-                        <DropdownItem>Action</DropdownItem>
-                        <DropdownItem>Another action</DropdownItem>
-                        <DropdownItem active>Active Item</DropdownItem>
-                        <DropdownItem divider />
-                        <DropdownItem>Separated link</DropdownItem>
+                    <DropdownMenu className="dropdown-menu">
+                        <a className="dropdown-item" href="#"><i class="icon-user"></i>&nbsp;&nbsp;Profile</a>
+                        <a class="dropdown-item" href="#"><i class="icon-ban"></i>&nbsp;&nbsp;Change status</a>
+                        <a class="dropdown-item" href="#"><i class="icon-settings"></i>&nbsp;&nbsp;Reset password</a>
+                        <hr></hr>
+                        <a class="dropdown-item" href="#"><i class="icon-trash"></i>&nbsp;&nbsp;Delete user</a>
                     </DropdownMenu>
                 </Dropdown>
             </div>
@@ -38,15 +38,8 @@ class DropdownBox extends Component  {
     }
 }
 
-class ChartRadial extends Component {
+class AllEmployees extends Component {
 
-    constructor() {
-        super();
-     
-        this.state = {
-          date: new Date()
-        };
-      }
 
     state = {
         dtOptions1: {
@@ -69,6 +62,7 @@ class ChartRadial extends Component {
                 }
             }
         },
+        date: new Date()
         
        
     }
@@ -88,32 +82,35 @@ class ChartRadial extends Component {
         const { date } = this.state;
         const ANIMATIONS = ['fadeIn',]
         return (
+            <ConfigProvider colors={['hsl(172, 33%, 45%', 'blue', 'blue']}>
             <ContentWrapper>
                 <Container fluid>
                     {/* DATATABLE DEMO 1 */}
                     <Card>
-                        <CardHeader className="table-card-header employee-header">
+                        <CardHeader className=" employee-header">
                             
                             <h1>1 Employee</h1>
-                           
-                            <select className="selectVisitors">
+                            <div className="button-align">
+                            <button className="btn btn-secondary btn-lg invite-btn employee-btn"><Link to="/#"> Create New</Link> </button>
+                            </div>
+                            </CardHeader>
+                            <div className="subheader">
+                            <div className="align-left">
+                               <button  className="btn btn-secondary btn-lg invite-btn white-btn"><Link to="/#" className="black-link">Export</Link> </button></div>
+                            <div className="align-left2"><button className="btn btn-secondary btn-lg invite-btn"><Link to="/#" className="black-link">Import employees</Link> </button></div>
+                            <div className="button-align no-align">
+                            <select defaultValue="" className="custom-select" multiple="">
 										<option value="1">All Employees</option>
 										<option value="2">My Employees</option>
-	                              	</select>
-                                      
-                                      <button href="#" className="table button"><Link to="/form-standard">New</Link> </button>
-                                      
-                           <div className="align-left">
-                               <button href="#" className="table button "><Link to="/form-standard">Export</Link> </button></div>
-                            <div className="align-left2"><button href="#" className="table button"><Link to="/form-standard">Import employees</Link> </button></div>
-                            
-                        </CardHeader>
+	                              	</select></div>       
+                           </div>
+                        
                         <CardBody>
                             <Datatable options={this.state.dtOptions1}>
-                                <table className="table table-striped my-4 w-100">
+                                <table className="table table-striped my-4 w-100 smaller">
                                     <thead>
                                         <tr>
-                                            
+                                            <th data-priority="1"></th>
                                             <th></th>
                                             <th> Name</th>
                                             <th>Account type</th>
@@ -126,14 +123,14 @@ class ChartRadial extends Component {
                                     </thead>
                                     <tbody>
                                         <tr className="gradeX">
-                                           
-                                            <td className="image-holder"><img src="img/user/02.jpg"></img></td>
+                                           <td></td>
+                                            <td><Avatar name="Tioluwani Joseph" round="50px" size="50"/></td>
                                             <td>Joseph Tioluwani</td>
-                                            <td><button href="#" className="btn btn-secondary btn-lg invite-btn table-round-btn">Visitor </button></td>
-                                            <td><button href="#" className="btn btn-secondary btn-lg invite-btn table-round-btn table-dark-btn ">Male </button></td>
+                                            <td><button href="#" className=" table-round-btn">Visitor </button></td>
+                                            <td><button href="#" className="  table-round-btn table-dark-btn ">Male </button></td>
                                             <td>Techbarn</td>
                                             <td>tioluwanijoseph@gmail.com</td>
-                                            <td><button href="#" className="btn btn-secondary btn-lg invite-btn table-round-btn">Active </button></td>
+                                            <td><button href="#" className=" table-round-btn">Active </button></td>
                                             <td>{ ANIMATIONS.map((title, i) => (
                    
                                              <DropdownBox title={title}/>                     
@@ -148,9 +145,10 @@ class ChartRadial extends Component {
                     
                 </Container>
             </ContentWrapper>
+            </ConfigProvider>
             );
     }
 
 }
 
-export default ChartRadial;
+export default AllEmployees;

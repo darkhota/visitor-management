@@ -3,6 +3,7 @@ import ContentWrapper from '../Layout/ContentWrapper';
 import '../../styles/MyStyles/custom.css'
 import {  Dropdown, DropdownMenu, DropdownToggle, DropdownItem } from 'reactstrap';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 
 class DropdownBox extends Component  {
     
@@ -15,16 +16,17 @@ class DropdownBox extends Component  {
         
         return (
             <div >
-                <Dropdown isOpen={this.state.ddOpen} toggle={this.toggle}>
-                    <DropdownToggle className="remove-border">
-                    <i className="fa fa-ellipsis-h"></i>
-                    </DropdownToggle>
-                    <DropdownMenu className={ddClass}>
-                        <DropdownItem><i class="icon-trash"></i>&nbsp;Remove tablet</DropdownItem>
-                        
-                    </DropdownMenu>
-                </Dropdown>
-            </div>
+            <Dropdown isOpen={this.state.ddOpen} toggle={this.toggle} >
+                <DropdownToggle className=" dropdown-devices " tag="span"
+    data-toggle="dropdown"
+    >
+                <i className="fa fa-ellipsis-h"></i>
+                </DropdownToggle>
+                <DropdownMenu className="dropdown-menu">
+                    <a className="dropdown-item " href="#"><i class="icon-trash"></i>&nbsp;&nbsp;Remove Tablet</a>
+                </DropdownMenu>
+            </Dropdown>
+        </div>
         );
     }
 }
@@ -41,9 +43,9 @@ class Devices extends Component {
                               Tablets
                             </h2>
                             <div className="button-align">
-                            <a href="/new-tablet">
-                                        <button class="btn btn-secondary btn-lg invite-btn" type="button">New Tablet</button>
-                                    </a>
+                           
+                                        <button className="btn btn-secondary btn-lg invite-btn" ><Link to="/new-tablet" className="black-link">New tablet</Link></button>
+                                   
                                     </div>
                             </div >
                             <div className="device-grid"> <div className="device-cards">
@@ -138,6 +140,9 @@ class Devices extends Component {
                                         
                             </div>
                             </div></div>
+                            <p className="h5 tw-mt-8 tw-mb-0 tw-px-8">
+                          Learn more about <a href="#" target="_blank" rel="noopener" tabindex="-1">managing visitor sign-in kiosks</a> in Workwise.
+                        </p>
                            
                 </div>
             </ContentWrapper>

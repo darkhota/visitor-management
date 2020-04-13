@@ -8,7 +8,7 @@ import { Dropdown, DropdownMenu, DropdownToggle, DropdownItem } from 'reactstrap
 import classNames from 'classnames';
 import "flatpickr/dist/themes/light.css";
 import Flatpickr from "react-flatpickr";
-
+import { Link } from 'react-router-dom';
 class DropdownBox extends Component  {
     state = { ddOpen: false }
     toggle = () => this.setState({
@@ -19,16 +19,16 @@ class DropdownBox extends Component  {
         
         return (
             <div >
-                <Dropdown isOpen={this.state.ddOpen} toggle={this.toggle}>
-                    <DropdownToggle className="remove-border">
+                <Dropdown isOpen={this.state.ddOpen} toggle={this.toggle} >
+                    <DropdownToggle className="remove-border" tag="span"
+        data-toggle="dropdown"
+        >
                     <i className="fa fa-ellipsis-h"></i>
                     </DropdownToggle>
-                    <DropdownMenu className={ddClass}>
-                        <DropdownItem>Action</DropdownItem>
-                        <DropdownItem>Another action</DropdownItem>
-                        <DropdownItem active>Active Item</DropdownItem>
-                        <DropdownItem divider />
-                        <DropdownItem>Separated link</DropdownItem>
+                    <DropdownMenu className="dropdown-menu">
+                        <a className="dropdown-item" href="#"><i class="icon-logout"></i>&nbsp;&nbsp;Sign out</a>
+                        <a class="dropdown-item" href="#"><i class="icon-envelope-open"></i>&nbsp;&nbsp;Refer to Workwise</a>
+                        <a class="dropdown-item" href="#"><i class="icon-trash"></i>&nbsp;&nbsp;Delete visitor</a>
                     </DropdownMenu>
                 </Dropdown>
             </div>
@@ -59,9 +59,7 @@ class DatatableView extends Component {
                 }
             }
         },
-        date: new Date()
-        
-       
+        date: new Date()  
     }
 
     // Access to internal datatable instance for customizations
@@ -102,7 +100,7 @@ class DatatableView extends Component {
 										<option value="2">My Visitors</option>
 										<option value="3">Currently Signed In</option>
 	                              	</select>
-                            <button href="#" className="btn btn-secondary btn-lg invite-btn">Export</button>
+                            <button  className="btn btn-secondary btn-lg invite-btn"><Link to="/#"> Export</Link></button>
                         </CardHeader>
                         <CardBody>
                             <Datatable options={this.state.dtOptions1}>
@@ -189,9 +187,6 @@ class DatatableView extends Component {
                             </Datatable>
                         </CardBody>
                     </Card>
-                   
-                   
-                    
                 </Container>
             </ContentWrapper>
             );

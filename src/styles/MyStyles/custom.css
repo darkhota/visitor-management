@@ -261,11 +261,15 @@ ol >:nth-child(2):before{
 }
 .employee-header{
     display:grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+}
+.employee-header button{
+    width: 25%;
 }
 .table-card-header-rooms{
     display:grid;
     grid-template-columns: repeat(2, 1fr);
+   
 }
 
 .table-card-header input{
@@ -318,22 +322,19 @@ ol >:nth-child(2):before{
     transition: all 0.1s;
     padding: 0.625rem 1.25rem;
     line-height: 1.5;
-    border-radius: 0.375rem;
+    border-radius: 3px;
     text-align: center;
 
 }
-.align-left{
-   
+.align-left  button{
     
-}
-.align-left button{
-    margin-left:0;
-    
+    width: 30%;
+    background-color: #fff;
 }
 .align-left2 button{
-    margin-left:-200px;
-    width: 50%;
-    
+    margin-left:-12rem;
+    width: 45%;
+    background-color: #fff;
 }
 .table-card-header-rooms button{
     width: 25%;
@@ -351,7 +352,7 @@ ol >:nth-child(2):before{
 }
 
 .remove-border,
-.remove-border:hover,
+
 .remove-border:active,
 .remove-border:focus,
 .remove-border:focus-within,
@@ -360,7 +361,18 @@ ol >:nth-child(2):before{
  {
     background: none;
     border:none;
-    color:#fff;
+    color:#656565;
+    margin-right: 2rem;
+}
+.remove-border:hover, .dropdown-devices:hover, .room-dropdown:hover{
+    color:#00914b
+}
+.room-dropdown{
+
+}
+.dropdown-devices{
+    color: #fff;
+    margin-right: 1rem;
 }
 
 .form-control[readonly] {
@@ -383,11 +395,12 @@ ol >:nth-child(2):before{
 }
 .visitorForm{
     width: 75%;
-   
+   padding-top: 1rem;
     padding-bottom: 70px;
 }
 .profile-form{
     width: 50%;
+    padding-top: 1rem;
 }
 .new-room-form{
     padding-bottom: 2px;
@@ -425,7 +438,7 @@ small, .small {
     padding:20px;
 }
 .input-field p{
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 .input-field select{
     border-radius: 5px;
@@ -440,6 +453,9 @@ small, .small {
     padding-top:15px;
     width: 70%;
     margin-left: 105px;
+}
+.hidden-form{
+    padding-top: 1rem;
 }
 .invite-btn {
     cursor: pointer;
@@ -464,10 +480,19 @@ small, .small {
     font-family: inherit;
     transition: all .5s;
 }
+.black-link{
+    color: #333;
+    font-weight: 400;
+}
 .button-align{
     text-align:right;
 }
-
+.button-align button{
+    background-color: #00914b;
+}
+.button-align button:hover{
+    color: #000;
+}
 .device-grid{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -622,6 +647,10 @@ small, .small {
     width: 140%;
     
 }
+.new-tablet-form button {
+    background-color: #00914b;
+    color: #fff;
+}
 .card-top-tablet a{
     color:#656565;
 }
@@ -740,6 +769,7 @@ small, .small {
     padding: 10px 33px;
     border-radius: 0.25rem;
     font-size: 1rem;
+    border:none;
    
   }
   .btn-upload2 {
@@ -753,8 +783,7 @@ small, .small {
    
   }
   .btn-upload2:hover {
-    color: #00914a;
-    border: 1px solid #00914a;
+    color: #656565;
   }
   
   .upload-btn-wrapper input[type=file] {
@@ -800,6 +829,8 @@ small, .small {
       border-radius:1.5rem;
       padding: 5px 20px;
       background-color: #27c24c;
+      border: none;
+      color: #fff;
   }
 
   .table-dark-btn{
@@ -813,6 +844,7 @@ small, .small {
     text-decoration: none;
     box-shadow: inset 0 -0.125rem #00914b;
     padding-bottom:.5rem;
+    color: #00914b;
 }
 .integration-desc{
     padding-top:2rem;
@@ -862,6 +894,25 @@ small, .small {
 .change-pwd{
     display: none;
 }
+.c-checkbox input[type="checkbox"]:checked + span, .c-checkbox input[type="radio"]:checked + span, .c-radio input[type="checkbox"]:checked + span, .c-radio input[type="radio"]:checked + span {
+    border-color: #00914b;
+    background-color: #00914b;
+}
+.c-checkbox span, .c-radio span {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+        border-top-color: rgb(204, 204, 204);
+        border-right-color: rgb(204, 204, 204);
+        border-bottom-color: rgb(204, 204, 204);
+        border-left-color: rgb(204, 204, 204);
+    margin-right: 5px;
+    text-align: center;
+}
 
 .c-checkbox span:before, .c-radio span:before {
     position: absolute;
@@ -896,6 +947,12 @@ table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > td:first-child, 
     cursor: pointer;
     top: 30px;
     left: 10px;
+}
+table.dataTable.dtr-inline.collapsed.smaller > tbody > tr[role="row"] > td:first-child, table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > th:first-child {
+    top: 20px; 
+}
+table.dataTable.dtr-inline.collapsed.smallest > tbody > tr[role="row"] > td:first-child, table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > th:first-child {
+    top: 5px;
 }
 button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disabled), [type="submit"]:not(:disabled) {
     cursor: pointer;
@@ -991,6 +1048,63 @@ button, select {
    
 }
 
+.navbar-right{
+    padding-right: 1rem;
+    color:#656565;
+}
+.sidebar-heading{
+    font-size: 15px;
+}
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: right;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+
+.dropdown-menu .dropdown-item {
+
+    line-height: 1.52857143;
+    padding: 0;
+
+}
+.tw-mb-0 {
+    margin-bottom: 50px;
+}
+.tw-px-8 {
+    
+    padding-right: 2rem;
+}
+.h5 {
+    font-size: .875rem;
+}
+.tw-mt-8 {
+    margin-top: 2rem;
+}
+.tw-mt-8 a{
+    color: #5d9cec;
+text-decoration: none;
+background-color: transparent;
+}
+.tw-mt-8 a:hover{
+    color: #1b72e2;
+text-decoration: underline;
+}
+.subheader{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 1rem;
+}
+.subheader select{
+    width: 40%;
+}
+
 @keyframes moving-gradient{
     0% { background-position: 0 0;
             opacity: 0.5;
@@ -1065,6 +1179,10 @@ button, select {
         display:grid;
         grid-template-columns: 1fr;
        
+    }
+    .table-card-header-rooms{
+        display:grid;
+        grid-template-columns: repeat(2, 1fr);
     }
     .table-card-header select{
      
@@ -1220,5 +1338,43 @@ button, select {
         grid-template-columns:  1fr;
         grid-row-gap: 1rem;
     }
-    
+
+    .integration-content-container{
+        width: 90%;
+        margin-top:2rem;
+    }
+    .navbar-right{
+        padding-right:0;
+        color:#656565;
+    }
+    .table-card-header-rooms button{
+        width: 80%;
+        margin-top:0px;
+        margin-left: 20%;
+    }
+    .employee-header{
+        grid-template-columns: repeat(2, 1fr);
+       }
+       .employee-header h1{
+           font-size: 1.5rem;
+       }
+    .employee-header button{
+       width: 70%;
+    }
+    .subheader{
+        grid-template-columns: 1fr;
+        grid-gap: 1rem;
+    }
+    .align-left2 button{
+        margin-left:0rem;
+        width: 55%;
+        background-color: #fff;
+    }
+    .no-align{
+        text-align: left;
+        
+    }
+    .subheader select{
+        width: 90%;
+    }
 }

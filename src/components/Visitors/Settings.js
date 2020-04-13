@@ -28,7 +28,9 @@ class ChartMorris extends Component {
                 a: '1',
          },
          address: '',
-         colors: []
+         colors: [],
+         imgPrevUrl: "img/icon.png",
+         file: ''
         
     };
     
@@ -74,11 +76,32 @@ class ChartMorris extends Component {
             }
         }))
          //this.setState({rState:r})
-            console.log(this.state.colors);
+            console.log(this.state.color);
+            console.log(this.rgbToHex(r, g, b));
       };
 
      
-      
+       rgbToHex =(r, g, b) =>{
+        return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+        
+      };
+    
+      _handleImageChange(e) {
+        e.preventDefault();
+    
+        let reader = new FileReader();
+        let file = e.target.files[0];
+       
+        reader.onloadend = () => {
+          console.log(reader.result);
+          this.setState({
+            file: file,
+            imgPrevUrl: reader.result
+          });
+        }
+    
+        reader.readAsDataURL(file)
+      }
       
       
     render() {
@@ -201,7 +224,7 @@ class ChartMorris extends Component {
                                             <img  crossOrigin={"anonymous"}
             ref={this.imgRef}
             src={
-              "img/icon.png"
+              this.state.imgPrevUrl
             }
             alt={"example"}
            
@@ -213,11 +236,11 @@ class ChartMorris extends Component {
             }} className="grid-img"></img>
                                             <div className="upload-btn-wrapper">
                                         <button className="btn-upload">Select file</button>
-                                        <input type="file" name="myfile" />
+                                        <input type="file" name="myfile" onChange={(e)=>this._handleImageChange(e)}/>
                                         </div>
                                                                                     
                                            
-                                        <div className="upload-button"><button class="btn-upload2" type="button"><i class="fa fa-upload"></i><Link to="/form-standard"></Link> &nbsp; &nbsp; Upload</button></div>
+                                        <div className="upload-button"><button class="btn-upload2" type="button"><i class="fa fa-upload"></i><Link to="/#"></Link> &nbsp; &nbsp; Upload</button></div>
                                         
                                     <div className="upload-text">
                                         <h5>We recommend uploading a transparent PNG cropped to the edges of your logo and up to 1000px wide or 600px tall.</h5>

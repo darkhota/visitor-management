@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ContentWrapper from '../Layout/ContentWrapper';
 import '../../styles/MyStyles/custom.css'
 
-
 class Home extends Component {
     render() {
         return (
@@ -32,8 +31,6 @@ class Home extends Component {
                         </div>
                     </div>
 
-                
-
                 { /* END cards box */ }
                 { /* START cards box */ }
                 
@@ -52,9 +49,6 @@ class Home extends Component {
                             
                         </div>
                     </div>
-
-                
-
                 { /* END cards box */ }
                 { /* START cards box */ }
                
@@ -128,7 +122,6 @@ class Home extends Component {
                
             </ContentWrapper>
             )
-
     }
 
 }

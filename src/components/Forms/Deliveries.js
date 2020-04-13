@@ -9,7 +9,6 @@ import classNames from 'classnames';
 import "flatpickr/dist/themes/light.css";
 import Flatpickr from "react-flatpickr";
 import { Link } from 'react-router-dom';
-
 class DropdownBox extends Component  {
     
     state = { ddOpen: false }
@@ -80,6 +79,7 @@ class FormCropper extends Component {
         const { date } = this.state;
         const ANIMATIONS = ['fadeIn',]
         return (
+           
             <ContentWrapper>
                 <Container fluid>
                     {/* DATATABLE DEMO 1 */}
@@ -98,18 +98,19 @@ class FormCropper extends Component {
                                         this.setState({ date });
                                         }}
                                     />
-                            <select className="selectVisitors">
+                            <select defaultValue="" className="custom-select" multiple="">
 										<option value="1">All Deliveries</option>
 										<option value="2">My Deliveries</option>
 	                              	</select>
-                            <button href="#" className="table button"><Link to="/form-standard">Export</Link> </button>
+                            <button href="#" className="btn btn-secondary btn-lg invite-btn"><Link to="/form-standard">Export</Link> </button>
                         </CardHeader>
                         <CardBody>
                             <Datatable options={this.state.dtOptions1}>
-                                <table className="table table-striped my-4 w-100">
+                                <table className="table table-striped my-4 w-100 ">
                                     <thead>
                                         <tr>
-                                        <th data-priority="1"><div className="table-cell tw-align-middle tw-pl-1 ember-view log-chk">
+                                            <th data-priority="1"></th>
+                                        <th ><div className="table-cell tw-align-middle tw-pl-1 ember-view log-chk">
                                                 <input className="js-entry-checkbox" type="checkbox"/>
                                                 </div></th>
                                             <th></th>
@@ -123,8 +124,9 @@ class FormCropper extends Component {
                                     </thead>
                                     <tbody>
                                         <tr className="gradeX">
+                                            <td></td>
                                         <td><input class="js-entry-checkbox" type="checkbox"/></td>
-                                            <td className="image-holder"><img src="img/user/02.jpg"></img></td>
+                                        <td className="image-holder"><img src="img/user/02.jpg"></img></td>
                                             <td>Joseph Tioluwani</td>
                                             <td>Deliveries</td>
                                             <td>Niyi Adisa</td>
@@ -144,6 +146,7 @@ class FormCropper extends Component {
                     
                 </Container>
             </ContentWrapper>
+          
             );
     }
 

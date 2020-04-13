@@ -21,19 +21,17 @@ class DropdownBox extends Component  {
         
         return (
             <div >
-                <Dropdown isOpen={this.state.ddOpen} toggle={this.toggle}>
-                    <DropdownToggle className="remove-border">
-                    <i className="fa fa-ellipsis-h"></i>
-                    </DropdownToggle>
-                    <DropdownMenu className={ddClass}>
-                        <DropdownItem>Action</DropdownItem>
-                        <DropdownItem>Another action</DropdownItem>
-                        <DropdownItem active>Active Item</DropdownItem>
-                        <DropdownItem divider />
-                        <DropdownItem>Separated link</DropdownItem>
-                    </DropdownMenu>
-                </Dropdown>
-            </div>
+            <Dropdown isOpen={this.state.ddOpen} toggle={this.toggle} >
+                <DropdownToggle  tag="span"
+    data-toggle="dropdown"
+    >
+                <i className="fa fa-ellipsis-h"></i>
+                </DropdownToggle>
+                <DropdownMenu className="dropdown-menu">
+                    <a className="dropdown-item" href="#"><i class="icon-note"></i>&nbsp;&nbsp;Edit booking</a>
+                </DropdownMenu>
+            </Dropdown>
+        </div>
         );
     }
 }
@@ -98,18 +96,18 @@ class FormWizard extends Component {
                                         this.setState({ date });
                                         }}
                                     />
-                            <select className="selectVisitors">
+                            <select defaultValue="" className="custom-select" multiple="">
 										<option value="1">All Bookings</option>
 										<option value="2">My Bookings</option>
 	                              	</select>
-                            <button href="#" className="table button"><Link to="/form-standard">Export</Link> </button>
+                            <button href="#" className="btn btn-secondary btn-lg invite-btn"><Link to="/form-standard">Export</Link> </button>
                         </CardHeader>
                         <CardBody>
                             <Datatable options={this.state.dtOptions1}>
-                                <table className="table table-striped my-4 w-100">
+                                <table className="table table-striped my-4 w-100 smaller">
                                     <thead>
                                         <tr>
-                                        
+                                            <th data-priority="1"></th>
                                             <th>Title</th>
                                             <th>Room </th>
                                             <th className="sort-numeric">Date</th>
@@ -120,7 +118,7 @@ class FormWizard extends Component {
                                     </thead>
                                     <tbody>
                                         <tr className="gradeX">
-                                        
+                                            <td></td>
                                             <td>Test</td>
                                             <td>Conference room</td>
                                             

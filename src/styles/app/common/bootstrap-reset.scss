@@ -186,11 +186,12 @@ hr {
 }
 
 .btn-secondary {
-    background-color: $btn-secondary-bg;
+    background-color: #00914b;
     border-color: $btn-secondary-border;
-    color: $btn-secondary-color;
+    color: #fff;
     &:hover {
         background-color: #f5f5f5;
+        color: #000;
     } // active state override
     &:not(:disabled):not(.disabled):active,
     &:not(:disabled):not(.disabled).active,

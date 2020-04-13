@@ -21,7 +21,7 @@ $nav-header-bg:                 transparent;
 $nav-top-item-mobile:           $nav-top-bg;
 $nav-top-item-mobile-active:    $nav-top-bg;
 
-$nav-top-item-desktop:          #000;
+$nav-top-item-desktop:          #656565;
 $nav-top-item-desktop-active:   $nav-top-item-mobile-active;
 
 
@@ -206,7 +206,7 @@ $nav-top-item-desktop-active:   $nav-top-item-mobile-active;
         left: 0;
         z-index: 3001; // Add color only for the icon
         >em {
-            color: white;
+            color: #656565;
         }
     }
 }

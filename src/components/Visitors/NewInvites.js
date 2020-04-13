@@ -4,35 +4,11 @@ import '../../styles/MyStyles/custom.css'
 import Select from 'react-select';
 import "flatpickr/dist/themes/light.css";
 import Flatpickr from "react-flatpickr";
-import {
-    Row,
-    Col,
-    Card,
-    CardHeader,
-    CardBody,
-    FormGroup,
-    FormFeedback,
-    FormText,
-    Label,
-    InputGroup,
-    InputGroupAddon,
-    InputGroupButtonDropdown,
-    InputGroupText,
-    Input,
-    Button,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem } from 'reactstrap';
+import {Card,Input } from 'reactstrap';
 
     const STATES = [
-        { value: 'australian-capital-territory', label: 'Australian Capital Territory', className: 'State-ACT' },
-        { value: 'new-south-wales', label: 'hello', className: 'State-NSW' },
-        { value: 'victoria', label: 'Victoria', className: 'State-Vic' },
-        { value: 'queensland', label: 'Queensland', className: 'State-Qld' },
-        { value: 'western-australia', label: 'Western Australia', className: 'State-WA' },
-        { value: 'south-australia', label: 'South Australia', className: 'State-SA' },
-        { value: 'tasmania', label: 'Tasmania', className: 'State-Tas' },
-        { value: 'northern-territory', label: 'Northern Territory', className: 'State-NT' },
+        { value: 'visitor', label: 'visitor', className: 'State-ACT' },
+      
     ]
     function styleFn(provided, state) {
         return { ...provided, color: state.isFocused ? '#00914b' : '' };
@@ -46,7 +22,7 @@ import {
         }),
        
     }
-class FormStandard extends Component {
+class NewInvites extends Component {
     constructor() {
         super();
      
@@ -86,8 +62,6 @@ class FormStandard extends Component {
 
         return (
             <ContentWrapper>
-                
-                
                <div className="form-card">
                <div className=" card-top-tablet">
                             <h3><a href="/invites">
@@ -176,7 +150,5 @@ class FormStandard extends Component {
             </ContentWrapper>
             );
     }
-
 }
-
-export default FormStandard;
+export default NewInvites;

@@ -7,7 +7,6 @@ import Datatable from '../Tables/Datatable';
 import { Row, Col, Dropdown, DropdownMenu, DropdownToggle, DropdownItem } from 'reactstrap';
 import classNames from 'classnames';
 import "flatpickr/dist/themes/light.css";
-import Flatpickr from "react-flatpickr";
 import { Link } from 'react-router-dom';
 
 class DropdownBox extends Component  {
@@ -21,19 +20,19 @@ class DropdownBox extends Component  {
         
         return (
             <div >
-                <Dropdown isOpen={this.state.ddOpen} toggle={this.toggle}>
-                    <DropdownToggle className="remove-border">
-                    <i className="fa fa-ellipsis-h"></i>
-                    </DropdownToggle>
-                    <DropdownMenu className={ddClass}>
-                        <DropdownItem>Action</DropdownItem>
-                        <DropdownItem>Another action</DropdownItem>
-                        <DropdownItem active>Active Item</DropdownItem>
-                        <DropdownItem divider />
-                        <DropdownItem>Separated link</DropdownItem>
-                    </DropdownMenu>
-                </Dropdown>
-            </div>
+            <Dropdown isOpen={this.state.ddOpen} toggle={this.toggle} >
+                <DropdownToggle className="room-dropdown" tag="span"
+    data-toggle="dropdown"
+    >
+                <i className="fa fa-ellipsis-h"></i>
+                </DropdownToggle>
+                <DropdownMenu className="dropdown-menu">
+                    <a className="dropdown-item" href="#"><i class="icon-note"></i>&nbsp;&nbsp;Book room</a>
+                    <a class="dropdown-item" href="#"><i class="icon-pencil"></i>&nbsp;&nbsp;Edit room</a>
+                    <a class="dropdown-item" href="#"><i class="icon-trash"></i>&nbsp;&nbsp;Delete room</a>
+                </DropdownMenu>
+            </Dropdown>
+        </div>
         );
     }
 }
@@ -88,15 +87,15 @@ class TableStandard extends Component {
                             
                             <h1>1 Room(s)</h1>
                             
-                            <button href="#" className="table button "><Link to="/new-room">Create New</Link> </button>
+                            <button href="#" className="btn btn-secondary btn-lg invite-btn"><Link to="/new-room">Create New</Link> </button>
                         </CardHeader>
                         <CardBody>
                             <Datatable options={this.state.dtOptions1}>
-                                <table className="table table-striped my-4 w-100">
+                                <table className="table table-striped my-4 w-100 smallest">
                                     <thead>
                                         <tr>
                                         
-                                            
+                                            <th data-priority="1"></th>
                                             <th>Title</th>
                                             <th>Description </th>
                                             <th className="sort-numeric">Resources</th>
@@ -108,7 +107,7 @@ class TableStandard extends Component {
                                     <tbody>
                                         <tr className="gradeX">
                                         
-                                            
+                                            <td></td>
                                             <td>Conference Room</td>
                                             <td>Good Room</td>
                                             <td>HDMI, projector</td>

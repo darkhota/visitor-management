@@ -95,7 +95,7 @@ const Routes = ({ location }) => {
                                 
                            
                                 {/*Dashboard*/}
-                                <Route path="/home" component={waitFor(Home)}/>
+                                <Route path="/" exact component={waitFor(Home)}/>
                                 {/*Widgets*/}
                                 
 
@@ -128,7 +128,7 @@ const Routes = ({ location }) => {
                                 {/*Extras*/}
                                 <Route path="/new-room" component={waitFor(NewRoom)}/>                
                                 <Route path="/profile" component={waitFor(Profile)}/>
-                                <Redirect to="#"/>
+                                <Redirect to="/notfound"/>
                             </Switch>
                         </Suspense>
                     </div>
