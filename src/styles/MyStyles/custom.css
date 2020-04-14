@@ -398,6 +398,14 @@ ol >:nth-child(2):before{
    padding-top: 1rem;
     padding-bottom: 70px;
 }
+.newEmplGrid{
+    width: 100%;
+    padding-top: 1rem;
+     padding-bottom: 1rem;
+     display:grid;
+     grid-template-columns: repeat(3, 1fr);
+     grid-column-gap: 1rem;
+}
 .profile-form{
     width: 50%;
     padding-top: 1rem;
@@ -486,6 +494,9 @@ small, .small {
 }
 .button-align{
     text-align:right;
+}
+.employee-button-align{
+    text-align:center;
 }
 .button-align button{
     background-color: #00914b;

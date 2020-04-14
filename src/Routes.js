@@ -20,7 +20,7 @@ const Devices = lazy(() => import('./components/Visitors/Devices'));
 const Settings = lazy(() => import('./components/Visitors/Settings'));
 
 const AllEmployees = lazy(() => import('./components/Employee_directory/AllEmployees'));
-
+const NewEmployee = lazy(() => import('./components/Employee_directory/NewEmployee'));
 const MyRooms = lazy(() => import('./components/Rooms/MyRooms'));
 const VisitorsLog = lazy(() => import('./components/Visitors/VisitorsLog'));
 
@@ -125,6 +125,7 @@ const Routes = ({ location }) => {
 
                                 {/*Maps*/}
                                 <Route path="/all-employees" component={waitFor(AllEmployees)}/>
+                                <Route path="/new-employee" component={waitFor(NewEmployee)}/>
                                 {/*Extras*/}
                                 <Route path="/new-room" component={waitFor(NewRoom)}/>                
                                 <Route path="/profile" component={waitFor(Profile)}/>

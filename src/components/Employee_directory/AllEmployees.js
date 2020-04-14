@@ -91,7 +91,7 @@ class AllEmployees extends Component {
                             
                             <h1>1 Employee</h1>
                             <div className="button-align">
-                            <button className="btn btn-secondary btn-lg invite-btn employee-btn"><Link to="/#"> Create New</Link> </button>
+                            <button className="btn btn-secondary btn-lg invite-btn employee-btn"><Link to="/new-employee"> Create New</Link> </button>
                             </div>
                             </CardHeader>
                             <div className="subheader">
