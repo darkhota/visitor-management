@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../styles/MyStyles/Login.css';
 import workwise from '../fonts/workwise.ttf';
-
+import { Link } from 'react-router-dom';
 const Workwise = {
   fontFamily: 'workwise',
   fontStyle: 'normal',
@@ -55,7 +55,7 @@ class Signin extends Component {
                   </div>
                   
               </div>
-              <a href="/home">
+              <a href="/">
               <button type= "button" className="form-submit" >
               <i className="fa fa-lock"></i>
                 &nbsp; &nbsp; Login </button>

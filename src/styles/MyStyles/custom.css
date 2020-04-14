@@ -496,6 +496,8 @@ small, .small {
 .device-grid{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    margin-left: 2rem;
+    
 }
 
 .device-cards{
@@ -505,6 +507,8 @@ small, .small {
     background: linear-gradient(to bottom, #004684, #00914b) !important;
     color: #fff !important;
     border-radius: 5px;
+    justify-self: start;
+    
 }
 .device-card-top{
     text-align:right;
@@ -1337,6 +1341,7 @@ text-decoration: underline;
         
         grid-template-columns:  1fr;
         grid-row-gap: 1rem;
+        
     }
 
     .integration-content-container{
@@ -1378,3 +1383,44 @@ text-decoration: underline;
         width: 90%;
     }
 }
+@media (min-width: 1300px) { 
+    .cards-container{
+       
+        grid-gap: 1rem;
+      }
+      .dashCards{
+        width:100%;
+        height:220px;
+    }
+    .linkButton{
+      width:15%;    
+    }
+    .card-content h3{
+        width:20rem;
+    }
+    .list-numbering {
+        width:12%;
+    }
+    .list-style h5, .list-link {
+        margin-left:-160px;
+    }
+    .section-content{
+        width:100%;
+    }
+    .section-text-content{
+        margin-left: -60px;
+    }
+    .list-style2 h5 {
+        margin-left:-240px;
+    }
+    .list-numbering2 {
+        width:8%;
+    }
+    .second-card{
+        margin-left: -2rem;
+    }
+    .upload-logo-content{
+        margin-left: -450px;
+    }
+    
+ }

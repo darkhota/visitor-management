@@ -20,16 +20,16 @@ class DropdownBox extends Component  {
         
         return (
             <div >
-                <Dropdown isOpen={this.state.ddOpen} toggle={this.toggle}>
-                    <DropdownToggle className="remove-border">
+                <Dropdown isOpen={this.state.ddOpen} toggle={this.toggle} >
+                    <DropdownToggle  tag="span"
+        data-toggle="dropdown"
+        >
                     <i className="fa fa-ellipsis-h"></i>
                     </DropdownToggle>
-                    <DropdownMenu className={ddClass}>
-                        <DropdownItem>Action</DropdownItem>
-                        <DropdownItem>Another action</DropdownItem>
-                        <DropdownItem active>Active Item</DropdownItem>
-                        <DropdownItem divider />
-                        <DropdownItem>Separated link</DropdownItem>
+                    <DropdownMenu className="dropdown-menu">
+                        <a className="dropdown-item" href="#"><i class="icon-logout"></i>&nbsp;&nbsp;Sign out</a>
+                        <a class="dropdown-item" href="#"><i class="icon-envelope-open"></i>&nbsp;&nbsp;Refer to Workwise</a>
+                        <a class="dropdown-item" href="#"><i class="icon-trash"></i>&nbsp;&nbsp;Delete visitor</a>
                     </DropdownMenu>
                 </Dropdown>
             </div>

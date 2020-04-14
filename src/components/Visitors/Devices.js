@@ -93,7 +93,7 @@ class Devices extends Component {
                             </div>
                             </div>
 
-                            <div className="device-cards">
+                            <div className="device-cards second-card">
                               <div className="device-card-top">
                               { ANIMATIONS.map((title, i) => (
                    
