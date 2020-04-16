@@ -96,7 +96,8 @@ class DatatableView extends Component {
             <CardHeader className="table-card-header">
               <h1>3 visitors</h1>
               <Flatpickr
-                className="custom-select"
+              
+                className="date-picker"
                 options={{
                   altInput: true,
                   altFormat: "F j, Y",
@@ -107,14 +108,15 @@ class DatatableView extends Component {
                   this.setState({ date });
                 }}
               />
-              <select defaultValue="" className="custom-select" multiple="">
+              <select  defaultValue="" className="custom-select" multiple="">
                 <option value="1">All Visitors</option>
                 <option value="2">My Visitors</option>
                 <option value="3">Currently Signed In</option>
               </select>
-              <button className="btn btn-secondary btn-lg invite-btn">
-                <Link to="/#"> Export</Link>
-              </button>
+              <Link to="/#">  <button className="btn btn-secondary btn-lg ">
+              Export
+              </button></Link>
+             
             </CardHeader>
             <CardBody>
               <Datatable options={this.state.dtOptions1}>

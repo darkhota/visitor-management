@@ -10,13 +10,13 @@ const Menu = [
         name: 'Home',
         icon: 'icon-home',
         translate: 'sidebar.nav.DASHBOARD',
-        path: '/',      
+        path: '/home',      
     }, 
     {
         name: 'Feeds',
         icon: 'icon-speech',
         translate: 'sidebar.nav.form.FORM',
-        path: '/table-datagrid',
+        path: '/#',
        
     },
     {
@@ -74,7 +74,7 @@ const Menu = [
             },
             {
                 name: 'Analytics',
-                path: '/table-extended',
+                path: '/#',
                 translate: 'sidebar.nav.table.EXTENDED'
             },
             {

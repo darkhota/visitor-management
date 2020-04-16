@@ -78,6 +78,7 @@ class NewInvites extends Component {
                 </small>
               </p>
               <Select
+              className="sectionTest"
                 theme={theme => ({
                   ...theme,
                   borderRadius: 5,
@@ -98,8 +99,8 @@ class NewInvites extends Component {
 
             <div className="form-gird">
               <div className="flat-width">
-                <p>
-                  Arrival date <span className="required">*</span>
+                <p><small><b>Arrival date</b></small>
+                   <span className="required">*</span>
                 </p>
                 <Flatpickr
                   options={{
@@ -115,8 +116,8 @@ class NewInvites extends Component {
               </div>
 
               <div className="flat-width">
-                <p>
-                  Arrival time <span className="required">*</span>
+                <p><small><b>Arrival time</b></small>
+                   <span className="required">*</span>
                 </p>
                 <select defaultValue="" className="custom-select" multiple="">
                   <option defaultValue="1">12:45 pm</option>
@@ -134,6 +135,7 @@ class NewInvites extends Component {
                 <span className="required">*</span>
               </p>
               <Input
+              
                 id="input-id-1"
                 type="text"
                 placeholder="Enter full name"
@@ -153,7 +155,7 @@ class NewInvites extends Component {
                 <small>
                   <b>Phone number</b>
                 </small>
-                Phone number <span className="required">*</span>
+                <span className="required">*</span>
               </p>
               <Input
                 id="input-id-1"

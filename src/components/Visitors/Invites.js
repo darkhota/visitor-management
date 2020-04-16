@@ -99,11 +99,12 @@ class ChartRadial extends Component {
                                         this.setState({ date });
                                         }}
                                     />
-                            <select defaultValue="" className="custom-select" multiple="">
+                            <select defaultValue="" className="custom-select custom-select-small" multiple="">
 										<option value="1">All Invites</option>
 										<option value="2">My Invites</option>
 	                              	</select>
-                            <button href="#" className="btn btn-secondary btn-lg invite-btn"><Link to="/new-invites">New invite</Link> </button>
+                                      <Link to="/new-invites"> <button href="#" className="btn btn-secondary btn-lg invite-btn">New invite </button></Link>
+                           
                         </CardHeader>
                         <CardBody>
                             <Datatable options={this.state.dtOptions1}>

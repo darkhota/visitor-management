@@ -46,7 +46,7 @@ const Profile = lazy(() => import('./components/Profile/Profile'));
 // listed here to Switch between layouts
 // depending on the current pathname
 const listofPages = [
-    '/signin',
+    '/',
     '/recover',
     '/lock',
     '/notfound',
@@ -71,7 +71,7 @@ const Routes = ({ location }) => {
             <BasePage>
                 <Suspense fallback={<PageLoader/>}>
                     <Switch location={location}>
-                    <Route path="/signin" component={waitFor(Signin)}/>
+                    <Route path="/"  exact component={waitFor(Signin)}/>
                         <Route path="/recover" component={waitFor(Recover)}/>
                         <Route path="/lock" component={waitFor(Lock)}/>
                         <Route path="/notfound" component={waitFor(NotFound)}/>
@@ -95,13 +95,7 @@ const Routes = ({ location }) => {
                                 
                            
                                 {/*Dashboard*/}
-                                <Route path="/" exact component={waitFor(Home)}/>
-                                {/*Widgets*/}
-                                
-
-                                {/*Elements*/}
-                                
-                                
+                                <Route path="/home"  component={waitFor(Home)}/>    
 
                                 {/*Forms*/}
                                 <Route path="/new-invites" component={waitFor(NewInvites)}/>
@@ -129,7 +123,7 @@ const Routes = ({ location }) => {
                                 {/*Extras*/}
                                 <Route path="/new-room" component={waitFor(NewRoom)}/>                
                                 <Route path="/profile" component={waitFor(Profile)}/>
-                                <Redirect to="/notfound"/>
+                                <Redirect to="/home"/>
                             </Switch>
                         </Suspense>
                     </div>

@@ -92,6 +92,7 @@ class FormStandard extends Component {
                     Room manager <span className="required">*</span>
                   </p>
                   <Select
+                  className="sectionTest"
                     theme={theme => ({
                       ...theme,
                       borderRadius: 5,

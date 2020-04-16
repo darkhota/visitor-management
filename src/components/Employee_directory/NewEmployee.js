@@ -82,8 +82,9 @@ class NewInvites extends Component {
                             <div className=" newEmplGrid" >
                                    
                                     <div className="input-field">
-                                        <p><small><b>Account Type</b></small><span className="required">*</span></p>
-                                        <Select                                       
+                                        <p><small><b>ACCOUNT TYPE</b></small><span className="required">*</span></p>
+                                        <Select   
+                                        className="sectionTest"                                    
                                             theme={theme => ({
                                                 ...theme,
                                                 borderRadius: 5,                                            
@@ -104,8 +105,9 @@ class NewInvites extends Component {
                                         />
                                         </div>
                                         <div className="input-field">
-                                        <p><small><b>Company</b></small><span className="required">*</span></p>
-                                        <Select                                       
+                                        <p><small><b>COMPANY</b></small><span className="required">*</span></p>
+                                        <Select  
+                                        className="sectionTest"                                     
                                             theme={theme => ({
                                                 ...theme,
                                                 borderRadius: 5,                                            
@@ -126,8 +128,9 @@ class NewInvites extends Component {
                                         />
                                         </div>
                                         <div className="input-field">
-                                        <p><small><b>Gender</b></small><span className="required">*</span></p>
-                                        <Select                                       
+                                        <p><small><b>GENDER</b></small><span className="required">*</span></p>
+                                        <Select   
+                                        className="sectionTest"                                    
                                             theme={theme => ({
                                                 ...theme,
                                                 borderRadius: 5,                                            

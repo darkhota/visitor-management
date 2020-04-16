@@ -55,7 +55,7 @@ class Signin extends Component {
                   </div>
                   
               </div>
-              <a href="/">
+              <a href="/home">
               <button type= "button" className="form-submit" >
               <i className="fa fa-lock"></i>
                 &nbsp; &nbsp; Login </button>

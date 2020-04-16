@@ -236,7 +236,8 @@ class ChartMorris extends Component {
             }} className="grid-img"></img>
                                             <div className="upload-btn-wrapper">
                                         <button className="btn-upload">Select file</button>
-                                        <input type="file" name="myfile" onChange={(e)=>this._handleImageChange(e)}/>
+                                        <input type="file" className="add-cursor" accept="image/png,image/gif,image/jpeg" name="myfile" onChange={(e)=>this._handleImageChange(e)}></input>
+                                        
                                         </div>
                                                                                     
                                            
