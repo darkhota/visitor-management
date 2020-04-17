@@ -28,7 +28,7 @@ class DropdownBox extends Component {
     return (
       <div>
         <Dropdown isOpen={this.state.ddOpen} toggle={this.toggle}>
-          <DropdownToggle tag="span" data-toggle="dropdown">
+          <DropdownToggle className="cursor-pointer"tag="span" data-toggle="dropdown">
             <i className="fa fa-ellipsis-h"></i>
           </DropdownToggle>
           <DropdownMenu className="dropdown-menu">

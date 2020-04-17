@@ -96,7 +96,6 @@ class DatatableView extends Component {
             <CardHeader className="table-card-header">
               <h1>3 visitors</h1>
               <Flatpickr
-              
                 className="date-picker"
                 options={{
                   altInput: true,
@@ -108,15 +107,15 @@ class DatatableView extends Component {
                   this.setState({ date });
                 }}
               />
-              <select  defaultValue="" className="custom-select" multiple="">
+              <select defaultValue="" className="custom-select" multiple="">
                 <option value="1">All Visitors</option>
                 <option value="2">My Visitors</option>
                 <option value="3">Currently Signed In</option>
               </select>
-              <Link to="/#">  <button className="btn btn-secondary btn-lg ">
-              Export
-              </button></Link>
-             
+              <Link to="/#">
+                {" "}
+                <button className="btn btn-secondary btn-lg ">Export</button>
+              </Link>
             </CardHeader>
             <CardBody>
               <Datatable options={this.state.dtOptions1}>
@@ -142,7 +141,7 @@ class DatatableView extends Component {
                       <th className="no-display">Signed in</th>
                       <th className="no-display">Signed out</th>
                       <th className="no-display">Checked Out By</th>
-                      <th className="no-display"></th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -165,7 +164,7 @@ class DatatableView extends Component {
                       <td className="no-display">2:06 pm</td>
                       <td className="no-display">2:35pm</td>
                       <td className="no-display">Ilyas</td>
-                      <td className="no-display">
+                      <td>
                         {ANIMATIONS.map((title, i) => (
                           <DropdownBox title={title} />
                         ))}
