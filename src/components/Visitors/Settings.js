@@ -181,9 +181,9 @@ class ChartMorris extends Component {
                                                 ? { backgroundColor: '#fafafa', cursor: 'pointer' }
                                                 : { backgroundColor: '#ffffff', cursor: 'pointer' };
                                               return (
-                                                <div
+                                                <div 
                                                   {...getSuggestionItemProps(suggestion, {
-                                                    className,
+                                                    className: 'suggestions',
                                                     style,
                                                   })}
                                                 >
