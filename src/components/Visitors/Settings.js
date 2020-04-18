@@ -181,9 +181,9 @@ class ChartMorris extends Component {
                                                 ? { backgroundColor: '#fafafa', cursor: 'pointer' }
                                                 : { backgroundColor: '#ffffff', cursor: 'pointer' };
                                               return (
-                                                <div
+                                                <div 
                                                   {...getSuggestionItemProps(suggestion, {
-                                                    className,
+                                                    className: 'suggestions',
                                                     style,
                                                   })}
                                                 >
@@ -235,9 +235,9 @@ class ChartMorris extends Component {
               {this.convertToHex(result)};
             }} className="grid-img"></img>
                                             <div className="upload-btn-wrapper">
-                                        <button className="btn-upload">Select file</button>
-                                        <input type="file" className="add-cursor" accept="image/png,image/gif,image/jpeg" name="myfile" onChange={(e)=>this._handleImageChange(e)}></input>
                                         
+                                        <input type="file" className="add-cursor" accept="image/png,image/gif,image/jpeg" name="myfile" onChange={(e)=>this._handleImageChange(e)}></input>
+                                        <button className="btn-upload">Select file</button>
                                         </div>
                                                                                     
                                            
