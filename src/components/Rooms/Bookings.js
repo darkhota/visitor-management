@@ -1,34 +1,30 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import ContentWrapper from "../Layout/ContentWrapper";
 import { Container, Card, CardHeader, CardBody, CardTitle } from "reactstrap";
 import $ from "jquery";
 import "../../styles/MyStyles/custom.css";
 import Datatable from "../Tables/Datatable";
 import {
-  Row,
-  Col,
   Dropdown,
   DropdownMenu,
   DropdownToggle,
-  DropdownItem
 } from "reactstrap";
 import classNames from "classnames";
 import "flatpickr/dist/themes/light.css";
 import Flatpickr from "react-flatpickr";
 import { Link } from "react-router-dom";
 
-class DropdownBox extends Component {
-  state = { ddOpen: false };
-  toggle = () =>
-    this.setState({
-      ddOpen: !this.state.ddOpen
-    });
-  render() {
-    const ddClass = classNames("animated", this.props.title);
+const DropdownBox = (title) => {
+  const [ddOpen, setDdopen] = useState(false);
+  
+  const toggle = () => setDdopen(!ddOpen);
+
+ 
+    const ddClass = classNames("animated", title);
 
     return (
       <div>
-        <Dropdown isOpen={this.state.ddOpen} toggle={this.toggle}>
+        <Dropdown isOpen={ddOpen} toggle={toggle}>
           <DropdownToggle  className = "cursor-pointer"tag="span" data-toggle="dropdown">
             <i className="fa fa-ellipsis-h"></i>
           </DropdownToggle>
@@ -40,36 +36,35 @@ class DropdownBox extends Component {
         </Dropdown>
       </div>
     );
-  }
+ 
 }
 
-class FormWizard extends Component {
-  state = {
-    dtOptions1: {
-      paging: true, // Table pagination
-      ordering: true, // Column ordering
-      info: true, // Bottom left status text
-      responsive: true,
-      // Text translation options
-      // Note the required keywords between underscores (e.g _MENU_)
-      oLanguage: {
-        sSearch: '<em class="fa fa-search"></em>',
+const Bookings = () => {
+  const [dtOptions1, setDtOptions1] = useState({
+    paging: true, // Table pagination
+    ordering: true, // Column ordering
+    info: true, // Bottom left status text
+    responsive: true,
+    // Text translation options
+    // Note the required keywords between underscores (e.g _MENU_)
+    oLanguage: {
+      sSearch: '<em class="fa fa-search"></em>',
 
-        info: "Showing page _PAGE_ of _PAGES_",
-        zeroRecords: "Nothing found - sorry",
-        infoEmpty: "No records available",
-        infoFiltered: "(filtered from _MAX_ total records)",
-        oPaginate: {
-          sNext: '<em class="fa fa-caret-right"></em>',
-          sPrevious: '<em class="fa fa-caret-left"></em>'
-        }
+      info: "Showing page _PAGE_ of _PAGES_",
+      zeroRecords: "Nothing found - sorry",
+      infoEmpty: "No records available",
+      infoFiltered: "(filtered from _MAX_ total records)",
+      oPaginate: {
+        sNext: '<em class="fa fa-caret-right"></em>',
+        sPrevious: '<em class="fa fa-caret-left"></em>'
       }
-    },
-    date: new Date()
-  };
+    }
+  });
+
+  const [date, setDate] = useState(new Date());
 
   // Access to internal datatable instance for customizations
-  dtInstance = dtInstance => {
+   const dtInstance = dtInstance => {
     const inputSearchClass = "datatable_input_col_search";
     const columnInputs = $("tfoot ." + inputSearchClass);
     // On input keyup trigger filtering
@@ -78,8 +73,6 @@ class FormWizard extends Component {
     });
   };
 
-  render() {
-    const { date } = this.state;
     const ANIMATIONS = ["fadeIn"];
     return (
       <ContentWrapper>
@@ -96,7 +89,7 @@ class FormWizard extends Component {
                 }}
                 value={date}
                 onChange={date => {
-                  this.setState({ date });
+                  setDate( date );
                 }}
               />
               <select defaultValue="" className="custom-select" multiple="">
@@ -110,7 +103,7 @@ class FormWizard extends Component {
               </Link>
             </CardHeader>
             <CardBody>
-              <Datatable options={this.state.dtOptions1}>
+              <Datatable options={dtOptions1}>
                 <table className="table table-striped my-4 w-100 smaller">
                   <thead>
                     <tr>
@@ -147,7 +140,7 @@ class FormWizard extends Component {
         </Container>
       </ContentWrapper>
     );
-  }
+  
 }
 
-export default FormWizard;
+export default Bookings;

@@ -1,84 +1,71 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import ContentWrapper from "../Layout/ContentWrapper";
 import { Container, Card, CardHeader, CardBody, CardTitle } from "reactstrap";
 import $ from "jquery";
 import "../../styles/MyStyles/custom.css";
 import Datatable from "../Tables/Datatable";
-import {
-  Row,
-  Col,
-  Dropdown,
-  DropdownMenu,
-  DropdownToggle,
-  DropdownItem
-} from "reactstrap";
+import { Dropdown, DropdownMenu, DropdownToggle } from "reactstrap";
 import classNames from "classnames";
 import "flatpickr/dist/themes/light.css";
 import { Link } from "react-router-dom";
 
-class DropdownBox extends Component {
-  state = { ddOpen: false };
-  toggle = () =>
-    this.setState({
-      ddOpen: !this.state.ddOpen
-    });
-  render() {
-    const ddClass = classNames("animated", this.props.title);
+const DropdownBox = title => {
+  const [ddOpen, setDdopen] = useState(false);
 
-    return (
-      <div>
-        <Dropdown isOpen={this.state.ddOpen} toggle={this.toggle}>
-          <DropdownToggle
-            className="cursor-pointer"
-            tag="span"
-            data-toggle="dropdown"
-          >
-            <i className="fa fa-ellipsis-h"></i>
-          </DropdownToggle>
-          <DropdownMenu className="dropdown-menu">
-            <a className="dropdown-item" href="#">
-              <i class="icon-note"></i>&nbsp;&nbsp;Book room
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="icon-pencil"></i>&nbsp;&nbsp;Edit room
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="icon-trash"></i>&nbsp;&nbsp;Delete room
-            </a>
-          </DropdownMenu>
-        </Dropdown>
-      </div>
-    );
-  }
-}
+  const toggle = () => setDdopen(!ddOpen);
 
-class TableStandard extends Component {
-  state = {
-    dtOptions1: {
-      paging: true, // Table pagination
-      ordering: true, // Column ordering
-      info: true, // Bottom left status text
-      responsive: true,
-      // Text translation options
-      // Note the required keywords between underscores (e.g _MENU_)
-      oLanguage: {
-        sSearch: '<em class="fa fa-search"></em>',
+  const ddClass = classNames("animated", title);
 
-        info: "Showing page _PAGE_ of _PAGES_",
-        zeroRecords: "Nothing found - sorry",
-        infoEmpty: "No records available",
-        infoFiltered: "(filtered from _MAX_ total records)",
-        oPaginate: {
-          sNext: '<em class="fa fa-caret-right"></em>',
-          sPrevious: '<em class="fa fa-caret-left"></em>'
-        }
+  return (
+    <div>
+      <Dropdown isOpen={ddOpen} toggle={toggle}>
+        <DropdownToggle
+          className="cursor-pointer"
+          tag="span"
+          data-toggle="dropdown"
+        >
+          <i className="fa fa-ellipsis-h"></i>
+        </DropdownToggle>
+        <DropdownMenu className="dropdown-menu">
+          <a className="dropdown-item" href="#">
+            <i class="icon-note"></i>&nbsp;&nbsp;Book room
+          </a>
+          <a class="dropdown-item" href="#">
+            <i class="icon-pencil"></i>&nbsp;&nbsp;Edit room
+          </a>
+          <a class="dropdown-item" href="#">
+            <i class="icon-trash"></i>&nbsp;&nbsp;Delete room
+          </a>
+        </DropdownMenu>
+      </Dropdown>
+    </div>
+  );
+};
+
+const MyRooms = () => {
+  const [dtOptions1, setDtOptions1] = useState({
+    paging: true, // Table pagination
+    ordering: true, // Column ordering
+    info: true, // Bottom left status text
+    responsive: true,
+    // Text translation options
+    // Note the required keywords between underscores (e.g _MENU_)
+    oLanguage: {
+      sSearch: '<em class="fa fa-search"></em>',
+
+      info: "Showing page _PAGE_ of _PAGES_",
+      zeroRecords: "Nothing found - sorry",
+      infoEmpty: "No records available",
+      infoFiltered: "(filtered from _MAX_ total records)",
+      oPaginate: {
+        sNext: '<em class="fa fa-caret-right"></em>',
+        sPrevious: '<em class="fa fa-caret-left"></em>'
       }
-    },
-    date: new Date()
-  };
+    }
+  });
 
   // Access to internal datatable instance for customizations
-  dtInstance = dtInstance => {
+  const dtInstance = dtInstance => {
     const inputSearchClass = "datatable_input_col_search";
     const columnInputs = $("tfoot ." + inputSearchClass);
     // On input keyup trigger filtering
@@ -87,8 +74,6 @@ class TableStandard extends Component {
     });
   };
 
-  render() {
-    const { date } = this.state;
     const ANIMATIONS = ["fadeIn"];
     return (
       <ContentWrapper>
@@ -108,7 +93,7 @@ class TableStandard extends Component {
               </Link>
             </CardHeader>
             <CardBody>
-              <Datatable options={this.state.dtOptions1}>
+              <Datatable options={dtOptions1}>
                 <table className="table table-striped my-4 w-100 smallest">
                   <thead>
                     <tr>
@@ -145,7 +130,6 @@ class TableStandard extends Component {
         </Container>
       </ContentWrapper>
     );
-  }
 }
 
-export default TableStandard;
+export default MyRooms;

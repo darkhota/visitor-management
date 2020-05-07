@@ -18,11 +18,9 @@ const Workwise = {
 
 
 
-class Signin extends Component {
-    render(){
+const Signin = () => {
+  
   return (
-    
-    
     <div className="App">
       <header className="App-header">
        <div className="Grid-container">
@@ -73,7 +71,7 @@ class Signin extends Component {
     </div>
    
   );
-}
+
 }
 
 export default Signin;

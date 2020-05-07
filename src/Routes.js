@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { withRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-
+import WorkwiseState from './context/Workwise/WorkwiseState';
 /* loader component for Suspense*/
 import PageLoader from './components/Common/PageLoader';
 
@@ -71,7 +71,7 @@ const Routes = ({ location }) => {
             <BasePage>
                 <Suspense fallback={<PageLoader/>}>
                     <Switch location={location}>
-                    <Route path="/"  exact component={waitFor(Signin)}/>
+                    <Route path="/"  component={waitFor(Signin)}/>
                         <Route path="/recover" component={waitFor(Recover)}/>
                         <Route path="/lock" component={waitFor(Lock)}/>
                         <Route path="/notfound" component={waitFor(NotFound)}/>
@@ -84,8 +84,8 @@ const Routes = ({ location }) => {
     }
     else {
         return (
-            // Layout component wrapper
-            // Use <BaseHorizontal> to change layout
+            <WorkwiseState>
+            
             <Base>
               <TransitionGroup>
                 <CSSTransition key={currentKey} timeout={timeout} classNames={animationName} exit={false}>
@@ -130,6 +130,7 @@ const Routes = ({ location }) => {
                 </CSSTransition>
               </TransitionGroup>
             </Base>
+            </WorkwiseState>
         )
     }
 }
