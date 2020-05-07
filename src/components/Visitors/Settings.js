@@ -1,5 +1,5 @@
 'use strict'
-import React, { Component } from 'react';
+import React, { useState, useContext } from 'react';
 import ContentWrapper from '../Layout/ContentWrapper';
 import { Input } from 'reactstrap';
 import '../../styles/MyStyles/custom.css';
@@ -7,86 +7,64 @@ import { Link } from 'react-router-dom';
 import { SketchPicker } from 'react-color';
 import reactCSS from 'reactcss';
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from "react-places-autocomplete";
-import Palette from 'react-palette';
-import { usePalette } from 'react-palette';
-import { ColorExtractor } from 'react-color-extractor';
 import ColorThief from 'colorthief';
+import WorkwiseContext from "../../context/Workwise/workwiseContext";
+const Settings = () => {
+  const workwiseContext = useContext(WorkwiseContext);
+  const { handleClick, displayColorPicker, handleClose} = workwiseContext; 
 
-
-class ChartMorris extends Component {
-   
-   constructor(props) {
-    super(props);
-    this.imgRef = React.createRef();
-   this. state = {
-        
-        displayColorPicker: false,
-            color: {
-                r: '0',
-                g: '145',
-                b: '74',
-                a: '1',
-         },
-         address: '',
-         colors: [],
-         imgPrevUrl: "img/icon.png",
-         file: ''
-        
-    };
-    
-  }
  
-  getColors = colors =>
-    this.setState(state => ({ colors: [...state.colors, ...colors] }))
+  const [color, setColor] = useState({r: '0',g: '145',b: '74',a: '1'});
+  const [address, setAddress] = useState('');
+  const [colors, setColors] = useState([]);
+  const [imgPrevUrl, setImgPrevUrl] = useState("img/icon.png");
+  const [file, setFile] = useState('');
+
+   const imgRef = React.createRef();
+   
+ const getColors = colors =>
+    setColors(state => ([...state.colors, ...colors] ))
   //.then(results => console.log(results[0].formatted_address))
-    handleClick = () => {
-        this.setState({ displayColorPicker: !this.state.displayColorPicker })
-      };
     
-      handleClose = () => {
-        this.setState({ displayColorPicker: false })
-      };
+  
     
-      handleChange = (color) => {
-        this.setState({ color: color.rgb })
+     const handleChange = (color) => {
+        setColor( color.rgb )
         
       };
       
-       handleChange2 = address => {
-    this.setState({ address });
+      const handleChange2 = address => {
+   setAddress(address);
   };
-      handleSelect = address => {
+     const handleSelect = address => {
         geocodeByAddress(address)
-          .then(results => this.setState({address:results[0].formatted_address}))
+          .then(results => setAddress(results[0].formatted_address))
           .then(latLng => console.log('Success', latLng))
           .catch(error => console.error('Error', error));
       };
 
-      convertToHex = (result, color) => {
+     const convertToHex = (result) => {
         const r = result[0];
          const g = result[1];
          const b = result[2];
          const rgbVal = 'rgb('+ r + ',' + g + ',' + b + ')';
-         this.setState(prevState => ({
-            color: {                  
-                ...prevState.color,    
+         setColor( {      
                 r: r,
                 g: g,
-                b: b       
-            }
-        }))
+                b: b,
+                a: 1       
+         })
          //this.setState({rState:r})
-            console.log(this.state.color);
-            console.log(this.rgbToHex(r, g, b));
+            console.log(color.r);
+            console.log(rgbToHex(r, g, b));
       };
 
-     
-       rgbToHex =(r, g, b) =>{
+     const rgbToHex =(r, g, b) =>{
         return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
         
       };
     
-      _handleImageChange(e) {
+     const _handleImageChange =(e) =>{
         e.preventDefault();
     
         let reader = new FileReader();
@@ -94,26 +72,21 @@ class ChartMorris extends Component {
        
         reader.onloadend = () => {
           console.log(reader.result);
-          this.setState({
-            file: file,
-            imgPrevUrl: reader.result
-          });
+          setFile (file);
+          setImgPrevUrl (reader.result);
+         
         }
     
         reader.readAsDataURL(file)
       }
-      
-      
-    render() {
-       
-        
+             
         const styles = reactCSS({
             'default': {
               color: {
                 width: '160px',
                 height: '40px',
                 borderRadius: '2px',
-                background: `rgba(${ this.state.color.r }, ${ this.state.color.g }, ${ this.state.color.b }, ${ this.state.color.a })`,
+                background: `rgba(${ color.r }, ${ color.g }, ${ color.b }, ${ color.a })`,
               },
               swatch: {
                 padding: '5px',
@@ -137,17 +110,13 @@ class ChartMorris extends Component {
             },
           });
         return (
-            
             <ContentWrapper>
-                
                 <div className="form-card">
                 <div className=" card-top no-button">
                             <h3>
                               Location details
                             </h3>
-                            <div>
-                        
-       
+                            <div> 
       </div>
                             </div >
                             <div className="visitorForm" >
@@ -165,11 +134,11 @@ class ChartMorris extends Component {
                                     <p><small><b>ADDRESS</b></small> <span className="required">*</span></p>
 
                                         <PlacesAutocomplete 
-                                        value ={this.state.address}
-                                         onChange ={this.handleChange2}
-                                          onSelect ={this.handleSelect}>
+                                        value ={address}
+                                         onChange ={handleChange2}
+                                          onSelect ={handleSelect}>
                                           {({getInputProps, suggestions, getSuggestionItemProps, loading}) => (<div><Input  {...getInputProps({placeholder: "Enter a location",
-                                                            className: 'location-search-input',})} id="input-id-1" type="text" autoComplete="off" value ={this.state.address} />
+                                                            className: 'location-search-input',})} id="input-id-1" type="text" autoComplete="off" value ={address} />
                                         <div className="autocomplete-dropdown-container">
                                             {loading && <div>...loading </div> }
                                             {suggestions.map(suggestion => {
@@ -192,9 +161,7 @@ class ChartMorris extends Component {
                                             })}
                                         </div>
                                         </div>)}
-                                        
-                                        </PlacesAutocomplete>
-                                        
+                                        </PlacesAutocomplete>       
                                     </div>
                                     <div className="input-field-small">
                                     <p><small><b>ADDRESS LINE 2</b></small> </p>
@@ -210,11 +177,9 @@ class ChartMorris extends Component {
                             <h3>
                              Branding
                             </h3>
-                                         
                             </div >
                            
-                                <div className="upload-logo">
-                                  
+                                <div className="upload-logo">       
                                 <img src="img/logo.svg"></img>
                                 <div className="upload-logo-content">
                                         <h4>Logo</h4>
@@ -222,52 +187,44 @@ class ChartMorris extends Component {
 
                                         <div className="logo-preview">
                                             <img  crossOrigin={"anonymous"}
-            ref={this.imgRef}
+            ref={imgRef}
             src={
-              this.state.imgPrevUrl
+              imgPrevUrl
             }
             alt={"example"}
-           
             onLoad={() => {
               const colorThief = new ColorThief();
-              const img = this.imgRef.current;
+              const img = imgRef.current;
               const result = colorThief.getColor(img, 25);
-              {this.convertToHex(result)};
+              {convertToHex(result)};
             }} className="grid-img"></img>
                                             <div className="upload-btn-wrapper">
-                                        
-                                        <input type="file" className="add-cursor" accept="image/png,image/gif,image/jpeg" name="myfile" onChange={(e)=>this._handleImageChange(e)}></input>
+                                        <input type="file" className="add-cursor" accept="image/png,image/gif,image/jpeg" name="myfile" onChange={(e)=>_handleImageChange(e)}></input>
                                         <button className="btn-upload">Select file</button>
                                         </div>
-                                                                                    
-                                           
+                                                                                   
                                         <div className="upload-button"><button class="btn-upload2" type="button"><i class="fa fa-upload"></i><Link to="/#"></Link> &nbsp; &nbsp; Upload</button></div>
                                         
                                     <div className="upload-text">
                                         <h5>We recommend uploading a transparent PNG cropped to the edges of your logo and up to 1000px wide or 600px tall.</h5>
-                                    </div>
-                                    
+                                    </div>                              
                                         </div>
                                 </div>
                             </div>
-               
-
-               
+      
                                 <div className="upload-logo">
                                 <img src="img/accent.svg"></img>
                                 <div className="upload-logo-content">
                                         <h4>Accent color</h4>
                                         <h5>Choose a custom accent color for the details on your Tablet and pre-registration emails.</h5>
                                         <h4>Choose a color</h4>
-                                <div style={ styles.swatch } onClick={ this.handleClick }>
+                                <div style={ styles.swatch } onClick={ handleClick }>
                         <div style={ styles.color }></div> 
                         </div>
-                        { this.state.displayColorPicker ? <div style={ styles.popover }>
-                        <div style={ styles.cover } onClick={ this.handleClose }/>
-                        <SketchPicker color={ this.state.colors } onChange={ this.handleChange } />
+                        { displayColorPicker ? <div style={ styles.popover }>
+                        <div style={ styles.cover } onClick={ handleClose }/>
+                        <SketchPicker color={ colors } onChange={ handleChange } />
                         </div> : null }
-
-                                       
                                 </div>
                             </div>
 
@@ -287,8 +244,7 @@ class ChartMorris extends Component {
                                         </div>
                                         <div className="content-button">
                                         <button class="btn btn-secondary btn-lg invite-btn" type="button"><Link to="/#"></Link>  Export</button>
-                                        </div>
-                                         
+                                        </div>             
                                         </div>      
                                 </div>
                             </div>
@@ -307,18 +263,10 @@ class ChartMorris extends Component {
                                         </div>      
                                 </div>
                             </div>
-                </div>
-                    
-               
-
-               
-               
-               
+                </div> 
             </ContentWrapper>
         );
-    }
-
 }
 
-export default ChartMorris;
+export default Settings;
 

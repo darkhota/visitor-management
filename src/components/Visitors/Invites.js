@@ -1,28 +1,27 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import ContentWrapper from '../Layout/ContentWrapper';
-import { Container, Card, CardHeader, CardBody, CardTitle } from 'reactstrap';
+import { Container, Card, CardHeader, CardBody, } from 'reactstrap';
 import $ from 'jquery';
 import '../../styles/MyStyles/custom.css'
 import Datatable from '../Tables/Datatable';
-import { Row, Col, Dropdown, DropdownMenu, DropdownToggle, DropdownItem } from 'reactstrap';
+import {  Dropdown, DropdownMenu, DropdownToggle } from 'reactstrap';
 import classNames from 'classnames';
 import "flatpickr/dist/themes/light.css";
 import Flatpickr from "react-flatpickr";
 import { Link } from 'react-router-dom';
 import Avatar, { ConfigProvider } from 'react-avatar';
 
-class DropdownBox extends Component  {
+const DropdownBox = (title) =>  {
     
-    state = { ddOpen: false }
-    toggle = () => this.setState({
-            ddOpen: !this.state.ddOpen
-    })
-    render() {
-        const ddClass = classNames('animated', this.props.title);
+    const [ddOpen, setDdopen] = useState(false);
+
+  const toggle = () => setDdopen(!ddOpen);
+
+  const ddClass = classNames("animated", title);
         
         return (
             <div >
-            <Dropdown isOpen={this.state.ddOpen} toggle={this.toggle} >
+            <Dropdown isOpen={ddOpen} toggle={toggle} >
                 <DropdownToggle className="remove-border" tag="span"
     data-toggle="dropdown"
     >
@@ -35,38 +34,34 @@ class DropdownBox extends Component  {
             </Dropdown>
         </div>
         );
-    }
 }
 
-class ChartRadial extends Component {
-    state = {
-        dtOptions1: {
-            'paging': true, // Table pagination
-            'ordering': true, // Column ordering
-            'info': true, // Bottom left status text
-            responsive: true,
-            // Text translation options
-            // Note the required keywords between underscores (e.g _MENU_)
-            oLanguage: {
-                sSearch: '<em class="fa fa-search"></em>',
-                
-                info: 'Showing page _PAGE_ of _PAGES_',
-                zeroRecords: 'Nothing found - sorry',
-                infoEmpty: 'No records available',
-                infoFiltered: '(filtered from _MAX_ total records)',
-                oPaginate: {
-                    sNext: '<em class="fa fa-caret-right"></em>',
-                    sPrevious: '<em class="fa fa-caret-left"></em>'
-                }
-            }
-        },
-        date: new Date()
-        
-       
-    }
+const Invites = () =>{
+    const [dtOptions1, setDtOptions1] = useState({
+        paging: true, // Table pagination
+        ordering: true, // Column ordering
+        info: true, // Bottom left status text
+        responsive: true,
+        // Text translation options
+        // Note the required keywords between underscores (e.g _MENU_)
+        oLanguage: {
+          sSearch: '<em class="fa fa-search"></em>',
+    
+          info: "Showing page _PAGE_ of _PAGES_",
+          zeroRecords: "Nothing found - sorry",
+          infoEmpty: "No records available",
+          infoFiltered: "(filtered from _MAX_ total records)",
+          oPaginate: {
+            sNext: '<em class="fa fa-caret-right"></em>',
+            sPrevious: '<em class="fa fa-caret-left"></em>'
+          }
+        }
+      });
+    
+      const [date, setDate] = useState(new Date());
 
     // Access to internal datatable instance for customizations
-    dtInstance = dtInstance => {
+   const dtInstance = dtInstance => {
         const inputSearchClass = 'datatable_input_col_search';
         const columnInputs = $('tfoot .' + inputSearchClass);
         // On input keyup trigger filtering
@@ -76,8 +71,6 @@ class ChartRadial extends Component {
             });
     }
 
-    render() {
-        const { date } = this.state;
         const ANIMATIONS = ['fadeIn',]
         return (
             <ConfigProvider colors={['hsl(172, 33%, 45%', 'blue', 'blue']}>
@@ -96,7 +89,7 @@ class ChartRadial extends Component {
        
                                         value={date}
                                         onChange={date => {
-                                        this.setState({ date });
+                                        setDate( date );
                                         }}
                                     />
                             <select defaultValue="" className="custom-select custom-select-small" multiple="">
@@ -107,7 +100,7 @@ class ChartRadial extends Component {
                            
                         </CardHeader>
                         <CardBody>
-                            <Datatable options={this.state.dtOptions1}>
+                            <Datatable options={dtOptions1}>
                                 <table className="table table-striped my-4 w-100 smaller">
                                     <thead>
                                         <tr>
@@ -144,8 +137,6 @@ class ChartRadial extends Component {
             </ContentWrapper>
             </ConfigProvider>
             );
-    }
-
 }
 
-export default ChartRadial;
+export default Invites;

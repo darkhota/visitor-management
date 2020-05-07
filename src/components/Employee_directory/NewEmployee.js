@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import ContentWrapper from '../Layout/ContentWrapper';
 import '../../styles/MyStyles/custom.css'
 import Select from 'react-select';
 import "flatpickr/dist/themes/light.css";
-import Flatpickr from "react-flatpickr";
-import {Card,Input } from 'reactstrap';
+import {Input } from 'reactstrap';
 
     const STATES = [
         { value: 'australian-capital-territory', label: 'Employee', className: 'State-ACT' },
@@ -35,40 +34,7 @@ import {Card,Input } from 'reactstrap';
        
     }
       
-class NewInvites extends Component {
-   
-    state = {
-        dropdownOpen: false,
-        splitButtonOpen: false,
-        date: new Date(),
-    
-    }
-
-    toggleDropDown = () => {
-        this.setState({
-            dropdownOpen: !this.state.dropdownOpen
-        });
-    }
-
-    toggleSplit = () => {
-        this.setState({
-            splitButtonOpen: !this.state.splitButtonOpen
-        });
-    }
-
-    onSubmit = e => {
-        console.log('Form submitted..');
-        e.preventDefault();
-    }
-    
-
-    render() {
-        const { date } = this.state;
-        const { selectedOption } = this.state;
-        const value = selectedOption && selectedOption.value;
-        const { selectedOptionMulti } = this.state;
-        
-
+const NewInvites = () => {
         return (
             <ContentWrapper>
                <div className="form-card">
@@ -98,8 +64,8 @@ class NewInvites extends Component {
                                             styles={customStyles}
                                                 name="select-name"
                                                 placeholder="Select account type"
-                                                value={value}
-                                                onChange={this.handleChangeSelect}
+                                                
+                                               
                                                 options={STATES}
                                             
                                         />
@@ -121,8 +87,8 @@ class NewInvites extends Component {
                                             styles={customStyles}
                                                 name="select-name"
                                                 placeholder="Select company"
-                                                value={value}
-                                                onChange={this.handleChangeSelect}
+                                                
+                                             
                                                 options={COMPANIES}
                                             
                                         />
@@ -144,8 +110,8 @@ class NewInvites extends Component {
                                             styles={customStyles}
                                                 name="select-name"
                                                 placeholder="Select gender"
-                                                value={value}
-                                                onChange={this.handleChangeSelect}
+                                               
+                                               
                                                 options={GENDER}
                                             
                                         />
@@ -187,6 +153,6 @@ class NewInvites extends Component {
                 
             </ContentWrapper>
             );
-    }
+  
 }
 export default NewInvites;

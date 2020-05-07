@@ -1,47 +1,38 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import ContentWrapper from "../Layout/ContentWrapper";
 import "../../styles/MyStyles/custom.css";
-import {
-  Dropdown,
-  DropdownMenu,
-  DropdownToggle,
-  DropdownItem
-} from "reactstrap";
+import { Dropdown, DropdownMenu, DropdownToggle } from "reactstrap";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
 
-class DropdownBox extends Component {
-  state = { ddOpen: false };
-  toggle = () =>
-    this.setState({
-      ddOpen: !this.state.ddOpen
-    });
-  render() {
-    const ddClass = classNames("animated", this.props.title);
+const DropdownBox = (title) => {
+  const [ddOpen, setDdopen] = useState(false);
 
-    return (
-      <div>
-        <Dropdown isOpen={this.state.ddOpen} toggle={this.toggle}>
-          <DropdownToggle
-            className=" dropdown-devices "
-            tag="span"
-            data-toggle="dropdown"
-          >
-            <i className="fa fa-ellipsis-h"></i>
-          </DropdownToggle>
-          <DropdownMenu className="dropdown-menu">
-            <a className="dropdown-item " href="#">
-              <i class="icon-trash"></i>&nbsp;&nbsp;Remove Tablet
-            </a>
-          </DropdownMenu>
-        </Dropdown>
-      </div>
-    );
-  }
-}
+  const toggle = () => setDdopen(!ddOpen);
 
-class Devices extends Component {
-  render() {
+  const ddClass = classNames("animated", title);
+
+  return (
+    <div>
+      <Dropdown isOpen={ddOpen} toggle={toggle}>
+        <DropdownToggle
+          className=" dropdown-devices "
+          tag="span"
+          data-toggle="dropdown"
+        >
+          <i className="fa fa-ellipsis-h"></i>
+        </DropdownToggle>
+        <DropdownMenu className="dropdown-menu">
+          <a className="dropdown-item " href="#">
+            <i class="icon-trash"></i>&nbsp;&nbsp;Remove Tablet
+          </a>
+        </DropdownMenu>
+      </Dropdown>
+    </div>
+  );
+};
+
+const Devices = () => {
     const ANIMATIONS = ["fadeIn"];
     return (
       <ContentWrapper>
@@ -155,7 +146,6 @@ class Devices extends Component {
         </div>
       </ContentWrapper>
     );
-  }
 }
 
 export default Devices;
