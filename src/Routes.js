@@ -2,6 +2,8 @@ import React, { Suspense, lazy } from 'react';
 import { withRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import WorkwiseState from './context/Workwise/WorkwiseState';
+import AuthState from './context/auth/AuthState';
+
 /* loader component for Suspense*/
 import PageLoader from './components/Common/PageLoader';
 
@@ -68,18 +70,20 @@ const Routes = ({ location }) => {
     if(listofPages.indexOf(location.pathname) > -1) {
         return (
             // Page Layout component wrapper
-            <BasePage>
-                <Suspense fallback={<PageLoader/>}>
-                    <Switch location={location}>
-                    <Route path="/"  component={waitFor(Signin)}/>
-                        <Route path="/recover" component={waitFor(Recover)}/>
-                        <Route path="/lock" component={waitFor(Lock)}/>
-                        <Route path="/notfound" component={waitFor(NotFound)}/>
-                        <Route path="/error500" component={waitFor(Error500)}/>
-                        <Route path="/maintenance" component={waitFor(Maintenance)}/>
-                    </Switch>
-                </Suspense>
-            </BasePage>
+            <AuthState>
+                <BasePage>
+                    <Suspense fallback={<PageLoader/>}>
+                        <Switch location={location}>
+                        <Route path="/"  component={waitFor(Signin)}/>
+                            <Route path="/recover" component={waitFor(Recover)}/>
+                            <Route path="/lock" component={waitFor(Lock)}/>
+                            <Route path="/notfound" component={waitFor(NotFound)}/>
+                            <Route path="/error500" component={waitFor(Error500)}/>
+                            <Route path="/maintenance" component={waitFor(Maintenance)}/>
+                        </Switch>
+                    </Suspense>
+                </BasePage>
+            </AuthState>
         )
     }
     else {

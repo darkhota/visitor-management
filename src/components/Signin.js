@@ -1,4 +1,6 @@
-import React, { Component } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import AuthContext from '../context/auth/authContext';
+
 import "../styles/MyStyles/Login.css";
 import workwise from "../fonts/workwise.ttf";
 import { Link } from "react-router-dom";
@@ -16,7 +18,39 @@ const Workwise = {
     "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF"
 };
 
-const Signin = () => {
+const Signin = (props) => {
+  const authContext = useContext(AuthContext);
+  const { login, error, isAuthenticated } = authContext;
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      props.history.push('/home');
+    }
+    // eslint-disable-next-line
+  }, [props.history]);
+
+  const [user, setUser] = useState({
+    email: '',
+    password: ''
+  });
+
+  const { email, password } = user;
+
+  const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
+
+  const onSubmit = e => {
+    e.preventDefault();
+    if (email === '' || password === '') {
+      alert('Please fill in all fields')
+      // setAlert('Please fill in all fields', 'danger');
+    } else {
+      login({
+        email,
+        password
+      });
+    }
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -27,14 +61,27 @@ const Signin = () => {
             <form>
               <div className="form-elements">
                 <div className="form-group field">
-                  <input type="text" className="form-field" />
+                  <input className="form-field" id='email'
+                    type='email'
+                    name='email'
+                    value={email}
+                    onChange={onChange}
+                    required
+                    />
                   <label for="name" className="form-label">
                     Email
                   </label>
-                </div>{" "}
+                </div>
                 <br></br>
                 <div className="form-group field">
-                  <input type="text" className="form-field" />
+                  <input className="form-field" 
+                  id='password'
+                  type='password'
+                  name='password'
+                  value={password}
+                  onChange={onChange}
+                  required
+                  />
                   <label for="name" className="form-label">
                     Password
                   </label>
@@ -58,8 +105,8 @@ const Signin = () => {
                   </a>
                 </div>
               </div>
-              <a href="/home">
-                <button type="button" className="form-submit">
+              <a href="#" onClick={onSubmit}>
+                <button type="submit" className="form-submit">
                   <i className="fa fa-lock"></i>
                   &nbsp; &nbsp; Login{" "}
                 </button>
