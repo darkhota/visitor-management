@@ -2,6 +2,7 @@ import React, { useReducer } from 'react';
 import axios from 'axios';
 import AuthContext from './authContext';
 import authReducer from './authReducer';
+import { useToasts } from 'react-toast-notifications';
 
 import {
     USER_LOADED,
@@ -13,7 +14,10 @@ import {
 
 const base_url = "http://localhost:8090";
 const token    = "a56d34d777288aa5e18adfb06d2806e88283ec6e";
+
 const AuthState = props => {
+    const { addToast } = useToasts();
+
     const initialState = {
       token: localStorage.getItem('token'),
       isAuthenticated: null,
@@ -41,10 +45,10 @@ const AuthState = props => {
 
     // Login User
     const login = async formData => {
+      
       console.log(formData);
         const config = {
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
                 'Authorization': `Bearer ${token}`
             }
         };
@@ -53,13 +57,20 @@ const AuthState = props => {
         data.append('email', formData.email);
         data.append('password', formData.password);
         try {
-        // const res = await axios.post(`/api/user/login`, formData, config);
+        
         await axios.post('api/user/login', data, config).then((res) => {
           console.log(res);
+          addToast("Login success, user found", {
+            appearance: 'success',
+            autoDismiss: true,
+          });
         }).catch((err) => {
-          console.log('Invalid Info')
+          addToast("Login failed, user not found", {
+            appearance: 'error',
+            autoDismiss: true,
+          });
         });
-        
+
         // dispatch({
         //     type: LOGIN_SUCCESS,
         //     payload: res.data
