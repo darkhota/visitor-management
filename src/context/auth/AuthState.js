@@ -41,17 +41,25 @@ const AuthState = props => {
 
     // Login User
     const login = async formData => {
+      console.log(formData);
         const config = {
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded',
                 'Authorization': `Bearer ${token}`
             }
         };
 
+        var data = new FormData(); 
+        data.append('email', formData.email);
+        data.append('password', formData.password);
         try {
         // const res = await axios.post(`/api/user/login`, formData, config);
-        const res =  axios.get('api/user/auth', config);
-        console.log(res);
+        await axios.post('api/user/login', data, config).then((res) => {
+          console.log(res);
+        }).catch((err) => {
+          console.log('Invalid Info')
+        });
+        
         // dispatch({
         //     type: LOGIN_SUCCESS,
         //     payload: res.data
