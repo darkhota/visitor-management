@@ -50,8 +50,10 @@ const AuthState = props => {
 
         try {
         // const res = await axios.post(`/api/user/login`, formData, config);
-        const res =  axios.get('api/user/auth', config);
-        console.log(res);
+        axios.get('api/user/auth', config).then((res) => {
+          console.log(res);
+        });
+        
         // dispatch({
         //     type: LOGIN_SUCCESS,
         //     payload: res.data
