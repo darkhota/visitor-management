@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
 import AuthContext from '../context/auth/authContext';
-
 import "../styles/MyStyles/Login.css";
 import workwise from "../fonts/workwise.ttf";
 import { Link } from "react-router-dom";

@@ -108,6 +108,7 @@
     "react-router-dom": "4.3.1",
     "react-scripts": "2.1.1",
     "react-select": "2.1.1",
+    "react-toast-notifications": "^2.4.0",
     "react-toastify": "4.4.3",
     "react-transition-group": "2.5.0",
     "reactstrap": "6.5.0",
