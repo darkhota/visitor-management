@@ -89,11 +89,12 @@ const Routes = ({ location }) => {
     else {
         return (
             <WorkwiseState>
+             <AuthState>
             
             <Base>
               <TransitionGroup>
                 <CSSTransition key={currentKey} timeout={timeout} classNames={animationName} exit={false}>
-                    <div>
+                    
                         <Suspense fallback={<PageLoader/>}>
                             <Switch location={location}>
                                 
@@ -130,10 +131,11 @@ const Routes = ({ location }) => {
                                 <Redirect to="/home"/>
                             </Switch>
                         </Suspense>
-                    </div>
+                   
                 </CSSTransition>
               </TransitionGroup>
             </Base>
+            </AuthState>
             </WorkwiseState>
         )
     }
