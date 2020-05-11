@@ -60,10 +60,18 @@ const AuthState = props => {
         
         await axios.post('api/user/login', data, config).then((res) => {
           console.log(res);
-          addToast("Login success, user found", {
-            appearance: 'success',
-            autoDismiss: true,
-          });
+          if (res.data.status === 200) {
+            addToast(res.data.message, {
+              appearance: 'success',
+              autoDismiss: true,
+            });
+          } else {
+            addToast(res.data.message, {
+              appearance: 'error',
+              autoDismiss: true,
+            });
+          }
+          
         }).catch((err) => {
           addToast("Login failed, user not found", {
             appearance: 'error',
