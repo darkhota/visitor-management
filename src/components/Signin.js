@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import AuthContext from '../context/auth/authContext';
 import "../styles/MyStyles/Login.css";
 import workwise from "../fonts/workwise.ttf";
+import { useToasts } from 'react-toast-notifications';
 import { Link } from "react-router-dom";
 const Workwise = {
   fontFamily: "workwise",
@@ -19,6 +20,7 @@ const Workwise = {
 
 const Signin = (props) => {
   const authContext = useContext(AuthContext);
+  const { addToast } = useToasts();
   const { login, error, isAuthenticated } = authContext;
 
   useEffect(() => {
@@ -40,7 +42,10 @@ const Signin = (props) => {
   const onSubmit = e => {
     e.preventDefault();
     if (email === '' || password === '') {
-      alert('Please fill in all fields')
+      addToast('Please fill in all fields', {
+        appearance: 'warning',
+        autoDismiss: true,
+      });
       // setAlert('Please fill in all fields', 'danger');
     } else {
       login({
