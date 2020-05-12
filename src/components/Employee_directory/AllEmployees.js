@@ -19,8 +19,6 @@ const DropdownBox = ({ title }) => {
 
   const toggle = () => setDdopen(!ddOpen);
 
-  const ddClass = classNames("animated", title);
-
   return (
     <div>
       <Dropdown isOpen={ddOpen} toggle={toggle}>

@@ -67,7 +67,7 @@ const Signin = (props) => {
                     onChange={onChange}
                     required
                     />
-                  <label for="name" className="form-label">
+                  <label htmlFor="name" className="form-label">
                     Email
                   </label>
                 </div>

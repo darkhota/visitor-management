@@ -88,7 +88,8 @@ const Menu = [
         name: 'Work Requests',
         icon: 'icon-wrench',
         translate: 'sidebar.nav.form.FORM',
-        path: '/form-cropper',
+        path: '/view-requests',
+        
        
     },
     {

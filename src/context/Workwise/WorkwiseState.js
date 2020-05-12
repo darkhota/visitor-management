@@ -12,7 +12,7 @@ import {
 
 const WorkwiseState = props => {
     const initialState = {
-     checked: false,
+     //checked: false,
      ddOpen: false,
      displayColorPicker: false,
      color: {r: '0',g: '145',b: '74',a: '1'}
@@ -21,7 +21,7 @@ const WorkwiseState = props => {
     const [state, dispatch] = useReducer(WorkwiseReducer, initialState);
 
     //set checked
-    const handleChange = () => {
+    const handleCheck = () => {
         dispatch({ type: SET_CHECKED});
       };
 
@@ -62,16 +62,17 @@ const WorkwiseState = props => {
     return (
         <WorkwiseContext.Provider
           value={{
-           checked: state.checked,
+          // checked: state.checked,
            ddOpen: state.ddOpen,
            displayColorPicker: state.displayColorPicker,
            color: state.color,
            handleClick,
            handleClose,
-           handleChange,
+           handleCheck,
            toggle,
            changeColor,
-           convertToHex
+           convertToHex,
+         
           }}
         >
           {props.children}

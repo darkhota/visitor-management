@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ContentWrapper from "../Layout/ContentWrapper";
 import "../../styles/MyStyles/custom.css";
 import Select from "react-select";
@@ -14,9 +14,7 @@ const STATES = [
   { value: "new-south-wales", label: "Kamsi Kodi", className: "State-NSW" },
   { value: "victoria", label: "Tioluwani Joseph", className: "State-Vic" }
 ];
-function styleFn(provided, state) {
-  return { ...provided, color: state.isFocused ? "#00914b" : "" };
-}
+
 const customStyles = {
   option: (provided, state) => ({
     ...provided,

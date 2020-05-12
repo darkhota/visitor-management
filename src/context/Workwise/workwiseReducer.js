@@ -2,12 +2,7 @@ import { SET_CHECKED, TOGGLE_MENU, DISPLAY_COLOR_PICKER, CLOSE_COLOR_PICKER, CHA
 
 export default (state, action) => {
   switch (action.type) {
-     
-      case CHANGE_COLOR:
-          return{
-              ...state,
-              color: state.color.rgb
-          }
+    
       case DISPLAY_COLOR_PICKER:
           return{
               ...state,
@@ -23,11 +18,12 @@ export default (state, action) => {
         ...state,
         ddOpen: !state.ddOpen
       };
-    case SET_CHECKED:
+    /*case SET_CHECKED:
       return {
         ...state,
         checked: !state.checked
       };
+      */
     default:
       return state;
   }

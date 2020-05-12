@@ -1,7 +1,6 @@
-import React, { Component, useState } from "react";
+import React, {  useState } from "react";
 import ContentWrapper from "../Layout/ContentWrapper";
-import { Container, Card, CardHeader, CardBody, CardTitle } from "reactstrap";
-import $ from "jquery";
+import { Container, Card, CardHeader, CardBody, } from "reactstrap";
 import "../../styles/MyStyles/custom.css";
 import Datatable from "../Tables/Datatable";
 import { Dropdown, DropdownMenu, DropdownToggle } from "reactstrap";
@@ -14,8 +13,6 @@ const DropdownBox = title => {
   const [ddOpen, setDdopen] = useState(false);
 
   const toggle = () => setDdopen(!ddOpen);
-
-  const ddClass = classNames("animated", title);
 
   return (
     <div>

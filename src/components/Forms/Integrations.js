@@ -1,6 +1,6 @@
 import React from "react";
 import ContentWrapper from "../Layout/ContentWrapper";
-import { Container, Col, Card, CardHeader, CardBody } from "reactstrap";
+import { Container, Card, CardHeader, CardBody } from "reactstrap";
 import "../../styles/MyStyles/custom.css";
 
 const Integrations = () => {

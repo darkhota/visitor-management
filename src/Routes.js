@@ -25,7 +25,8 @@ const AllEmployees = lazy(() => import('./components/Employee_directory/AllEmplo
 const NewEmployee = lazy(() => import('./components/Employee_directory/NewEmployee'));
 const MyRooms = lazy(() => import('./components/Rooms/MyRooms'));
 const VisitorsLog = lazy(() => import('./components/Visitors/VisitorsLog'));
-
+const ViewRequests = lazy (() => import('./components/Work_requests/ViewRequests'));
+const NewRequest = lazy (() => import('./components/Work_requests/NewRequest'));
 const NewInvites = lazy(() => import('./components/Visitors/NewInvites'));
 const NewTablet = lazy(() => import('./components/Visitors/NewTablet'));
 const Billing = lazy(() => import('./components/Forms/Billing'));
@@ -115,6 +116,9 @@ const Routes = ({ location }) => {
                                 <Route path="/invites" component={waitFor(Invites)}/>
                                 <Route path="/devices" component={waitFor(Devices)}/>
                                 <Route path="/settings" component={waitFor(Settings)}/>
+
+                                <Route path="/view-requests" component={waitFor(ViewRequests)}/>
+                                <Route path="/New-request" component={waitFor(NewRequest)}/>
 
                                 {/*Table*/}
                                 <Route path="/my-rooms" component={waitFor(MyRooms)}/>

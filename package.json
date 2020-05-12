@@ -5,7 +5,7 @@
   "author": "@themicon_co",
   "license": "https://wrapbootstrap.com/help/licenses",
   "private": true,
-  "proxy": "http://[::1]:8090/",
+  "proxy": "http://127.0.0.1:8090/",
   "secure": false,
   "homepage": ".",
   "scripts": {

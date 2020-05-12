@@ -6,8 +6,13 @@ import { Input } from "reactstrap";
 import WorkwiseContext from "../../context/Workwise/workwiseContext";
 const Profile = () => {
   const workwiseContext = useContext(WorkwiseContext);
-  const { handleChange, checked} = workwiseContext;
-  
+ 
+  const [checked, setChecked] = useState(false);
+  const handleChange = () => {
+    setChecked(
+     (!checked)
+    )
+  }
   const content = checked ? (
     <div className="hidden-form">
       {" "}
@@ -84,7 +89,7 @@ const Profile = () => {
                 type="checkbox"
                 value=""
                 checked={checked}
-                onChange={handleChange}
+                onClick={handleChange}
               />
               <span className="fa fa-check"></span> Change Password{" "}
             </label>

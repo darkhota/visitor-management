@@ -2,15 +2,12 @@ import React, { useState } from "react";
 import ContentWrapper from "../Layout/ContentWrapper";
 import "../../styles/MyStyles/custom.css";
 import { Dropdown, DropdownMenu, DropdownToggle } from "reactstrap";
-import classNames from "classnames";
 import { Link } from "react-router-dom";
 
 const DropdownBox = (title) => {
   const [ddOpen, setDdopen] = useState(false);
 
   const toggle = () => setDdopen(!ddOpen);
-
-  const ddClass = classNames("animated", title);
 
   return (
     <div>

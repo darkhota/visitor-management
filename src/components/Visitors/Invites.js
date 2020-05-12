@@ -5,7 +5,6 @@ import $ from 'jquery';
 import '../../styles/MyStyles/custom.css'
 import Datatable from '../Tables/Datatable';
 import {  Dropdown, DropdownMenu, DropdownToggle } from 'reactstrap';
-import classNames from 'classnames';
 import "flatpickr/dist/themes/light.css";
 import Flatpickr from "react-flatpickr";
 import { Link } from 'react-router-dom';
@@ -16,8 +15,6 @@ const DropdownBox = (title) =>  {
     const [ddOpen, setDdopen] = useState(false);
 
   const toggle = () => setDdopen(!ddOpen);
-
-  const ddClass = classNames("animated", title);
         
         return (
             <div >
