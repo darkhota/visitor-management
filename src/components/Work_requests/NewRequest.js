@@ -3,35 +3,61 @@ import ContentWrapper from "../Layout/ContentWrapper";
 import "../../styles/MyStyles/custom.css";
 import Select from "react-select";
 import "flatpickr/dist/themes/light.css";
-import { Card} from "reactstrap";
+import { Card, Input } from "reactstrap";
 import { Link } from "react-router-dom";
 
 const STATES = [
-  {
-    value: "australian-capital-territory",
-    label: "Room A",
-    className: "State-ACT"
-  },
-  {
-    value: "new-south-wales",
-    label: "Room B",
-    className: "State-NSW"
-  },
-  { value: "victoria", label: "Room C", className: "State-Vic" }
+  { value: "room-a", label: "Room A", className: "State-ACT" },
+  { value: "room-b", label: "Room B", className: "State-NSW" },
+  { value: "room-c", label: "Room C", className: "State-Vic" }
 ];
 
 const CATEGORIES = [
+  { value: "software", label: "IT Software", className: "State-ACT" },
+  { value: "hardware", label: "IT Hardware", className: "State-NSW" },
+  { value: "facilities", label: "Facilities", className: "State-Vic" }
+];
+
+const DEVICES = [
+  { value: "projector", label: "Projector", className: "State-ACT" },
+  { value: "smart-board", label: "Smart board", className: "State-NSW" },
+  { value: "ipad", label: "Ipad", className: "State-Vic" },
+  { value: "camera", label: "Camera", className: "State-Vic" },
+  { value: "monitor", label: "Monitor", className: "State-Vic" },
+  { value: "internet", label: "Internet", className: "State-Vic" }
+];
+
+const FACILITIES = [
+  { value: "furniture", label: "Furniture", className: "State-ACT" },
+  { value: "electrical", label: "Electrical", className: "State-NSW" }
+];
+const BRANDS = [
+  { value: "Sony", label: "Sony", className: "State-ACT" },
+  { value: "Dell", label: "Dell", className: "State-NSW" },
+  { value: "Fijitsu", label: "Fijitsu", className: "State-NSW" }
+];
+const TAGS = [
+  { value: "08698tjr9u", label: "08698tjr9u", className: "State-ACT" },
+  { value: "948875y8y4y", label: "948875y8y4y", className: "State-NSW" }
+];
+const FURNITURES = [
+  { value: "Chair", label: "Chair", className: "State-ACT" },
+  { value: "Table", label: "Table", className: "State-NSW" }
+];
+const FUBRANDS = [
+  { value: "HermanMiller", label: "Herman Miller", className: "State-ACT" }
+];
+const ELECTRONICS = [
   {
-    value: "australian-capital-territory",
-    label: "Category A",
+    value: "air-conditioner",
+    label: "Air conditioner",
     className: "State-ACT"
   },
-  {
-    value: "new-south-wales",
-    label: "Category B",
-    className: "State-NSW"
-  },
-  { value: "victoria", label: "Category C", className: "State-Vic" }
+  { value: "light-bulb", label: "Light bulb", className: "State-NSW" }
+];
+const ELEBRANDS = [
+  { value: "panasonic", label: "Panasonic", className: "State-ACT" },
+  { value: "lg", label: "LG", className: "State-NSW" }
 ];
 
 const customStyles = {
@@ -44,9 +70,367 @@ const customStyles = {
 };
 
 const NewRequest = () => {
-  const [date, setDate] = useState(new Date());
   const [imgPrevUrl, setImgPrevUrl] = useState("");
   const [file, setFile] = useState("");
+  const [selectedValue, setSelectedValue] = useState("");
+
+  const handleChange = option => {
+    setSelectedValue(option.value);
+  };
+
+  const renderSelectedForm = param => {
+    switch (param) {
+      case "software":
+        return (
+          <div>
+            <div className="input-field">
+              <p>
+                <small>
+                  <b>Software description</b>
+                </small>
+              </p>
+              <Input
+                id="input-id-1"
+                type="text"
+                placeholder="Enter description"
+              />
+            </div>
+            <div className="input-field">
+              <p>
+                <small>
+                  <b>Device</b>
+                </small>
+              </p>
+              <Select
+                className="sectionTest"
+                theme={theme => ({
+                  ...theme,
+                  borderRadius: 5,
+                  colors: {
+                    ...theme.colors,
+
+                    primary: "#00914b"
+                  }
+                })}
+                styles={customStyles}
+                name="select-name"
+                placeholder="Select Device"
+                options={DEVICES}
+              />
+            </div>
+            <div className="input-field">
+              <p>
+                <small>
+                  <b> Brand </b>
+                </small>
+              </p>
+
+              <Select
+                className="sectionTest"
+                theme={theme => ({
+                  ...theme,
+                  borderRadius: 5,
+                  colors: {
+                    ...theme.colors,
+
+                    primary: "#00914b"
+                  }
+                })}
+                styles={customStyles}
+                name="select-name"
+                placeholder="Select Brand"
+                options={BRANDS}
+              />
+            </div>
+            <div className="input-field">
+              <p>
+                <small>
+                  <b>Asset tag number</b>
+                </small>
+              </p>
+
+              <Select
+                className="sectionTest"
+                theme={theme => ({
+                  ...theme,
+                  borderRadius: 5,
+                  colors: {
+                    ...theme.colors,
+
+                    primary: "#00914b"
+                  }
+                })}
+                styles={customStyles}
+                name="select-name"
+                placeholder="Select tag"
+                options={TAGS}
+              />
+            </div>
+          </div>
+        );
+      case "hardware":
+        return (
+          <div>
+            <div className="input-field">
+              <p>
+                <small>
+                  <b>Device</b>
+                </small>
+              </p>
+              <Select
+                className="sectionTest"
+                theme={theme => ({
+                  ...theme,
+                  borderRadius: 5,
+                  colors: {
+                    ...theme.colors,
+
+                    primary: "#00914b"
+                  }
+                })}
+                styles={customStyles}
+                name="select-name"
+                placeholder="Select Device"
+                options={DEVICES}
+              />
+            </div>
+            <div className="input-field">
+              <p>
+                <small>
+                  <b>Brand</b>
+                </small>
+              </p>
+
+              <Select
+                className="sectionTest"
+                theme={theme => ({
+                  ...theme,
+                  borderRadius: 5,
+                  colors: {
+                    ...theme.colors,
+
+                    primary: "#00914b"
+                  }
+                })}
+                styles={customStyles}
+                name="select-name"
+                placeholder="Select brand"
+                options={BRANDS}
+              />
+            </div>
+            <div className="input-field">
+              <p>
+                <small>
+                  <b>Asset tag number</b>
+                </small>
+              </p>
+
+              <Select
+                className="sectionTest"
+                theme={theme => ({
+                  ...theme,
+                  borderRadius: 5,
+                  colors: {
+                    ...theme.colors,
+
+                    primary: "#00914b"
+                  }
+                })}
+                styles={customStyles}
+                name="select-name"
+                placeholder="Select tag"
+                options={TAGS}
+              />
+            </div>
+          </div>
+        );
+      case "facilities":
+        return (
+          <div className="input-field">
+            <p>
+              <small>
+                <b>Facility type</b>
+              </small>
+            </p>
+            <Select
+              onChange={handleChange}
+              className="sectionTest"
+              theme={theme => ({
+                ...theme,
+                borderRadius: 5,
+                colors: {
+                  ...theme.colors,
+
+                  primary: "#00914b"
+                }
+              })}
+              styles={customStyles}
+              name="select-name"
+              placeholder="Select type"
+              options={FACILITIES}
+            />
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+  const renderSelectedFacility = param => {
+    switch (param) {
+      case "furniture":
+        return (
+          <div>
+            <div className="input-field">
+              <p>
+                <small>
+                  <b>Select Furniture</b>
+                </small>
+              </p>
+              <Select
+                className="sectionTest"
+                theme={theme => ({
+                  ...theme,
+                  borderRadius: 5,
+                  colors: {
+                    ...theme.colors,
+
+                    primary: "#00914b"
+                  }
+                })}
+                styles={customStyles}
+                name="select-name"
+                placeholder="Select Furniture"
+                options={FURNITURES}
+              />
+            </div>
+            <div className="input-field">
+              <p>
+                <small>
+                  <b> Brand </b>
+                </small>
+              </p>
+              <Select
+                className="sectionTest"
+                theme={theme => ({
+                  ...theme,
+                  borderRadius: 5,
+                  colors: {
+                    ...theme.colors,
+
+                    primary: "#00914b"
+                  }
+                })}
+                styles={customStyles}
+                name="select-name"
+                placeholder="Select Brand"
+                options={FUBRANDS}
+              />
+            </div>
+            <div className="input-field">
+              <p>
+                {" "}
+                <small>
+                  <b>Asset tag number</b>
+                </small>{" "}
+              </p>
+              <Select
+                className="sectionTest"
+                theme={theme => ({
+                  ...theme,
+                  borderRadius: 5,
+                  colors: {
+                    ...theme.colors,
+
+                    primary: "#00914b"
+                  }
+                })}
+                styles={customStyles}
+                name="select-name"
+                placeholder="Select tag"
+                options={TAGS}
+              />
+            </div>
+          </div>
+        );
+      case "electrical":
+        return (
+          <div>
+            <div className="input-field">
+              <p>
+                <small>
+                  <b>Electrical device</b>
+                </small>
+              </p>
+              <Select
+                className="sectionTest"
+                theme={theme => ({
+                  ...theme,
+                  borderRadius: 5,
+                  colors: {
+                    ...theme.colors,
+
+                    primary: "#00914b"
+                  }
+                })}
+                styles={customStyles}
+                name="select-name"
+                placeholder="Select electronic device"
+                options={ELECTRONICS}
+              />
+            </div>
+            <div className="input-field">
+              <p>
+                <small>
+                  <b>Brand</b>
+                </small>
+              </p>
+              <Select
+                className="sectionTest"
+                theme={theme => ({
+                  ...theme,
+                  borderRadius: 5,
+                  colors: {
+                    ...theme.colors,
+
+                    primary: "#00914b"
+                  }
+                })}
+                styles={customStyles}
+                name="select-name"
+                placeholder="Select Brand"
+                options={ELEBRANDS}
+              />
+            </div>
+            <div className="input-field">
+              <p>
+                <small>
+                  <b>Asset tag number</b>
+                </small>
+              </p>
+              <Select
+                className="sectionTest"
+                theme={theme => ({
+                  ...theme,
+                  borderRadius: 5,
+                  colors: {
+                    ...theme.colors,
+
+                    primary: "#00914b"
+                  }
+                })}
+                styles={customStyles}
+                name="select-name"
+                placeholder="Select tag"
+                options={TAGS}
+              />
+            </div>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
   const onSubmit = e => {
     console.log("Form submitted..");
     e.preventDefault();
@@ -131,6 +515,7 @@ const NewRequest = () => {
               </small>
             </p>
             <Select
+              onChange={handleChange}
               className="sectionTest"
               theme={theme => ({
                 ...theme,
@@ -147,6 +532,8 @@ const NewRequest = () => {
               options={CATEGORIES}
             />
           </div>
+          {renderSelectedForm(selectedValue)}
+          {renderSelectedFacility(selectedValue)}
           <div className="input-field">
             <p>
               <small>

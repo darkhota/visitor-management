@@ -3,6 +3,7 @@ import { withRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import WorkwiseState from './context/Workwise/WorkwiseState';
 import AuthState from './context/auth/AuthState';
+import SimpleReactLightbox from "simple-react-lightbox";
 
 /* loader component for Suspense*/
 import PageLoader from './components/Common/PageLoader';
@@ -27,6 +28,9 @@ const MyRooms = lazy(() => import('./components/Rooms/MyRooms'));
 const VisitorsLog = lazy(() => import('./components/Visitors/VisitorsLog'));
 const ViewRequests = lazy (() => import('./components/Work_requests/ViewRequests'));
 const NewRequest = lazy (() => import('./components/Work_requests/NewRequest'));
+const ViewMore = lazy (() => import('./components/Work_requests/ViewMore'));
+const CreateAsset = lazy (() => import('./components/Work_requests/CreateAsset'));
+const ViewAssets = lazy (() => import('./components/Work_requests/ViewAssets'));
 const NewInvites = lazy(() => import('./components/Visitors/NewInvites'));
 const NewTablet = lazy(() => import('./components/Visitors/NewTablet'));
 const Billing = lazy(() => import('./components/Forms/Billing'));
@@ -89,6 +93,7 @@ const Routes = ({ location }) => {
     }
     else {
         return (
+            
             <WorkwiseState>
              <AuthState>
             
@@ -119,7 +124,12 @@ const Routes = ({ location }) => {
 
                                 <Route path="/view-requests" component={waitFor(ViewRequests)}/>
                                 <Route path="/New-request" component={waitFor(NewRequest)}/>
-
+                                
+                                <Route path="/view-more" component={waitFor(ViewMore)}/>
+                                {/*Table*/}
+                                <Route path="/create-asset" component={waitFor(CreateAsset)}/>
+                                {/*Table*/}
+                                <Route path="/view-assets" component={waitFor(ViewAssets)}/>
                                 {/*Table*/}
                                 <Route path="/my-rooms" component={waitFor(MyRooms)}/>
                                

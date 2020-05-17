@@ -26,14 +26,8 @@ const DropdownBox = title => {
           <i className="fa fa-ellipsis-h"></i>
         </DropdownToggle>
         <DropdownMenu className="dropdown-menu">
-          <a className="dropdown-item" href="#">
-            <i className="icon-ban"></i>&nbsp;&nbsp;Change status
-          </a>
-          <Link to ="/view-more" className="dropdown-item" href="#">
-            <i className="icon-info"></i>&nbsp;&nbsp;View more
-          </Link>
           <Link  to = "#" className="dropdown-item" >
-            <i className="icon-trash"></i>&nbsp;&nbsp;Delete request
+            <i className="icon-trash"></i>&nbsp;&nbsp;Delete asset
           </Link>
         </DropdownMenu>
       </Dropdown>
@@ -41,7 +35,7 @@ const DropdownBox = title => {
   );
 };
 
-const ViewRequests = () => {
+const ViewAssets = () => {
   const [dtOptions1, setDtOptions1] = useState({
     paging: true, // Table pagination
     ordering: true, // Column ordering
@@ -87,35 +81,24 @@ const ViewRequests = () => {
         <Container fluid>
           {/* DATATABLE DEMO 1 */}
           <Card>
-            <CardHeader className="table-card-header">
-              <h1>1 request</h1>
-              <Flatpickr
-                className="custom-select"
-                options={{
-                  altInput: true,
-                  altFormat: "F j, Y",
-                  dateFormat: "Y-m-d"
-                }}
-                value={date}
-                onChange={date => {
-                  setDate(date);
-                }}
-              />
+            <CardHeader className="table-card-header grid-3">
+              <h1>1 Asset</h1>
               <select
                 defaultValue=""
                 className="custom-select custom-select-small"
                 multiple=""
               >
-                <option value="1">All Requests</option>
-                <option value="2">My Requests</option>
+                <option value="1">All Assets</option>
+                <option value="2">Hardware</option>
+                <option value="2">Facility</option>
               </select>
-              <Link to="/new-request">
+              <Link to="/create-asset">
                 {" "}
                 <button
                   href="#"
                   className="btn btn-secondary btn-lg invite-btn"
                 >
-                  New request{" "}
+                  New asset{" "}
                 </button>
               </Link>
             </CardHeader>
@@ -125,30 +108,64 @@ const ViewRequests = () => {
                   <thead>
                     <tr>
                       <th></th>
-                      <th data-priority="2">Description</th>
-                      <th>Room</th>
-                      <th className="sort-numeric no-display">Submitted By</th>
-                      <th className="sort-alpha no-display">Assigned to</th>
-                      <th>Status</th>
-                      <th className="no-display">Time</th>
+                      <th data-priority="2">Asset Name</th>
+                      <th>Brand</th>
+                      <th className="sort-numeric no-display">Rooms assigned to</th>
+                      <th className="sort-alpha no-display">Category</th>
+                      <th>Asset tag</th>
                       <th className="no-display"></th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr className="gradeX">
                       <td></td>
-                      <td>Bad Projector</td>
-                      <td>Conference Room</td>
-                      <td className="no-display">Niyi Adisa</td>
+                      <td>Projector</td>
+                      <td>Sony</td>
+                      <td className="no-display">Room A, Room B, Room C</td>
                       <td className="no-display">
-                        Tioluwani Joseph
+                       IT Hardware
                       </td>
                       <td>
-                      <button href="#" className=" table-round-btn">
-                          Active{" "}
-                        </button>
+                     3766536f626r
                       </td>
-                      <td className="no-display">10:00 am</td>
+                      <td className="no-display">
+                        {ANIMATIONS.map((title, i) => (
+                          <DropdownBox title={title} key={i} />
+                        ))}
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr className="gradeX">
+                      <td></td>
+                      <td>Projector</td>
+                      <td>Dell</td>
+                      <td className="no-display">Room A</td>
+                      <td className="no-display">
+                       IT Hardware
+                      </td>
+                      <td>
+                     37665rfrf626r
+                      </td>
+                      <td className="no-display">
+                        {ANIMATIONS.map((title, i) => (
+                          <DropdownBox title={title} key={i} />
+                        ))}
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    <tr className="gradeX">
+                      <td></td>
+                      <td>Chair</td>
+                      <td>Herman Miller</td>
+                      <td className="no-display">Room A, Room B</td>
+                      <td className="no-display">
+                       Facility-Furniture
+                      </td>
+                      <td>
+                     3766ddffdfdf
+                      </td>
                       <td className="no-display">
                         {ANIMATIONS.map((title, i) => (
                           <DropdownBox title={title} key={i} />
@@ -158,6 +175,8 @@ const ViewRequests = () => {
                   </tbody>
                 </table>
               </Datatable>
+
+              
             </CardBody>
           </Card>
         </Container>
@@ -165,4 +184,4 @@ const ViewRequests = () => {
   );
 };
 
-export default ViewRequests;
+export default ViewAssets;

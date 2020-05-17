@@ -288,6 +288,10 @@ ol >:nth-child(2):before{
     grid-column-gap: 10px;
     padding-right:1rem;
 }
+.grid-3{
+    display:grid;
+    grid-template-columns: 5fr 1fr 1fr;
+}
 .employee-header{
     display:grid;
     grid-template-columns: repeat(2, 1fr);
@@ -566,6 +570,9 @@ small, .small {
     margin: 0;
     font-family: inherit;
     transition: all .5s;
+}
+.delete-btn{
+    background: red;
 }
 .black-link{
     color: #333;
@@ -943,6 +950,11 @@ small, .small {
       border: none;
       color: #fff;
   }
+
+  .green{
+    background-color: #00914a;
+  }
+  
 
   .table-dark-btn{
     background-color: #3a3f51;

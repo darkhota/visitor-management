@@ -11,7 +11,7 @@
 
 import React, { Component } from "react";
 import { BrowserRouter } from "react-router-dom";
-
+import SimpleReactLightbox from "simple-react-lightbox";
 // App Routes
 import Routes from "./Routes";
 
@@ -31,9 +31,15 @@ class App extends Component {
       process.env.NODE_ENV === "development" ? "/" : PUBLIC_URL || "/";
 
     return (
+      <div>
+        
       <BrowserRouter basename={basename}>
+       
         <Routes />
+       
+        
       </BrowserRouter>
+      </div>
     );
   }
 }

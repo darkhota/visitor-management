@@ -4,6 +4,7 @@ import "../../styles/MyStyles/custom.css";
 import Select from "react-select";
 import "flatpickr/dist/themes/light.css";
 import { Card, Input } from "reactstrap";
+import { Creatable } from "react-select";
 
 const STATES = [
   {

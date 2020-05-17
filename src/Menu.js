@@ -88,7 +88,19 @@ const Menu = [
         name: 'Work Requests',
         icon: 'icon-wrench',
         translate: 'sidebar.nav.form.FORM',
-        path: '/view-requests',
+        submenu: [{
+            name: 'View requests',
+            path: '/view-requests',
+            translate: 'sidebar.nav.table.STANDARD',
+           
+        },
+        {
+            name: 'Assets',
+            path: '/view-assets',
+            translate: 'sidebar.nav.table.STANDARD',
+           
+        },
+    ]
         
        
     },
