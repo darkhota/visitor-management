@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ContentWrapper from "../Layout/ContentWrapper";
 import "../../styles/MyStyles/custom.css";
 import Select from "react-select";
 import "flatpickr/dist/themes/light.css";
 import { Card, Input } from "reactstrap";
 import { Link } from "react-router-dom";
+import RequestContext from "../../context/workRequests/requestContext";
 
 const STATES = [
   { value: "room-a", label: "Room A", className: "State-ACT" },
@@ -70,6 +71,34 @@ const customStyles = {
 };
 
 const NewRequest = () => {
+  const requestContext = useContext(RequestContext);
+  const { newRequest } = requestContext;
+  const [request, setRequest] = useState({
+    description: "",
+    room: "",
+    submittedBy: "Niyi Adisa",
+    assignedTo: "",
+    status: "",
+    time: ""
+  });
+
+  const {description} = request;
+
+  const onChange = e => setRequest({ ...request, [e.target.name]: e.target.value });
+
+  const onSubmit = e => {
+    e.preventDefault();
+    newRequest(request);
+    setRequest({
+      description: "",
+      room: "",
+      submittedBy: "Niyi Adisa",
+      assignedTo: "",
+      status: "",
+      time: ""
+    });
+  };
+
   const [imgPrevUrl, setImgPrevUrl] = useState("");
   const [file, setFile] = useState("");
   const [selectedValue, setSelectedValue] = useState("");
@@ -431,11 +460,6 @@ const NewRequest = () => {
     }
   };
 
-  const onSubmit = e => {
-    console.log("Form submitted..");
-    e.preventDefault();
-  };
-
   const _handleImageChange = e => {
     e.preventDefault();
 
@@ -484,7 +508,7 @@ const NewRequest = () => {
             &nbsp;New Request
           </h3>
         </div>
-        <div className="visitorForm">
+        <form className="visitorForm" onSubmit={onSubmit}>
           <div className="input-field">
             <p>
               <small>
@@ -544,6 +568,9 @@ const NewRequest = () => {
               <textarea
                 rows="5"
                 className="form-control note-editor note-editor-margin"
+                name= "description"
+                value = {description}
+                onChange = {onChange}
               ></textarea>
             </Card>
           </div>
@@ -565,11 +592,11 @@ const NewRequest = () => {
           {content}
           <hr />{" "}
           <div className="button-align">
-            <button class="invite-btn" type="button">
+            <button class="invite-btn" type="submit">
               <i class="icon-paper-plane"></i>&nbsp;&nbsp;Submit
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </ContentWrapper>
   );

@@ -7,8 +7,8 @@ const Home = () => {
     <ContentWrapper>
       <div className="content-heading">
         <div>
-          Workwise HQ
-          <small>Welcome to Workwise!</small>
+          Visitors management
+          <small>Welcome to visitor manager!</small>
         </div>
       </div>
       {/* START cards box */}

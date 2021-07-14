@@ -1,14 +1,13 @@
-import React, {  useState } from "react";
+import React, { useState, useContext } from "react";
 import ContentWrapper from "../Layout/ContentWrapper";
-import { Container, Card, CardHeader, CardBody, } from "reactstrap";
+import { Container, Card, CardHeader, CardBody } from "reactstrap";
 import "../../styles/MyStyles/custom.css";
 import Datatable from "../Tables/Datatable";
 import { Dropdown, DropdownMenu, DropdownToggle } from "reactstrap";
-import classNames from "classnames";
 import "flatpickr/dist/themes/light.css";
 import Flatpickr from "react-flatpickr";
 import { Link } from "react-router-dom";
-
+import DeliveriesContext from "../../context/deliveries/deliveriesContext";
 const DropdownBox = title => {
   const [ddOpen, setDdopen] = useState(false);
 
@@ -29,7 +28,8 @@ const DropdownBox = title => {
             <i class="icon-logout"></i>&nbsp;&nbsp;Sign out
           </a>
           <a class="dropdown-item" href="#">
-            <i class="icon-envelope-open"></i>&nbsp;&nbsp;Refer to Workwise
+            <i class="icon-envelope-open"></i>&nbsp;&nbsp;Refer to Visitors
+            manager
           </a>
           <a class="dropdown-item" href="#">
             <i class="icon-trash"></i>&nbsp;&nbsp;Delete visitor
@@ -41,6 +41,9 @@ const DropdownBox = title => {
 };
 
 const Deliveries = () => {
+  const deliveriesContext = useContext(DeliveriesContext);
+  const { deliveries } = deliveriesContext;
+
   const [dtOptions1, setDtOptions1] = useState({
     paging: true, // Table pagination
     ordering: true, // Column ordering
@@ -116,25 +119,27 @@ const Deliveries = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="gradeX">
-                    <td></td>
-                    <td>
-                      <input class="js-entry-checkbox" type="checkbox" />
-                    </td>
-                    <td className="image-holder">
-                      <img src="img/user/02.jpg"></img>
-                    </td>
-                    <td>Joseph Tioluwani</td>
-                    <td>Deliveries</td>
-                    <td>Niyi Adisa</td>
-                    <td>Mar 6, 2020</td>
-                    <td>2:06pm</td>
-                    <td>
-                      {ANIMATIONS.map((title, i) => (
-                        <DropdownBox title={title} />
-                      ))}
-                    </td>
-                  </tr>
+                  {deliveries.map(delivery => (
+                    <tr className="gradeX">
+                      <td></td>
+                      <td>
+                        <input class="js-entry-checkbox" type="checkbox" />
+                      </td>
+                      <td className="image-holder">
+                        <img src="img/user/02.jpg"></img>
+                      </td>
+                      <td>{delivery.visitor}</td>
+                      <td>{delivery.purpose}</td>
+                      <td>{delivery.recipient}</td>
+                      <td>{delivery.deliveryDate}</td>
+                      <td>{delivery.signedIn}</td>
+                      <td>
+                        {ANIMATIONS.map((title, i) => (
+                          <DropdownBox title={title} />
+                        ))}
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </Datatable>

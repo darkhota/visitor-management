@@ -4,7 +4,12 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import WorkwiseState from './context/Workwise/WorkwiseState';
 import AuthState from './context/auth/AuthState';
 import SimpleReactLightbox from "simple-react-lightbox";
-
+import VisitorsState from './context/visitors/VisitorsState'
+import InviteState from './context/invites/InviteState'
+import DeliveriesState from './context/deliveries/DeliveriesState'
+import RoomState from './context/rooms/RoomState'
+import RequestState from './context/workRequests/RequestState'
+import EmployeeState from './context/employees/EmployeeState'
 /* loader component for Suspense*/
 import PageLoader from './components/Common/PageLoader';
 
@@ -53,7 +58,7 @@ const Profile = lazy(() => import('./components/Profile/Profile'));
 // listed here to Switch between layouts
 // depending on the current pathname
 const listofPages = [
-    '/',
+    // '/',
     '/recover',
     '/lock',
     '/notfound',
@@ -79,7 +84,7 @@ const Routes = ({ location }) => {
                 <BasePage>
                     <Suspense fallback={<PageLoader/>}>
                         <Switch location={location}>
-                        <Route path="/"  component={waitFor(Signin)}/>
+                        {/* <Route path="/"  component={waitFor(Signin)}/> */}
                             <Route path="/recover" component={waitFor(Recover)}/>
                             <Route path="/lock" component={waitFor(Lock)}/>
                             <Route path="/notfound" component={waitFor(NotFound)}/>
@@ -93,7 +98,12 @@ const Routes = ({ location }) => {
     }
     else {
         return (
-            
+            <VisitorsState>
+                <InviteState>
+                    <RoomState>
+                        <RequestState>
+                            <EmployeeState>
+                <DeliveriesState>
             <WorkwiseState>
              <AuthState>
             
@@ -151,6 +161,12 @@ const Routes = ({ location }) => {
             </Base>
             </AuthState>
             </WorkwiseState>
+            </DeliveriesState>
+            </EmployeeState>
+            </RequestState>
+            </RoomState>
+            </InviteState>
+            </VisitorsState>
         )
     }
 }

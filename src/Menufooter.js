@@ -1,22 +1,22 @@
 const Menufooter = [
-  {
-    name: "Help center",
-    icon: "icon-info",
-    translate: "sidebar.nav.DASHBOARD",
-    path: "/dashboardv1"
-  },
+  // {
+  //   name: "Help center",
+  //   icon: "icon-info",
+  //   translate: "sidebar.nav.DASHBOARD",
+  //   path: "/dashboardv1"
+  // },
   {
     name: "Billing",
     icon: "icon-wallet",
     translate: "sidebar.nav.form.FORM",
     path: "/billing"
   },
-  {
-    name: "Buy devices and badges",
-    icon: "icon-basket-loaded",
-    translate: "sidebar.nav.chart.CHART",
-    path: "/form-extended"
-  },
+  // {
+  //   name: "Buy devices and badges",
+  //   icon: "icon-basket-loaded",
+  //   translate: "sidebar.nav.chart.CHART",
+  //   path: "/form-extended"
+  // },
 
   {
     name: "Tioluwani Joseph",

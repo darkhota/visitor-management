@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ContentWrapper from "../Layout/ContentWrapper";
 import "../../styles/MyStyles/custom.css";
 import { Dropdown, DropdownMenu, DropdownToggle } from "reactstrap";
 import { Link } from "react-router-dom";
+import VisitorsContext from "../../context/visitors/visitorsContext";
 
-const DropdownBox = (title) => {
+const DropdownBox = title => {
   const [ddOpen, setDdopen] = useState(false);
 
   const toggle = () => setDdopen(!ddOpen);
@@ -30,22 +31,25 @@ const DropdownBox = (title) => {
 };
 
 const Devices = () => {
-    const ANIMATIONS = ["fadeIn"];
-    return (
-      <ContentWrapper>
-        <div className="form-card">
-          <div className=" card-top">
-            <h2>Tablets</h2>
-            <div className="button-align">
-              <Link to="/new-tablet" className="black-link">
-                <button className="btn btn-secondary btn-lg invite-btn">
-                  New tablet
-                </button>
-              </Link>
-            </div>
+  const visitorsContext = useContext(VisitorsContext);
+  const { devices } = visitorsContext;
+  const ANIMATIONS = ["fadeIn"];
+  return (
+    <ContentWrapper>
+      <div className="form-card">
+        <div className=" card-top">
+          <h2>Tablets</h2>
+          <div className="button-align">
+            <Link to="/new-tablet" className="black-link">
+              <button className="btn btn-secondary btn-lg invite-btn">
+                New tablet
+              </button>
+            </Link>
           </div>
-          <div className="device-grid">
-            {" "}
+        </div>
+
+        <div className="device-grid">
+          {devices.map(device => (
             <div className="device-cards">
               <div className="device-card-top">
                 {ANIMATIONS.map((title, i) => (
@@ -64,15 +68,25 @@ const Devices = () => {
 
                   <ul>
                     <li>
-                      <h3 className="device-Name">Ipad</h3>
+                      <h3 className="device-Name">{device.deviceName}</h3>
                     </li>
                     <li>
-                      <div className="device-status">
+                      <div
+                        className={
+                          "device-status " +
+                          (device.deviceStatus === "disabled" ? "disabled" : "")
+                        }
+                      >
                         <span
                           data-test-status-icon=""
-                          className="deviceStatus small good"
+                          className={
+                            "deviceStatus small " +
+                            (device.deviceStatus === "operational"
+                              ? "good"
+                              : "bad")
+                          }
                         ></span>{" "}
-                        Operational
+                        {device.deviceStatus}
                       </div>
                     </li>
                   </ul>
@@ -80,69 +94,27 @@ const Devices = () => {
 
                 <div className="device-desc">
                   <h5>Device type:</h5>
-                  <h5>iPad (9.7-inch)</h5>
+                  <h5>{device.deviceType}</h5>
                   <h5>Device type:</h5>
-                  <h5>iOS - 13.3.1</h5>
+                  <h5>{device.deviceOS}</h5>
                   <h5>Device type:</h5>
-                  <h5>192.168.1.17</h5>
+                  <h5>{device.deviceIP}</h5>
                 </div>
               </div>
             </div>
-            <div className="device-cards second-card">
-              <div className="device-card-top">
-                {ANIMATIONS.map((title, i) => (
-                  <DropdownBox title={title} />
-                ))}
-              </div>
-              <div className="whole-device">
-                <div className="device-content">
-                  <div className="dancing">
-                    <div className="box">
-                      <img
-                        src="img/ipad-air.png"
-                        alt="ipad"
-                        className="grid-height"
-                      ></img>
-                    </div>
-                  </div>
-
-                  <ul>
-                    <li>
-                      <h3 className="device-Name">Samsung</h3>
-                    </li>
-                    <li>
-                      <div className="device-status disabled">
-                        <span
-                          data-test-status-icon=""
-                          className="deviceStatus small bad"
-                        ></span>{" "}
-                        Disabled
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="device-desc">
-                  <h5>Device type:</h5>
-                  <h5>Samsung (11-inch)</h5>
-                  <h5>Device type:</h5>
-                  <h5>android - 8.3.1</h5>
-                  <h5>Device type:</h5>
-                  <h5>192.168.8.1</h5>
-                </div>
-              </div>
-            </div>
-          </div>
-          <p className="h5 tw-mt-8 tw-mb-0 tw-px-8">
-            Learn more about{" "}
-            <a href="#" target="_blank" rel="noopener" tabindex="-1">
-              managing visitor sign-in kiosks
-            </a>{" "}
-            in Workwise.
-          </p>
+          ))}
         </div>
-      </ContentWrapper>
-    );
-}
+
+        <p className="h5 tw-mt-8 tw-mb-0 tw-px-8">
+          Learn more about{" "}
+          <a href="#" target="_blank" rel="noopener" tabindex="-1">
+            managing visitor sign-in kiosks
+          </a>{" "}
+          in Visitors manager.
+        </p>
+      </div>
+    </ContentWrapper>
+  );
+};
 
 export default Devices;

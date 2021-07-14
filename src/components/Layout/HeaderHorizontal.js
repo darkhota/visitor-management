@@ -69,7 +69,7 @@ class HeaderHorizontal extends Component {
                                 </DropdownMenu>
                             </UncontrolledDropdown>
                             <NavItem>
-                                <Link className="nav-link" to="widgets">Workwise</Link>
+                                <Link className="nav-link" to="widgets">Visitor management</Link>
                             </NavItem>
                             { /* END Left navbar */ }
                         </Nav>

@@ -47,7 +47,7 @@ const Billing = () => {
           <div className="upload-logo billing-box">
             <div className="content-text">
               <h4>No card on file</h4>
-              <h5>Add a credit card to continue using Workwise.</h5>
+              <h5>Add a credit card to continue using Visitors manager.</h5>
             </div>
             <div className="content-button learn-more">
               <button class="btn btn-secondary btn-lg invite-btn" type="button">
@@ -64,7 +64,7 @@ const Billing = () => {
             <Card>
               <Table responsive>
                 <thead>
-                  <tr>
+                  <tr style={{ backgroundColor: "#000" }}>
                     <th>DATE</th>
                     <th>AMOUNT</th>
                     <th>RECEIPT</th>

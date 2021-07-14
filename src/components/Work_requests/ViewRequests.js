@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ContentWrapper from "../Layout/ContentWrapper";
 import { Container, Card, CardHeader, CardBody } from "reactstrap";
 import $ from "jquery";
 import "../../styles/MyStyles/custom.css";
 import Datatable from "../Tables/Datatable";
 import { Dropdown, DropdownMenu, DropdownToggle } from "reactstrap";
-import classNames from "classnames";
 import "flatpickr/dist/themes/light.css";
 import Flatpickr from "react-flatpickr";
 import { Link } from "react-router-dom";
-
+import RequestContext from "../../context/workRequests/requestContext";
 const DropdownBox = title => {
   const [ddOpen, setDdopen] = useState(false);
 
@@ -42,6 +41,9 @@ const DropdownBox = title => {
 };
 
 const ViewRequests = () => {
+
+  const requestContext = useContext(RequestContext);
+  const { requests } = requestContext;
   const [dtOptions1, setDtOptions1] = useState({
     paging: true, // Table pagination
     ordering: true, // Column ordering
@@ -135,26 +137,28 @@ const ViewRequests = () => {
                     </tr>
                   </thead>
                   <tbody>
+                    {requests.map( request => (
                     <tr className="gradeX">
                       <td></td>
-                      <td>Bad Projector</td>
-                      <td>Conference Room</td>
-                      <td className="no-display">Niyi Adisa</td>
+                      <td>{request.description}</td>
+                      <td>{request.room}</td>
+                      <td className="no-display">{request.submittedBy}</td>
                       <td className="no-display">
-                        Tioluwani Joseph
+                        {request.assignedTo}
                       </td>
                       <td>
                       <button href="#" className=" table-round-btn">
                           Active{" "}
                         </button>
                       </td>
-                      <td className="no-display">10:00 am</td>
+                      <td className="no-display">{request.time}</td>
                       <td className="no-display">
                         {ANIMATIONS.map((title, i) => (
                           <DropdownBox title={title} key={i} />
                         ))}
                       </td>
                     </tr>
+                    ))}
                   </tbody>
                 </table>
               </Datatable>

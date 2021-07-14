@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ContentWrapper from "../Layout/ContentWrapper";
 import { Container, Card, CardHeader, CardBody, CardTitle } from "reactstrap";
 import $ from "jquery";
@@ -13,6 +13,7 @@ import {
 import classNames from "classnames";
 import { Link } from "react-router-dom";
 import Avatar, { ConfigProvider } from "react-avatar";
+import EmployeeContext from '../../context/employees/employeeContext';
 
 const DropdownBox = ({ title }) => {
   const [ddOpen, setDdopen] = useState(false);
@@ -50,6 +51,10 @@ const DropdownBox = ({ title }) => {
 };
 
 const AllEmployees = () => {
+
+const employeeContext = useContext(EmployeeContext);
+const { employees } = employeeContext;
+
   const [dtOptions1, setDtOptions1] = useState({
     paging: true, // Table pagination
     ordering: true, // Column ordering
@@ -129,16 +134,17 @@ const AllEmployees = () => {
                     </tr>
                   </thead>
                   <tbody>
+                    {employees.map (employee => (
                     <tr className="gradeX">
                       <td></td>
                       <td>
                         <Avatar
-                          name="Tioluwani Joseph"
+                          name={employee.empName}
                           round="50px"
                           size="50"
                         />
                       </td>
-                      <td>Joseph Tioluwani</td>
+                      <td>{employee.empName}</td>
                       <td>
                         <button href="#" className=" table-round-btn">
                           Visitor{" "}
@@ -153,7 +159,7 @@ const AllEmployees = () => {
                         </button>
                       </td>
                       <td>Techbarn</td>
-                      <td>tioluwanijoseph@gmail.com</td>
+                      <td>{employee.email}</td>
                       <td>
                         <button href="#" className=" table-round-btn">
                           Active{" "}
@@ -165,6 +171,7 @@ const AllEmployees = () => {
                         ))}
                       </td>
                     </tr>
+                    ))}
                   </tbody>
                 </table>
               </Datatable>

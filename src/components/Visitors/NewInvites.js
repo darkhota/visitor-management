@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ContentWrapper from "../Layout/ContentWrapper";
 import "../../styles/MyStyles/custom.css";
 import Select from "react-select";
 import "flatpickr/dist/themes/light.css";
 import Flatpickr from "react-flatpickr";
 import { Card, Input } from "reactstrap";
+import { Link } from "react-router-dom";
+import InviteContext from "../../context/invites/inviteContext";
 
 const STATES = [
   {
@@ -30,10 +32,31 @@ const customStyles = {
 };
 
 const NewInvites = () => {
+  const inviteContext = useContext(InviteContext);
+  const [invite, setInvite] = useState({
+    visitor: "",
+    purpose: "visitor",
+    invitedBy: "Niyi Adisa",
+    privateNotes: "",
+    dueAt: ""
+  });
+
+  const { visitor, purpose, invitedBy, privateNotes, dueAt } = invite;
   const [date, setDate] = useState(new Date());
+
+  const onChange = e =>
+    setInvite({ ...invite, [e.target.name]: e.target.value });
+
   const onSubmit = e => {
-    console.log("Form submitted..");
     e.preventDefault();
+    inviteContext.newInvite(invite);
+    setInvite({
+      visitor: "",
+      purpose: "",
+      invitedBy: "",
+      privateNotes: "",
+      dueAt: ""
+    });
   };
 
   return (
@@ -41,13 +64,13 @@ const NewInvites = () => {
       <div className="form-card">
         <div className=" card-top-tablet">
           <h3>
-            <a href="/invites">
+            <Link to="/invites">
               <i className="far fa-arrow-alt-circle-left"></i>
-            </a>
+            </Link>
             &nbsp;Single invite
           </h3>
         </div>
-        <div className="visitorForm">
+        <form className="visitorForm" onSubmit={onSubmit}>
           <div className="input-field">
             <p>
               <small>
@@ -88,7 +111,8 @@ const NewInvites = () => {
                 }}
                 value={date}
                 onChange={date => {
-                  setDate( date );
+                  setDate(date);
+                  onChange={onChange}
                 }}
               />
             </div>
@@ -100,7 +124,14 @@ const NewInvites = () => {
                 </small>
                 <span className="required">*</span>
               </p>
-              <select defaultValue="" className="custom-select" multiple="">
+              <select
+                defaultValue=""
+                className="custom-select"
+                multiple=""
+                vlaue={dueAt}
+                name="dueAt"
+                
+              >
                 <option defaultValue="1">12:45 pm</option>
                 <option defaultValue="2">1:00 pm</option>
                 <option defaultValue="3">1:15 pm</option>
@@ -115,7 +146,14 @@ const NewInvites = () => {
               </small>{" "}
               <span className="required">*</span>
             </p>
-            <Input id="input-id-1" type="text" placeholder="Enter full name" />
+            <Input
+              id="input-id-1"
+              type="text"
+              placeholder="Enter full name"
+              value={visitor}
+              name="visitor"
+              onChange={onChange}
+            />
           </div>
           <div className="input-field">
             <p>
@@ -149,15 +187,18 @@ const NewInvites = () => {
               <textarea
                 rows="5"
                 className="form-control note-editor note-editor-margin"
+                value={privateNotes}
+                name="privateNotes"
+                onChange={onChange}
               ></textarea>
             </Card>
           </div>
           <div className="button-align">
-            <button class="invite-btn" type="button">
+            <button class="invite-btn" type="submit" value="New Invite">
               <i class="icon-paper-plane"></i>&nbsp;&nbsp;Invite
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </ContentWrapper>
   );

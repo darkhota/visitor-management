@@ -1,5 +1,6 @@
 import React from "react";
 import ContentWrapper from "../Layout/ContentWrapper";
+import { Link } from "react-router-dom";
 import "../../styles/MyStyles/custom.css";
 
 const NewTablet = () => {
@@ -8,9 +9,9 @@ const NewTablet = () => {
       <div className="form-card">
         <div className=" card-top-tablet">
           <h3>
-            <a href="/devices">
+            <Link to="/devices">
               <i className="far fa-arrow-alt-circle-left"></i>
-            </a>
+            </Link>
             &nbsp; New Tablet
           </h3>
         </div>
@@ -18,15 +19,13 @@ const NewTablet = () => {
           <div className="new-tablet-form">
             <ol>
               <li className="list-padding">
-                <h4>Get the Workwise Visitors app</h4>
+                <h4>Get the Visitors management app</h4>
                 <ul className="sublist-mgin">
                   <li>
                     <h5>On your tablet, open the app store</h5>
                   </li>
                   <li>
-                    <h5>
-                      Search for and download Workwise Visitors Management
-                    </h5>
+                    <h5>Search for and download Visitors Management</h5>
                   </li>
                 </ul>
               </li>
@@ -34,7 +33,7 @@ const NewTablet = () => {
                 <h4>Enter the device code</h4>
                 <ul className="sublist-mgin">
                   <li>
-                    <h5>Open the Workwise Visitors app.</h5>
+                    <h5>Open the Visitors manager app.</h5>
                   </li>
                   <li>
                     <h5>

@@ -55,7 +55,7 @@ class Header extends Component {
                     <div className="navbar-header">
                         <a className="navbar-brand" href="#/">
                             <div className="brand-logo">
-                                <img className="img-fluid" src="img/workwise.png" alt="App Logo" />
+                                <h6 style={{color:'#00914b'}}>Visitor management</h6>
                             </div>
                             <div className="brand-logo-collapsed">
                                 <img className="img-fluid" src="img/icon.png" alt="App Logo" />

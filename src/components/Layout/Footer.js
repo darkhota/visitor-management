@@ -1,16 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class Footer extends Component {
-
-    render() {
-        const year = new Date().getFullYear()
-        return (
-            <footer className="footer-container">
-                <span>&copy; {year} - Workwise</span>
-            </footer>
-        );
-    }
-
+  render() {
+    const year = new Date().getFullYear();
+    return (
+      <footer className="footer-container">
+        <span>&copy; {year} - Visitors management</span>
+      </footer>
+    );
+  }
 }
 
 export default Footer;

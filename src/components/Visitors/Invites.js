@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import ContentWrapper from '../Layout/ContentWrapper';
 import { Container, Card, CardHeader, CardBody, } from 'reactstrap';
 import $ from 'jquery';
@@ -9,6 +9,7 @@ import "flatpickr/dist/themes/light.css";
 import Flatpickr from "react-flatpickr";
 import { Link } from 'react-router-dom';
 import Avatar, { ConfigProvider } from 'react-avatar';
+import InviteContext from "../../context/invites/inviteContext";
 
 const DropdownBox = (title) =>  {
     
@@ -34,6 +35,8 @@ const DropdownBox = (title) =>  {
 }
 
 const Invites = () =>{
+    const inviteContext = useContext(InviteContext);
+  const { invites } = inviteContext;
     const [dtOptions1, setDtOptions1] = useState({
         paging: true, // Table pagination
         ordering: true, // Column ordering
@@ -112,19 +115,21 @@ const Invites = () =>{
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    {invites.map(invite => (
                                         <tr className="gradeX">
                                             <td></td>
-                                            <td><Avatar name="Tioluwani Joseph" round="50px" size="50"/></td>
-                                            <td>Joseph Tioluwani</td>
-                                            <td>Visitor</td>
-                                            <td className="no-display">Niyi Adisa</td>
-                                            <td className="no-display">Come early</td>
-                                            <td className="no-display">Mar 6, 2020</td>
+                                            <td><Avatar name={invite.visitor} round="50px" size="50"/></td>
+                                            <td>{invite.visitor} </td>
+                                            <td>{invite.purpose} </td>
+                                            <td className="no-display">{invite.invitedBy} </td>
+                                            <td className="no-display">{invite.privateNotes} </td>
+                                            <td className="no-display">{invite.dueAt} </td>
                                             <td className="no-display">{ ANIMATIONS.map((title, i) => (
                    
                                              <DropdownBox title={title}/>                     
                                               ))}</td>
                                         </tr>
+                                    ))}
                                     </tbody>
                                 </table>
                             </Datatable>

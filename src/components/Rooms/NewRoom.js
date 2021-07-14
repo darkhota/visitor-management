@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import ContentWrapper from "../Layout/ContentWrapper";
 import "../../styles/MyStyles/custom.css";
 import Select from "react-select";
 import "flatpickr/dist/themes/light.css";
 import { Card, Input } from "reactstrap";
 import { Creatable } from "react-select";
+import { Link } from "react-router-dom";
+import RoomContext from "../../context/rooms/roomContext";
 
 const STATES = [
   {
-    value: "australian-capital-territory",
+    value: "manager",
     label: "Niyi Adisa",
     className: "State-ACT"
   },
@@ -25,9 +27,27 @@ const customStyles = {
   })
 };
 const NewRoom = () => {
+  const roomContext = useContext(RoomContext);
+  const [room, setRoom] = useState({
+    title: "",
+    description: "",
+    resources: "projector, whiteBoard",
+    manager: ""
+  });
+
+  const { title, description, resources, manager } = room;
+
+  const onChange = e => setRoom({ ...room, [e.target.name]: e.target.value });
+
   const onSubmit = e => {
-    console.log("Form submitted..");
     e.preventDefault();
+    roomContext.newRoom(room);
+    setRoom({
+      title: "",
+      description: "",
+      resources: "",
+      manager: ""
+    });
   };
 
   return (
@@ -35,18 +55,25 @@ const NewRoom = () => {
       <div className="form-card">
         <div className=" card-top-tablet">
           <h3>
-            <a href="/my-rooms">
+            <Link to="/my-rooms">
               <i className="far fa-arrow-alt-circle-left"></i>
-            </a>
+            </Link>
             &nbsp;Create a new room
           </h3>
         </div>
-        <div className="visitorForm new-room-form">
+        <form className="visitorForm new-room-form" onSubmit={onSubmit}>
           <div className="input-field">
             <p>
               Room Name <span className="required">*</span>
             </p>
-            <Input id="input-id-1" type="text" placeholder="Enter full name" />
+            <Input
+              id="input-id-1"
+              type="text"
+              placeholder="Enter full name"
+              name="title"
+              value={title}
+              onChange={onChange}
+            />
           </div>
 
           <div className="form-gird">
@@ -67,7 +94,9 @@ const NewRoom = () => {
                     }
                   })}
                   styles={customStyles}
-                  name="select-name"
+                  
+                  
+                  
                   placeholder="Select visitor"
                   options={STATES}
                 />
@@ -100,15 +129,20 @@ const NewRoom = () => {
               <textarea
                 rows="5"
                 className="form-control note-editor note-editor-margin"
+                name="description"
+                value={description}
+                onChange={onChange}
               ></textarea>
             </Card>
           </div>
-        </div>
-        <hr></hr>
-
-        <button class="invite-btn" type="button">
+          <hr></hr>
+          <button className="invite-btn" type="submit" value="new room">
           <i class="icon-paper-plane"></i>&nbsp;&nbsp;Save
         </button>
+        </form>
+        
+
+       
       </div>
     </ContentWrapper>
   );

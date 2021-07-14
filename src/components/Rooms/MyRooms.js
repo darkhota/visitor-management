@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ContentWrapper from "../Layout/ContentWrapper";
 import { Container, Card, CardHeader, CardBody, CardTitle } from "reactstrap";
 import $ from "jquery";
@@ -8,7 +8,7 @@ import { Dropdown, DropdownMenu, DropdownToggle } from "reactstrap";
 import classNames from "classnames";
 import "flatpickr/dist/themes/light.css";
 import { Link } from "react-router-dom";
-
+import RoomContext from "../../context/rooms/roomContext";
 const DropdownBox = title => {
   const [ddOpen, setDdopen] = useState(false);
 
@@ -43,6 +43,8 @@ const DropdownBox = title => {
 };
 
 const MyRooms = () => {
+  const roomContext = useContext(RoomContext);
+  const { rooms } = roomContext;
   const [dtOptions1, setDtOptions1] = useState({
     paging: true, // Table pagination
     ordering: true, // Column ordering
@@ -109,12 +111,13 @@ const MyRooms = () => {
                     </tr>
                   </thead>
                   <tbody>
+                  {rooms.map(room => (
                     <tr className="gradeX">
                       <td></td>
-                      <td>Conference Room</td>
-                      <td>Good Room</td>
-                      <td>HDMI, projector</td>
-                      <td>Kamsi Kodi</td>
+                      <td>{room.title}</td>
+                      <td>{room.description}</td>
+                      <td>{room.resources}</td>
+                      <td>{room.manager}</td>
 
                       <td>
                         {ANIMATIONS.map((title, i) => (
@@ -122,6 +125,7 @@ const MyRooms = () => {
                         ))}
                       </td>
                     </tr>
+                  ))}
                   </tbody>
                 </table>
               </Datatable>

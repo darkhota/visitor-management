@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ContentWrapper from "../Layout/ContentWrapper";
 import { Container, Card, CardHeader, CardBody } from "reactstrap";
 import $ from "jquery";
@@ -8,7 +8,7 @@ import { Dropdown, DropdownMenu, DropdownToggle } from "reactstrap";
 import "flatpickr/dist/themes/light.css";
 import Flatpickr from "react-flatpickr";
 import { Link } from "react-router-dom";
-
+import RoomContext from "../../context/rooms/roomContext";
 const DropdownBox = title => {
   const [ddOpen, setDdopen] = useState(false);
 
@@ -35,6 +35,9 @@ const DropdownBox = title => {
 };
 
 const Bookings = () => {
+
+  const roomContext = useContext(RoomContext);
+  const { bookings } = roomContext;
   const [dtOptions1, setDtOptions1] = useState({
     paging: true, // Table pagination
     ordering: true, // Column ordering
@@ -114,19 +117,21 @@ const Bookings = () => {
                   </tr>
                 </thead>
                 <tbody>
+                {bookings.map(booking => (
                   <tr className="gradeX">
                     <td></td>
-                    <td>Test</td>
-                    <td>Conference room</td>
+                    <td>{booking.title}</td>
+                    <td>{booking.room}</td>
 
-                    <td>28 Jan, 2020</td>
-                    <td>08:00 AM - 08:30 AM</td>
+                    <td>{booking.date}</td>
+                    <td>{booking.duration}</td>
                     <td>
                       {ANIMATIONS.map((title, i) => (
                         <DropdownBox title={title} />
                       ))}
                     </td>
                   </tr>
+                ))}
                 </tbody>
               </table>
             </Datatable>

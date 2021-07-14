@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState, useContext} from 'react';
 import ContentWrapper from '../Layout/ContentWrapper';
 import '../../styles/MyStyles/custom.css'
 import Select from 'react-select';
 import "flatpickr/dist/themes/light.css";
 import {Input } from 'reactstrap';
-
+import { Link } from 'react-router-dom';
+import EmployeeContext from '../../context/employees/employeeContext';
     const STATES = [
         { value: 'australian-capital-territory', label: 'Employee', className: 'State-ACT' },
         { value: 'new-south-wales', label: 'New South Wales', className: 'State-NSW' },
@@ -34,18 +35,46 @@ import {Input } from 'reactstrap';
        
     }
       
-const NewInvites = () => {
+const NewEmployees = () => {
+
+    const employeeContext = useContext(EmployeeContext);
+    const [employee, setEmployee] = useState (
+        {
+            empName: '',
+            accountType: '',
+            gender: '',
+            company: '',
+            email: '',
+            status: '',
+        }
+    );
+    const { email, empName } = employee;
+    const onChange = e => setEmployee({ ...employee, [e.target.name]: e.target.value });
+
+    const onSubmit = e => {
+        e.preventDefault();
+        employeeContext.newEmployee(employee);
+        setEmployee({
+            empName: '',
+            accountType: '',
+            gender: '',
+            company: '',
+            email: '',
+            status: '',
+        });
+    };
+
         return (
             <ContentWrapper>
                <div className="form-card">
                <div className=" card-top-tablet">
-                            <h3><a href="/invites">
+                            <h3><Link to="/all-employees">
                                <i className="far fa-arrow-alt-circle-left" ></i> 
-                           </a>
+                           </Link>
                               &nbsp;Create a new employee
                             </h3>
                             </div >
-                            <div className=" newEmplGrid" >
+                            <form className="newEmplGrid" onSubmit={onSubmit}>
                                    
                                     <div className="input-field">
                                         <p><small><b>ACCOUNT TYPE</b></small><span className="required">*</span></p>
@@ -120,12 +149,12 @@ const NewInvites = () => {
                                        
                                         <div className="input-field">
                                     <p><small><b>EMAIL</b></small> <span className="required">*</span></p>
-                                        <Input id="input-id-1" type="text" placeholder="Enter email"/>
+                                        <Input id="input-id-1" type="text" placeholder="Enter email" name="email" value={email} onChange={onChange}/>
                                     </div>
                                         
                                     <div className="input-field">
                                     <p><small><b>FIRST NAME</b></small> <span className="required">*</span></p>
-                                        <Input id="input-id-1" type="text" placeholder="Enter first name"/>
+                                        <Input id="input-id-1" type="text" placeholder="Enter first name" name="empName" value = {empName} onChange={onChange}/>
                                     </div>
                                     <div className="input-field">
                                     <p><small><b>LAST NAME </b></small><span className="required">*</span></p>
@@ -143,11 +172,13 @@ const NewInvites = () => {
                                     <p><small><b>CONFIRM PASSWORD</b></small> <span className="required">*</span></p>
                                         <Input id="input-id-1" type="password" placeholder="Retype password"/>
                                     </div>
-                                    </div>
+
                                     <hr></hr>
                                     <div className="employee-button-align">
-                                    <button class="invite-btn" type="button"><i class="icon-paper-plane"></i>&nbsp;&nbsp;Invite</button>
+                                    <button class="invite-btn" type="submit" value= "new employee"><i class="icon-paper-plane"></i>&nbsp;&nbsp;Invite</button>
                                     </div>
+                                    </form>
+                                    
                                 
                </div>
                 
@@ -155,4 +186,4 @@ const NewInvites = () => {
             );
   
 }
-export default NewInvites;
+export default NewEmployees;
