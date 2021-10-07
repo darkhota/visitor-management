@@ -132,7 +132,33 @@ const VisitorsLog = visitor => {
                   </tr>
                 </thead>
                 <tbody>
-                  {visitors.map(visitor => (
+
+                <tr className="gradeX">
+                      <td></td>
+                      <td className="dropTable">
+                        <input class="js-entry-checkbox" type="checkbox" />
+                      </td>
+                      <td className="image-holder">
+                        <img src="img/user/02.jpg"></img>
+                      </td>
+                      <td>JOjo</td>
+                      <td>to watch</td>
+                      <td className="no-display">NIyi</td>
+                      <td className="no-display">
+                        {" "}
+                        <i>looks good</i>
+                      </td>
+                      <td className="no-display">20/01</td>
+                      <td className="no-display">10am</td>
+                      <td className="no-display">12pm</td>
+                      <td className="no-display">Niyi</td>
+                      <td>
+                        {ANIMATIONS.map((title, i) => (
+                          <DropdownBox title={title} />
+                        ))}
+                      </td>
+                    </tr>
+                  {/* {visitors.map(visitor => (
                     <tr className="gradeX">
                       <td></td>
                       <td className="dropTable">
@@ -158,7 +184,8 @@ const VisitorsLog = visitor => {
                         ))}
                       </td>
                     </tr>
-                  ))}
+                    
+                  ))} */}
                 </tbody>
               </table>
             </Datatable>
