@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import $ from "jquery";
 
 // Datatables
+require("datatables.net-dt");
 require("datatables.net-bs");
 require("datatables.net-bs4/js/dataTables.bootstrap4.js");
 require("datatables.net-bs4/css/dataTables.bootstrap4.css");
