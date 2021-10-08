@@ -29,6 +29,7 @@
   ],
   "dependencies": {
     "@fortawesome/fontawesome-free": "5.5.0",
+    "@material-ui/core": "^4.12.3",
     "animate.css": "3.7.0",
     "axios": "^0.19.2",
     "bootstrap": "4.3.1",
@@ -74,6 +75,7 @@
     "jszip": "3.1.5",
     "loaders.css": "0.1.2",
     "matchmedia": "0.1.2",
+    "material-table": "^1.69.3",
     "modernizr": "3.6.0",
     "moment": "2.22.2",
     "morris.js.so": "0.5.1",

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import ContentWrapper from "../Layout/ContentWrapper";
 import { Container, Card, CardHeader, CardBody } from "reactstrap";
 import $ from "jquery";
@@ -9,6 +9,7 @@ import "flatpickr/dist/themes/light.css";
 import Flatpickr from "react-flatpickr";
 import { Link } from "react-router-dom";
 import VisitorsContext from "../../context/visitors/visitorsContext";
+import MaterialTable from "material-table";
 const DropdownBox = title => {
   const [ddOpen, setDdopen] = useState(false);
 
@@ -44,26 +45,26 @@ const DropdownBox = title => {
 const VisitorsLog = visitor => {
   const visitorsContext = useContext(VisitorsContext);
   const { visitors } = visitorsContext;
-  const [dtOptions1, setDtOptions1] = useState({
-    paging: true, // Table pagination
-    ordering: true, // Column ordering
-    info: true, // Bottom left status text
-    responsive: true,
-    // Text translation options
-    // Note the required keywords between underscores (e.g _MENU_)
-    oLanguage: {
-      sSearch: '<em class="fa fa-search"></em>',
+  // const [dtOptions1, setDtOptions1] = useState({
+  //   paging: true, // Table pagination
+  //   ordering: true, // Column ordering
+  //   info: true, // Bottom left status text
+  //   responsive: true,
+  //   // Text translation options
+  //   // Note the required keywords between underscores (e.g _MENU_)
+  //   oLanguage: {
+  //     sSearch: '<em class="fa fa-search"></em>',
 
-      info: "Showing page _PAGE_ of _PAGES_",
-      zeroRecords: "Nothing found - sorry",
-      infoEmpty: "No records available",
-      infoFiltered: "(filtered from _MAX_ total records)",
-      oPaginate: {
-        sNext: '<em class="fa fa-caret-right"></em>',
-        sPrevious: '<em class="fa fa-caret-left"></em>'
-      }
-    }
-  });
+  //     info: "Showing page _PAGE_ of _PAGES_",
+  //     zeroRecords: "Nothing found - sorry",
+  //     infoEmpty: "No records available",
+  //     infoFiltered: "(filtered from _MAX_ total records)",
+  //     oPaginate: {
+  //       sNext: '<em class="fa fa-caret-right"></em>',
+  //       sPrevious: '<em class="fa fa-caret-left"></em>'
+  //     }
+  //   }
+  // });
 
   const [date, setDate] = useState(new Date());
 
@@ -76,7 +77,49 @@ const VisitorsLog = visitor => {
       dtInstance.fnFilter(this.value, columnInputs.index(this));
     });
   };
+  const [data, setData] = useState([]);
 
+  const columns = [
+    {
+      title: "ID",
+      field: "id"
+    },
+    {
+      title: "Visitor",
+      field: "visitor"
+    },
+    {
+      title: "Purpose",
+      field: "purpose"
+    },
+    {
+      title: "Host",
+      field: "host"
+    },
+    {
+      title: "Private Notes",
+      field: "privateNotes"
+    },
+    {
+      title: "Date",
+      field: "date"
+    },
+    {
+      title: "Signed in",
+      field: "signedIn"
+    },
+    {
+      title: "Signed out",
+      field: "signedOut"
+    },
+    {
+      title: "Check out",
+      field: "checkedOutBy"
+    }
+  ];
+  useEffect(() => {
+    setData(visitors);
+  }, []);
   const ANIMATIONS = ["fadeIn"];
   return (
     <ContentWrapper>
@@ -108,7 +151,8 @@ const VisitorsLog = visitor => {
             </Link>
           </CardHeader>
           <CardBody>
-            <Datatable options={dtOptions1}>
+            <MaterialTable title="Visitors Log" data={data} columns={columns} />
+            {/* <Datatable options={dtOptions1}>
               <table className="table table-striped my-4 w-100">
                 <thead>
                   <tr>
@@ -186,9 +230,9 @@ const VisitorsLog = visitor => {
                     </tr>
                     
                   ))} */}
-                </tbody>
+            {/* </tbody>
               </table>
-            </Datatable>
+            </Datatable> */} */}
           </CardBody>
         </Card>
       </Container>
