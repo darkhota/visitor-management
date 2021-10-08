@@ -1,13 +1,14 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import ContentWrapper from "../Layout/ContentWrapper";
 import { Container, Card, CardHeader, CardBody } from "reactstrap";
 import "../../styles/MyStyles/custom.css";
-import Datatable from "../Tables/Datatable";
 import { Dropdown, DropdownMenu, DropdownToggle } from "reactstrap";
 import "flatpickr/dist/themes/light.css";
 import Flatpickr from "react-flatpickr";
 import { Link } from "react-router-dom";
 import DeliveriesContext from "../../context/deliveries/deliveriesContext";
+import MaterialTable from "material-table";
+
 const DropdownBox = title => {
   const [ddOpen, setDdopen] = useState(false);
 
@@ -44,28 +45,43 @@ const Deliveries = () => {
   const deliveriesContext = useContext(DeliveriesContext);
   const { deliveries } = deliveriesContext;
 
-  const [dtOptions1, setDtOptions1] = useState({
-    paging: true, // Table pagination
-    ordering: true, // Column ordering
-    info: true, // Bottom left status text
-    responsive: true,
-    // Text translation options
-    // Note the required keywords between underscores (e.g _MENU_)
-    oLanguage: {
-      sSearch: '<em class="fa fa-search"></em>',
-
-      info: "Showing page _PAGE_ of _PAGES_",
-      zeroRecords: "Nothing found - sorry",
-      infoEmpty: "No records available",
-      infoFiltered: "(filtered from _MAX_ total records)",
-      oPaginate: {
-        sNext: '<em class="fa fa-caret-right"></em>',
-        sPrevious: '<em class="fa fa-caret-left"></em>'
-      }
-    }
-  });
-
   const [date, setDate] = useState(new Date());
+
+  const [data, setData] = useState([]);
+
+  const columns = [
+    {
+      title: "ID",
+      field: "id"
+    },
+    {
+      title: "Visitor",
+      field: "visitor"
+    },
+    {
+      title: "Purpose",
+      field: "purpose"
+    },
+    {
+      title: "Item",
+      field: "item"
+    },
+    {
+      title: "Recipient",
+      field: "recipient"
+    },
+    {
+      title: "Delivery Date",
+      field: "deliveryDate"
+    },
+    {
+      title: "Signed In",
+      field: "signedIn"
+    }
+  ];
+  useEffect(() => {
+    setData(deliveries);
+  }, []);
 
   const ANIMATIONS = ["fadeIn"];
   return (
@@ -97,52 +113,7 @@ const Deliveries = () => {
             </Link>
           </CardHeader>
           <CardBody>
-            <Datatable options={dtOptions1}>
-              <table className="table table-striped my-4 w-100 ">
-                <thead>
-                  <tr>
-                    <th data-priority="1"></th>
-                    <th>
-                      <div className="table-cell tw-align-middle tw-pl-1 ember-view log-chk">
-                        <input className="js-entry-checkbox" type="checkbox" />
-                      </div>
-                    </th>
-                    <th></th>
-                    <th>Visitor</th>
-                    <th>Purpose </th>
-                    <th className="sort-numeric">Recipent</th>
-                    <th className="sort-alpha" data-priority="2">
-                      Date
-                    </th>
-                    <th>Signed in</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {deliveries.map(delivery => (
-                    <tr className="gradeX">
-                      <td></td>
-                      <td>
-                        <input class="js-entry-checkbox" type="checkbox" />
-                      </td>
-                      <td className="image-holder">
-                        <img src="img/user/02.jpg"></img>
-                      </td>
-                      <td>{delivery.visitor}</td>
-                      <td>{delivery.purpose}</td>
-                      <td>{delivery.recipient}</td>
-                      <td>{delivery.deliveryDate}</td>
-                      <td>{delivery.signedIn}</td>
-                      <td>
-                        {ANIMATIONS.map((title, i) => (
-                          <DropdownBox title={title} />
-                        ))}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </Datatable>
+            <MaterialTable title="Deliveries" data={data} columns={columns} />
           </CardBody>
         </Card>
       </Container>

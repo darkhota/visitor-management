@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import ContentWrapper from "../Layout/ContentWrapper";
 import { Container, Card, CardHeader, CardBody, CardTitle } from "reactstrap";
 import $ from "jquery";
@@ -9,6 +9,8 @@ import classNames from "classnames";
 import "flatpickr/dist/themes/light.css";
 import { Link } from "react-router-dom";
 import RoomContext from "../../context/rooms/roomContext";
+import MaterialTable from "material-table";
+
 const DropdownBox = title => {
   const [ddOpen, setDdopen] = useState(false);
 
@@ -45,95 +47,57 @@ const DropdownBox = title => {
 const MyRooms = () => {
   const roomContext = useContext(RoomContext);
   const { rooms } = roomContext;
-  const [dtOptions1, setDtOptions1] = useState({
-    paging: true, // Table pagination
-    ordering: true, // Column ordering
-    info: true, // Bottom left status text
-    responsive: true,
-    // Text translation options
-    // Note the required keywords between underscores (e.g _MENU_)
-    oLanguage: {
-      sSearch: '<em class="fa fa-search"></em>',
 
-      info: "Showing page _PAGE_ of _PAGES_",
-      zeroRecords: "Nothing found - sorry",
-      infoEmpty: "No records available",
-      infoFiltered: "(filtered from _MAX_ total records)",
-      oPaginate: {
-        sNext: '<em class="fa fa-caret-right"></em>',
-        sPrevious: '<em class="fa fa-caret-left"></em>'
-      }
+  const [data, setData] = useState([]);
+
+  const columns = [
+    {
+      title: "ID",
+      field: "id"
+    },
+    {
+      title: "ˇTitle",
+      field: "title"
+    },
+    {
+      title: "Description",
+      field: "description"
+    },
+    {
+      title: "Resources",
+      field: "resources"
+    },
+    {
+      title: "Manager",
+      field: "manager"
     }
-  });
+  ];
+  useEffect(() => {
+    setData(rooms);
+  }, []);
 
-  // Access to internal datatable instance for customizations
-  const dtInstance = dtInstance => {
-    const inputSearchClass = "datatable_input_col_search";
-    const columnInputs = $("tfoot ." + inputSearchClass);
-    // On input keyup trigger filtering
-    columnInputs.keyup(function() {
-      dtInstance.fnFilter(this.value, columnInputs.index(this));
-    });
-  };
-
-    const ANIMATIONS = ["fadeIn"];
-    return (
-      <ContentWrapper>
-        <Container fluid>
-          {/* DATATABLE DEMO 1 */}
-          <Card>
-            <CardHeader className="table-card-header table-card-header-rooms ">
-              <h1>1 Room(s)</h1>
-              <Link to="/new-room">
-                <button
-                  href="#"
-                  className="btn btn-secondary btn-lg invite-btn"
-                >
-                  {" "}
-                  Create New
-                </button>
-              </Link>
-            </CardHeader>
-            <CardBody>
-              <Datatable options={dtOptions1}>
-                <table className="table table-striped my-4 w-100 smallest">
-                  <thead>
-                    <tr>
-                      <th data-priority="1"></th>
-                      <th>Title</th>
-                      <th>Description </th>
-                      <th className="sort-numeric">Resources</th>
-                      <th className="sort-alpha" data-priority="2">
-                        manager
-                      </th>
-
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  {rooms.map(room => (
-                    <tr className="gradeX">
-                      <td></td>
-                      <td>{room.title}</td>
-                      <td>{room.description}</td>
-                      <td>{room.resources}</td>
-                      <td>{room.manager}</td>
-
-                      <td>
-                        {ANIMATIONS.map((title, i) => (
-                          <DropdownBox title={title} />
-                        ))}
-                      </td>
-                    </tr>
-                  ))}
-                  </tbody>
-                </table>
-              </Datatable>
-            </CardBody>
-          </Card>
-        </Container>
-      </ContentWrapper>
-    );
-}
+  const ANIMATIONS = ["fadeIn"];
+  return (
+    <ContentWrapper>
+      <Container fluid>
+        {/* DATATABLE DEMO 1 */}
+        <Card>
+          <CardHeader className="table-card-header table-card-header-rooms ">
+            <h1>1 Room(s)</h1>
+            <Link to="/new-room">
+              <button href="#" className="btn btn-secondary btn-lg invite-btn">
+                {" "}
+                Create New
+              </button>
+            </Link>
+          </CardHeader>
+          <CardBody>
+            <MaterialTable title="Rooms" data={data} columns={columns} />
+          </CardBody>
+        </Card>
+      </Container>
+    </ContentWrapper>
+  );
+};
 
 export default MyRooms;

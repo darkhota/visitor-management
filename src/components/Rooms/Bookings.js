@@ -1,14 +1,14 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import ContentWrapper from "../Layout/ContentWrapper";
 import { Container, Card, CardHeader, CardBody } from "reactstrap";
-import $ from "jquery";
 import "../../styles/MyStyles/custom.css";
-import Datatable from "../Tables/Datatable";
 import { Dropdown, DropdownMenu, DropdownToggle } from "reactstrap";
 import "flatpickr/dist/themes/light.css";
 import Flatpickr from "react-flatpickr";
 import { Link } from "react-router-dom";
 import RoomContext from "../../context/rooms/roomContext";
+import MaterialTable from "material-table";
+
 const DropdownBox = title => {
   const [ddOpen, setDdopen] = useState(false);
 
@@ -35,41 +35,36 @@ const DropdownBox = title => {
 };
 
 const Bookings = () => {
-
   const roomContext = useContext(RoomContext);
   const { bookings } = roomContext;
-  const [dtOptions1, setDtOptions1] = useState({
-    paging: true, // Table pagination
-    ordering: true, // Column ordering
-    info: true, // Bottom left status text
-    responsive: true,
-    // Text translation options
-    // Note the required keywords between underscores (e.g _MENU_)
-    oLanguage: {
-      sSearch: '<em class="fa fa-search"></em>',
-
-      info: "Showing page _PAGE_ of _PAGES_",
-      zeroRecords: "Nothing found - sorry",
-      infoEmpty: "No records available",
-      infoFiltered: "(filtered from _MAX_ total records)",
-      oPaginate: {
-        sNext: '<em class="fa fa-caret-right"></em>',
-        sPrevious: '<em class="fa fa-caret-left"></em>'
-      }
-    }
-  });
-
   const [date, setDate] = useState(new Date());
+  const [data, setData] = useState([]);
 
-  // Access to internal datatable instance for customizations
-  const dtInstance = dtInstance => {
-    const inputSearchClass = "datatable_input_col_search";
-    const columnInputs = $("tfoot ." + inputSearchClass);
-    // On input keyup trigger filtering
-    columnInputs.keyup(function() {
-      dtInstance.fnFilter(this.value, columnInputs.index(this));
-    });
-  };
+  const columns = [
+    {
+      title: "ID",
+      field: "id"
+    },
+    {
+      title: "ˇTitle",
+      field: "title"
+    },
+    {
+      title: "Room",
+      field: "room"
+    },
+    {
+      title: "Date",
+      field: "date"
+    },
+    {
+      title: "Duration",
+      field: "duration"
+    }
+  ];
+  useEffect(() => {
+    setData(bookings);
+  }, []);
 
   const ANIMATIONS = ["fadeIn"];
   return (
@@ -101,41 +96,13 @@ const Bookings = () => {
             </Link>
           </CardHeader>
           <CardBody>
-            <Datatable options={dtOptions1}>
-              <table className="table table-striped my-4 w-100 smaller">
-                <thead>
-                  <tr>
-                    <th data-priority="1"></th>
-                    <th>Title</th>
-                    <th>Room </th>
-                    <th className="sort-numeric">Date</th>
-                    <th className="sort-alpha" data-priority="2">
-                      Duration
-                    </th>
-
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                {bookings.map(booking => (
-                  <tr className="gradeX">
-                    <td></td>
-                    <td>{booking.title}</td>
-                    <td>{booking.room}</td>
-
-                    <td>{booking.date}</td>
-                    <td>{booking.duration}</td>
-                    <td>
-                      {ANIMATIONS.map((title, i) => (
-                        <DropdownBox title={title} />
-                      ))}
-                    </td>
-                  </tr>
-                ))}
-                </tbody>
-              </table>
-            </Datatable>
+            <MaterialTable title="Bookings" data={data} columns={columns} />
           </CardBody>
+          {/* <td>
+                        {ANIMATIONS.map((title, i) => (
+                          <DropdownBox title={title} />
+                        ))}
+                      </td> */}
         </Card>
       </Container>
     </ContentWrapper>

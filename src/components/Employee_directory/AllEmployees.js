@@ -1,19 +1,17 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import ContentWrapper from "../Layout/ContentWrapper";
 import { Container, Card, CardHeader, CardBody, CardTitle } from "reactstrap";
-import $ from "jquery";
 import "../../styles/MyStyles/custom.css";
-import Datatable from "../Tables/Datatable";
 import {
   Dropdown,
   DropdownMenu,
   DropdownToggle,
   DropdownItem
 } from "reactstrap";
-import classNames from "classnames";
 import { Link } from "react-router-dom";
 import Avatar, { ConfigProvider } from "react-avatar";
-import EmployeeContext from '../../context/employees/employeeContext';
+import EmployeeContext from "../../context/employees/employeeContext";
+import MaterialTable from "material-table";
 
 const DropdownBox = ({ title }) => {
   const [ddOpen, setDdopen] = useState(false);
@@ -51,31 +49,44 @@ const DropdownBox = ({ title }) => {
 };
 
 const AllEmployees = () => {
+  const employeeContext = useContext(EmployeeContext);
+  const { employees } = employeeContext;
 
-const employeeContext = useContext(EmployeeContext);
-const { employees } = employeeContext;
+  const [data, setData] = useState([]);
 
-  const [dtOptions1, setDtOptions1] = useState({
-    paging: true, // Table pagination
-    ordering: true, // Column ordering
-    info: true, // Bottom left status text
-    responsive: true,
-    // Text translation options
-    // Note the required keywords between underscores (e.g _MENU_)
-    oLanguage: {
-      sSearch: '<em class="fa fa-search"></em>',
-
-      info: "Showing page _PAGE_ of _PAGES_",
-      zeroRecords: "Nothing found - sorry",
-      infoEmpty: "No records available",
-      infoFiltered: "(filtered from _MAX_ total records)",
-      oPaginate: {
-        sNext: '<em class="fa fa-caret-right"></em>',
-        sPrevious: '<em class="fa fa-caret-left"></em>'
-      }
+  const columns = [
+    {
+      title: "ID",
+      field: "id"
+    },
+    {
+      title: "Employee",
+      field: "empName"
+    },
+    {
+      title: "Account Type",
+      field: "accountType"
+    },
+    {
+      title: "Gender",
+      field: "gender"
+    },
+    {
+      title: "Company",
+      field: "company"
+    },
+    {
+      title: "Email",
+      field: "email"
+    },
+    {
+      title: "Status",
+      field: "status"
     }
-  });
-
+  ];
+  useEffect(() => {
+    setData(employees);
+  }, []);
   const ANIMATIONS = ["fadeIn"];
   return (
     <ConfigProvider colors={["hsl(172, 33%, 45%", "blue", "blue"]}>
@@ -116,65 +127,7 @@ const { employees } = employeeContext;
             </div>
 
             <CardBody>
-              <Datatable options={dtOptions1}>
-                <table className="table table-striped my-4 w-100 smaller">
-                  <thead>
-                    <tr>
-                      <th data-priority="1"></th>
-                      <th></th>
-                      <th> Name</th>
-                      <th>Account type</th>
-                      <th className="sort-numeric">Gender</th>
-                      <th className="sort-alpha" data-priority="2">
-                        Company
-                      </th>
-                      <th>Email</th>
-                      <th>Status</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {employees.map (employee => (
-                    <tr className="gradeX">
-                      <td></td>
-                      <td>
-                        <Avatar
-                          name={employee.empName}
-                          round="50px"
-                          size="50"
-                        />
-                      </td>
-                      <td>{employee.empName}</td>
-                      <td>
-                        <button href="#" className=" table-round-btn">
-                          Visitor{" "}
-                        </button>
-                      </td>
-                      <td>
-                        <button
-                          href="#"
-                          className="  table-round-btn table-dark-btn "
-                        >
-                          Male{" "}
-                        </button>
-                      </td>
-                      <td>Techbarn</td>
-                      <td>{employee.email}</td>
-                      <td>
-                        <button href="#" className=" table-round-btn">
-                          Active{" "}
-                        </button>
-                      </td>
-                      <td>
-                        {ANIMATIONS.map((title, i) => (
-                          <DropdownBox title={title} />
-                        ))}
-                      </td>
-                    </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </Datatable>
+              <MaterialTable title="Employees" data={data} columns={columns} />
             </CardBody>
           </Card>
         </Container>

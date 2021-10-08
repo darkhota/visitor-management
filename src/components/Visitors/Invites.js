@@ -1,15 +1,14 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import ContentWrapper from "../Layout/ContentWrapper";
 import { Container, Card, CardHeader, CardBody } from "reactstrap";
-import $ from "jquery";
 import "../../styles/MyStyles/custom.css";
-import Datatable from "../Tables/Datatable";
 import { Dropdown, DropdownMenu, DropdownToggle } from "reactstrap";
 import "flatpickr/dist/themes/light.css";
 import Flatpickr from "react-flatpickr";
 import { Link } from "react-router-dom";
 import Avatar, { ConfigProvider } from "react-avatar";
 import InviteContext from "../../context/invites/inviteContext";
+import MaterialTable from "material-table";
 
 const DropdownBox = title => {
   const [ddOpen, setDdopen] = useState(false);
@@ -42,39 +41,40 @@ const DropdownBox = title => {
 const Invites = () => {
   const inviteContext = useContext(InviteContext);
   const { invites } = inviteContext;
-  const [dtOptions1, setDtOptions1] = useState({
-    paging: true, // Table pagination
-    ordering: true, // Column ordering
-    info: true, // Bottom left status text
-    responsive: true,
-    // Text translation options
-    // Note the required keywords between underscores (e.g _MENU_)
-    oLanguage: {
-      sSearch: '<em class="fa fa-search"></em>',
-
-      info: "Showing page _PAGE_ of _PAGES_",
-      zeroRecords: "Nothing found - sorry",
-      infoEmpty: "No records available",
-      infoFiltered: "(filtered from _MAX_ total records)",
-      oPaginate: {
-        sNext: '<em class="fa fa-caret-right"></em>',
-        sPrevious: '<em class="fa fa-caret-left"></em>'
-      }
-    }
-  });
 
   const [date, setDate] = useState(new Date());
 
-  // Access to internal datatable instance for customizations
-  //    const dtInstance = dtInstance => {
-  //         const inputSearchClass = 'datatable_input_col_search';
-  //         const columnInputs = $('tfoot .' + inputSearchClass);
-  //         // On input keyup trigger filtering
-  //         columnInputs
-  //             .keyup(function() {
-  //                 dtInstance.fnFilter(this.value, columnInputs.index(this));
-  //             });
-  //     }
+  const [data, setData] = useState([]);
+
+  const columns = [
+    {
+      title: "ID",
+      field: "id"
+    },
+    {
+      title: "Visitor",
+      field: "visitor"
+    },
+    {
+      title: "Purpose",
+      field: "purpose"
+    },
+    {
+      title: "Invited By",
+      field: "invitedBy"
+    },
+    {
+      title: "Private Notes",
+      field: "privateNotes"
+    },
+    {
+      title: "Due at",
+      field: "dueAt"
+    }
+  ];
+  useEffect(() => {
+    setData(invites);
+  }, []);
 
   const ANIMATIONS = ["fadeIn"];
   return (
@@ -84,7 +84,7 @@ const Invites = () => {
           {/* DATATABLE DEMO 1 */}
           <Card>
             <CardHeader className="table-card-header">
-              <h1>1 invite</h1>
+              <h1>3 invites</h1>
               <Flatpickr
                 className="custom-select"
                 options={{
@@ -116,46 +116,15 @@ const Invites = () => {
               </Link>
             </CardHeader>
             <CardBody>
-              <Datatable options={dtOptions1}>
-                <table className="table table-striped my-4 w-100 smaller">
-                  <thead>
-                    <tr>
-                      <th></th>
-                      <th></th>
-                      <th data-priority="2">Visitor Name</th>
-                      <th>Purpose of visit</th>
-                      <th className="sort-numeric no-display">Invited By</th>
-                      <th className="sort-alpha no-display">Private Notes</th>
-                      <th className="no-display">Due at</th>
-                      <th className="no-display"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {invites.map(invite => (
-                      <tr className="gradeX">
-                        <td></td>
-                        <td>
+              <MaterialTable title="Invites" data={data} columns={columns} />
+
+              {/* <td>
                           <Avatar
                             name={invite.visitor}
                             round="50px"
                             size="50"
                           />
-                        </td>
-                        <td>{invite.visitor} </td>
-                        <td>{invite.purpose} </td>
-                        <td className="no-display">{invite.invitedBy} </td>
-                        <td className="no-display">{invite.privateNotes} </td>
-                        <td className="no-display">{invite.dueAt} </td>
-                        <td className="no-display">
-                          {ANIMATIONS.map((title, i) => (
-                            <DropdownBox title={title} />
-                          ))}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </Datatable>
+                        </td> */}
             </CardBody>
           </Card>
         </Container>
