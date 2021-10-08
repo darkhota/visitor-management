@@ -3,7 +3,7 @@ import ContentWrapper from "../Layout/ContentWrapper";
 import { Container, Card, CardHeader, CardBody } from "reactstrap";
 import $ from "jquery";
 import "../../styles/MyStyles/custom.css";
-import Datatable from "../Tables/Datatable";
+// import Datatable from "../Tables/Datatable";
 import { Dropdown, DropdownMenu, DropdownToggle } from "reactstrap";
 import "flatpickr/dist/themes/light.css";
 import Flatpickr from "react-flatpickr";
@@ -69,14 +69,14 @@ const VisitorsLog = visitor => {
   const [date, setDate] = useState(new Date());
 
   // Access to internal datatable instance for customizations
-  const dtInstance = dtInstance => {
-    const inputSearchClass = "datatable_input_col_search";
-    const columnInputs = $("tfoot ." + inputSearchClass);
-    // On input keyup trigger filtering
-    columnInputs.keyup(function() {
-      dtInstance.fnFilter(this.value, columnInputs.index(this));
-    });
-  };
+  // const dtInstance = dtInstance => {
+  //   const inputSearchClass = "datatable_input_col_search";
+  //   const columnInputs = $("tfoot ." + inputSearchClass);
+  //   // On input keyup trigger filtering
+  //   columnInputs.keyup(function() {
+  //     dtInstance.fnFilter(this.value, columnInputs.index(this));
+  //   });
+  // };
   const [data, setData] = useState([]);
 
   const columns = [
